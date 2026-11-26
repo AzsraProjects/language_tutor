@@ -1,0 +1,786 @@
+{
+  "B1-1": {
+    "vocab": {
+      "words": [
+        {
+          "word": "a job interview",
+          "translation": "un entretien d'embauche",
+          "example": "I have a job interview on Monday.",
+          "example_translation": "J'ai un entretien d'embauche lundi."
+        },
+        {
+          "word": "a colleague",
+          "translation": "un collègue",
+          "example": "My colleague helped me with the report.",
+          "example_translation": "Mon collègue m'a aidé pour le rapport."
+        },
+        {
+          "word": "to apply for",
+          "translation": "postuler à",
+          "example": "She wants to apply for this position.",
+          "example_translation": "Elle veut postuler à ce poste."
+        },
+        {
+          "word": "a salary",
+          "translation": "un salaire",
+          "example": "The salary is better in my new job.",
+          "example_translation": "Le salaire est meilleur dans mon nouvel emploi."
+        },
+        {
+          "word": "to be promoted",
+          "translation": "être promu",
+          "example": "He hopes to be promoted next year.",
+          "example_translation": "Il espère être promu l'année prochaine."
+        },
+        {
+          "word": "a deadline",
+          "translation": "une date limite",
+          "example": "We must finish before the deadline.",
+          "example_translation": "Nous devons finir avant la date limite."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour parler d'une expérience de vie sans dire quand elle a eu lieu, tu utilises le present perfect : have ou has + participe passé. Avec ever, tu demandes si quelque chose est déjà arrivé ; avec never, tu dis que ce n'est jamais arrivé. Just, already et yet servent pour les événements récents. Attention : dès que tu donnes un moment précis (yesterday, in 2019, last week), tu dois utiliser le prétérit.",
+      "examples": [
+        {
+          "sentence": "I have visited London three times.",
+          "translation": "J'ai visité Londres trois fois."
+        },
+        {
+          "sentence": "She has just finished her presentation.",
+          "translation": "Elle vient de finir sa présentation."
+        },
+        {
+          "sentence": "Have you ever worked abroad?",
+          "translation": "As-tu déjà travaillé à l'étranger ?"
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "I have never ___ sushi.",
+          "options": ["eaten", "ate", "eat"],
+          "answer": "eaten",
+          "why": "Après have, il faut le participe passé : eat, ate, eaten."
+        },
+        {
+          "sentence": "She ___ just sent the email.",
+          "options": ["has", "have", "is"],
+          "answer": "has",
+          "why": "Avec she, l'auxiliaire du present perfect est has."
+        },
+        {
+          "sentence": "We ___ to Spain last summer.",
+          "options": ["went", "have gone", "have been"],
+          "answer": "went",
+          "why": "Last summer est un moment précis et terminé : il faut le prétérit."
+        },
+        {
+          "sentence": "Have you ___ met my manager?",
+          "options": ["ever", "since", "ago"],
+          "answer": "ever",
+          "why": "Dans une question sur une expérience de vie, « déjà » se dit ever, placé avant le participe passé."
+        },
+        {
+          "sentence": "I haven't finished the report ___.",
+          "options": ["yet", "already", "ever"],
+          "answer": "yet",
+          "why": "Dans une phrase négative, « pas encore » se dit not… yet, avec yet en fin de phrase."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "I have never worked in an office.",
+          "translation": "Je n'ai jamais travaillé dans un bureau."
+        },
+        {
+          "sentence": "She has just changed jobs.",
+          "translation": "Elle vient de changer de travail."
+        },
+        {
+          "sentence": "Have you ever lived abroad?",
+          "translation": "As-tu déjà vécu à l'étranger ?"
+        }
+      ]
+    },
+    "pron": {
+      "focus": "le schwa (voyelle faible)",
+      "advice": "Le schwa est la voyelle la plus fréquente de l'anglais : un petit son neutre, très court, proche du « e » de « le », prononcé la bouche détendue. On le trouve dans les syllabes non accentuées, quelle que soit la lettre écrite. L'erreur typique des francophones est de prononcer toutes les voyelles pleinement, comme elles sont écrites : dis « eu-BAOUT » pour about, pas « a-baout ».",
+      "words": [
+        {"word": "about", "translation": "à propos de"},
+        {"word": "teacher", "translation": "professeur"},
+        {"word": "banana", "translation": "banane"},
+        {"word": "problem", "translation": "problème"},
+        {"word": "support", "translation": "soutien"},
+        {"word": "famous", "translation": "célèbre"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "My sister is a famous doctor.",
+          "translation": "Ma sœur est une médecin célèbre."
+        },
+        {
+          "sentence": "The teacher talked about the problem.",
+          "translation": "Le professeur a parlé du problème."
+        }
+      ]
+    }
+  },
+  "B1-2": {
+    "vocab": {
+      "words": [
+        {
+          "word": "climate change",
+          "translation": "le changement climatique",
+          "example": "Climate change affects every country.",
+          "example_translation": "Le changement climatique touche tous les pays."
+        },
+        {
+          "word": "pollution",
+          "translation": "la pollution",
+          "example": "Air pollution is a serious problem here.",
+          "example_translation": "La pollution de l'air est un problème grave ici."
+        },
+        {
+          "word": "to recycle",
+          "translation": "recycler",
+          "example": "We recycle all our glass bottles.",
+          "example_translation": "Nous recyclons toutes nos bouteilles en verre."
+        },
+        {
+          "word": "renewable energy",
+          "translation": "l'énergie renouvelable",
+          "example": "The village uses only renewable energy.",
+          "example_translation": "Le village n'utilise que de l'énergie renouvelable."
+        },
+        {
+          "word": "wildlife",
+          "translation": "la faune sauvage",
+          "example": "The park protects the local wildlife.",
+          "example_translation": "Le parc protège la faune sauvage locale."
+        },
+        {
+          "word": "a drought",
+          "translation": "une sécheresse",
+          "example": "The drought destroyed most of the crops.",
+          "example_translation": "La sécheresse a détruit la plupart des récoltes."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour une condition réelle ou probable, tu utilises if + présent, puis will + verbe : If it rains, we will stay home. Pour une situation imaginaire ou peu probable, tu utilises if + prétérit, puis would + verbe : If I had a garden, I would grow vegetables. Ne mets jamais will ni would juste après if. Dans une hypothèse, on dit souvent if I were, même avec I, he ou she.",
+      "examples": [
+        {
+          "sentence": "If we recycle more, we will reduce waste.",
+          "translation": "Si nous recyclons davantage, nous réduirons les déchets."
+        },
+        {
+          "sentence": "If I had more time, I would travel.",
+          "translation": "Si j'avais plus de temps, je voyagerais."
+        },
+        {
+          "sentence": "If I were you, I would take the train.",
+          "translation": "Si j'étais toi, je prendrais le train."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "If it ___ tomorrow, we will cancel the hike.",
+          "options": ["rains", "will rain", "would rain"],
+          "answer": "rains",
+          "why": "Après if, dans une condition réelle, on met le présent, jamais will."
+        },
+        {
+          "sentence": "If I ___ a car, I would drive to work.",
+          "options": ["had", "have", "would have"],
+          "answer": "had",
+          "why": "Would dans l'autre partie montre une hypothèse : après if, il faut le prétérit."
+        },
+        {
+          "sentence": "If you heat ice, it ___.",
+          "options": ["melts", "would melt", "melted"],
+          "answer": "melts",
+          "why": "Pour une vérité générale, on met le présent dans les deux parties de la phrase."
+        },
+        {
+          "sentence": "We ___ save energy if we turn off the lights.",
+          "options": ["will", "would", "did"],
+          "answer": "will",
+          "why": "If + présent (turn off) va avec will dans l'autre partie de la phrase."
+        },
+        {
+          "sentence": "If she ___ nearer, she would cycle to school.",
+          "options": ["lived", "lives", "will live"],
+          "answer": "lived",
+          "why": "Avec would, la partie en if prend le prétérit : c'est une situation imaginaire."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "If it rains, we will stay inside.",
+          "translation": "S'il pleut, nous resterons à l'intérieur."
+        },
+        {
+          "sentence": "If I had a garden, I would plant trees.",
+          "translation": "Si j'avais un jardin, je planterais des arbres."
+        },
+        {
+          "sentence": "If I were rich, I would buy a forest.",
+          "translation": "Si j'étais riche, j'achèterais une forêt."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "l'accent de mot",
+      "advice": "En anglais, chaque mot de plusieurs syllabes a une syllabe plus forte, plus longue et plus haute que les autres, et sa place change d'un mot à l'autre. Les syllabes non accentuées sont courtes et faibles. L'erreur typique des francophones est de donner la même force à toutes les syllabes ou d'appuyer sur la dernière : dis PHOtograph mais phoTOgrapher.",
+      "words": [
+        {"word": "photograph", "translation": "photographie"},
+        {"word": "photographer", "translation": "photographe"},
+        {"word": "comfortable", "translation": "confortable"},
+        {"word": "environment", "translation": "environnement"},
+        {"word": "interesting", "translation": "intéressant"},
+        {"word": "develop", "translation": "développer"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "The photographer took an interesting photograph.",
+          "translation": "Le photographe a pris une photographie intéressante."
+        },
+        {
+          "sentence": "We must protect the environment together.",
+          "translation": "Nous devons protéger l'environnement ensemble."
+        }
+      ]
+    }
+  },
+  "B1-3": {
+    "vocab": {
+      "words": [
+        {
+          "word": "social media",
+          "translation": "les réseaux sociaux",
+          "example": "She spends hours on social media.",
+          "example_translation": "Elle passe des heures sur les réseaux sociaux."
+        },
+        {
+          "word": "a screen",
+          "translation": "un écran",
+          "example": "I look at a screen all day.",
+          "example_translation": "Je regarde un écran toute la journée."
+        },
+        {
+          "word": "to download",
+          "translation": "télécharger",
+          "example": "You can download the app for free.",
+          "example_translation": "Tu peux télécharger l'appli gratuitement."
+        },
+        {
+          "word": "a podcast",
+          "translation": "un podcast",
+          "example": "I listen to a podcast every morning.",
+          "example_translation": "J'écoute un podcast tous les matins."
+        },
+        {
+          "word": "reliable",
+          "translation": "fiable",
+          "example": "This website is not very reliable.",
+          "example_translation": "Ce site web n'est pas très fiable."
+        },
+        {
+          "word": "an advert",
+          "translation": "une publicité",
+          "example": "There is an advert before every video.",
+          "example_translation": "Il y a une publicité avant chaque vidéo."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour donner ton avis, tu peux dire I think (that), In my opinion ou As far as I'm concerned. Pour dire que tu es d'accord, on dit I agree with you, sans le verbe be : « I am agree » est une faute. Pour nuancer ou t'opposer, utilise des mots de liaison : however (cependant), although (bien que), on the other hand (d'un autre côté). Whereas oppose deux faits, et because introduit une raison.",
+      "examples": [
+        {
+          "sentence": "In my opinion, podcasts are very useful.",
+          "translation": "À mon avis, les podcasts sont très utiles."
+        },
+        {
+          "sentence": "I agree with you about social media.",
+          "translation": "Je suis d'accord avec toi au sujet des réseaux sociaux."
+        },
+        {
+          "sentence": "Although it is expensive, I like this phone.",
+          "translation": "Bien qu'il soit cher, j'aime ce téléphone."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "I ___ with you about this article.",
+          "options": ["agree", "am agree", "agreeing"],
+          "answer": "agree",
+          "why": "Agree est un verbe : on dit I agree, sans be devant."
+        },
+        {
+          "sentence": "In my ___, children watch too much television.",
+          "options": ["opinion", "advice", "mind"],
+          "answer": "opinion",
+          "why": "L'expression figée pour donner son avis est in my opinion."
+        },
+        {
+          "sentence": "___ the film was long, I enjoyed it.",
+          "options": ["Although", "However", "Despite"],
+          "answer": "Although",
+          "why": "Although introduit une proposition avec sujet et verbe ; despite est suivi d'un nom, et however ne relie pas deux propositions de cette façon."
+        },
+        {
+          "sentence": "As far as I'm ___, the news is too negative.",
+          "options": ["concerned", "concerning", "concern"],
+          "answer": "concerned",
+          "why": "L'expression figée est as far as I'm concerned : « en ce qui me concerne »."
+        },
+        {
+          "sentence": "I love podcasts, ___ my brother prefers videos.",
+          "options": ["whereas", "because", "so"],
+          "answer": "whereas",
+          "why": "Whereas oppose deux faits ; because donnerait une cause et so une conséquence, ce qui n'a pas de sens ici."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "I think that screens are bad for children.",
+          "translation": "Je pense que les écrans sont mauvais pour les enfants."
+        },
+        {
+          "sentence": "I agree with you about this advert.",
+          "translation": "Je suis d'accord avec toi au sujet de cette publicité."
+        },
+        {
+          "sentence": "Although it is free, I never use it.",
+          "translation": "Bien que ce soit gratuit, je ne l'utilise jamais."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les diphtongues de say / my / boy",
+      "advice": "Une diphtongue est une voyelle qui glisse d'un son vers un autre dans la même syllabe. Dans say, tu pars de « é » et tu glisses vers un petit « i » ; dans my, tu pars de « a » ; dans boy, tu pars de « o ». L'erreur typique des francophones est de ne prononcer qu'un seul son : say devient « sé » et se confond alors avec d'autres mots.",
+      "words": [
+        {"word": "say", "translation": "dire"},
+        {"word": "late", "translation": "en retard"},
+        {"word": "my", "translation": "mon, ma"},
+        {"word": "time", "translation": "temps"},
+        {"word": "boy", "translation": "garçon"},
+        {"word": "noise", "translation": "bruit"}
+      ],
+      "pairs": [
+        {"a": "late", "b": "let"},
+        {"a": "pain", "b": "pen"},
+        {"a": "wait", "b": "wet"}
+      ],
+      "sentences": [
+        {
+          "sentence": "The boy came late again today.",
+          "translation": "Le garçon est encore arrivé en retard aujourd'hui."
+        },
+        {
+          "sentence": "I like my quiet time at night.",
+          "translation": "J'aime mon moment de calme le soir."
+        }
+      ]
+    }
+  },
+  "B1-4": {
+    "vocab": {
+      "words": [
+        {
+          "word": "a headline",
+          "translation": "un gros titre",
+          "example": "Did you read the headline this morning?",
+          "example_translation": "As-tu lu le gros titre ce matin ?"
+        },
+        {
+          "word": "an election",
+          "translation": "une élection",
+          "example": "The election takes place next month.",
+          "example_translation": "L'élection a lieu le mois prochain."
+        },
+        {
+          "word": "the government",
+          "translation": "le gouvernement",
+          "example": "The government announced a new law.",
+          "example_translation": "Le gouvernement a annoncé une nouvelle loi."
+        },
+        {
+          "word": "a strike",
+          "translation": "une grève",
+          "example": "The train drivers are on strike today.",
+          "example_translation": "Les conducteurs de train sont en grève aujourd'hui."
+        },
+        {
+          "word": "a journalist",
+          "translation": "un journaliste",
+          "example": "The journalist asked a difficult question.",
+          "example_translation": "Le journaliste a posé une question difficile."
+        },
+        {
+          "word": "unemployment",
+          "translation": "le chômage",
+          "example": "Unemployment has fallen again this year.",
+          "example_translation": "Le chômage a encore baissé cette année."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour rapporter les paroles de quelqu'un, tu recules le temps d'un cran : le présent devient prétérit, will devient would et can devient could. Les pronoms changent aussi : « I am tired » devient She said she was tired. Say s'emploie sans personne juste après, alors que tell est toujours suivi de la personne : He told me that… Pour rapporter une question, tu gardes l'ordre sujet + verbe, sans do ni did : She asked where I lived.",
+      "examples": [
+        {
+          "sentence": "She said that she was tired.",
+          "translation": "Elle a dit qu'elle était fatiguée."
+        },
+        {
+          "sentence": "He told me that he would call.",
+          "translation": "Il m'a dit qu'il appellerait."
+        },
+        {
+          "sentence": "They asked where I worked.",
+          "translation": "Ils ont demandé où je travaillais."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "She said that she ___ busy that day.",
+          "options": ["was", "is being", "be"],
+          "answer": "was",
+          "why": "Au discours rapporté, « I am busy » recule d'un temps et devient she was busy."
+        },
+        {
+          "sentence": "He ___ me that the strike was over.",
+          "options": ["told", "said", "spoke"],
+          "answer": "told",
+          "why": "Tell est suivi directement de la personne (me) ; say et speak demandent to."
+        },
+        {
+          "sentence": "They said they ___ come the next day.",
+          "options": ["would", "will be", "are"],
+          "answer": "would",
+          "why": "Au discours rapporté, will devient would."
+        },
+        {
+          "sentence": "She asked me where I ___.",
+          "options": ["lived", "did live", "do live"],
+          "answer": "lived",
+          "why": "Dans une question rapportée, on garde l'ordre sujet + verbe, sans auxiliaire do."
+        },
+        {
+          "sentence": "The minister ___ that taxes would fall.",
+          "options": ["said", "told", "talked"],
+          "answer": "said",
+          "why": "Say s'emploie sans complément de personne ; tell en exigerait un, et talk ne se construit pas avec that."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "She said that she was very busy.",
+          "translation": "Elle a dit qu'elle était très occupée."
+        },
+        {
+          "sentence": "He told me that he would vote.",
+          "translation": "Il m'a dit qu'il voterait."
+        },
+        {
+          "sentence": "They asked where the journalist was.",
+          "translation": "Ils ont demandé où était le journaliste."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les diphtongues de go / now",
+      "advice": "Dans go, la voyelle glisse : tu pars d'un son proche de « eu » ou de « o » et tu finis en arrondissant les lèvres vers « ou ». Dans now, tu pars d'un « a » bien ouvert et tu glisses vers « ou ». L'erreur typique des francophones est de dire un « o » simple et fixe : no devient alors « no » à la française, et know ne se distingue plus de now.",
+      "words": [
+        {"word": "go", "translation": "aller"},
+        {"word": "home", "translation": "maison, chez soi"},
+        {"word": "phone", "translation": "téléphone"},
+        {"word": "now", "translation": "maintenant"},
+        {"word": "house", "translation": "maison"},
+        {"word": "town", "translation": "ville"}
+      ],
+      "pairs": [
+        {"a": "know", "b": "now"},
+        {"a": "tone", "b": "town"},
+        {"a": "load", "b": "loud"}
+      ],
+      "sentences": [
+        {
+          "sentence": "I know how to go home now.",
+          "translation": "Je sais comment rentrer à la maison maintenant."
+        },
+        {
+          "sentence": "Our old house is downtown.",
+          "translation": "Notre vieille maison est dans le centre-ville."
+        }
+      ]
+    }
+  },
+  "B1-5": {
+    "vocab": {
+      "words": [
+        {
+          "word": "shy",
+          "translation": "timide",
+          "example": "He was very shy as a child.",
+          "example_translation": "Il était très timide quand il était enfant."
+        },
+        {
+          "word": "confident",
+          "translation": "sûr de soi",
+          "example": "She feels confident before her exam.",
+          "example_translation": "Elle se sent sûre d'elle avant son examen."
+        },
+        {
+          "word": "stubborn",
+          "translation": "têtu",
+          "example": "My father is kind but stubborn.",
+          "example_translation": "Mon père est gentil mais têtu."
+        },
+        {
+          "word": "disappointed",
+          "translation": "déçu",
+          "example": "I was disappointed with the ending.",
+          "example_translation": "J'ai été déçu par la fin."
+        },
+        {
+          "word": "relieved",
+          "translation": "soulagé",
+          "example": "We were relieved to hear the news.",
+          "example_translation": "Nous avons été soulagés d'apprendre la nouvelle."
+        },
+        {
+          "word": "thoughtful",
+          "translation": "attentionné",
+          "example": "It was a very thoughtful present.",
+          "example_translation": "C'était un cadeau très attentionné."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Une proposition relative précise de qui ou de quoi tu parles. Tu utilises who pour une personne, which pour une chose, et that peut remplacer les deux dans la langue courante. Whose exprime la possession (dont) et where désigne un lieu. Attention : après le pronom relatif, tu ne répètes pas le sujet ni le complément : the man who lives here, pas « the man who he lives here ».",
+      "examples": [
+        {
+          "sentence": "She is the friend who helped me.",
+          "translation": "C'est l'amie qui m'a aidé."
+        },
+        {
+          "sentence": "This is the book which changed my life.",
+          "translation": "C'est le livre qui a changé ma vie."
+        },
+        {
+          "sentence": "I know a man whose daughter is famous.",
+          "translation": "Je connais un homme dont la fille est célèbre."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "The woman ___ lives next door is very kind.",
+          "options": ["who", "which", "whose"],
+          "answer": "who",
+          "why": "Who remplace une personne qui est sujet du verbe ; which s'emploie pour une chose."
+        },
+        {
+          "sentence": "This is the film ___ made me cry.",
+          "options": ["which", "who", "where"],
+          "answer": "which",
+          "why": "Pour une chose (the film), on utilise which ou that, pas who."
+        },
+        {
+          "sentence": "I have a friend ___ brother is an actor.",
+          "options": ["whose", "who", "which"],
+          "answer": "whose",
+          "why": "Whose exprime la possession : le frère de cet ami."
+        },
+        {
+          "sentence": "That is the café ___ we first met.",
+          "options": ["where", "which", "who"],
+          "answer": "where",
+          "why": "Pour un lieu dans lequel quelque chose se passe, on utilise where."
+        },
+        {
+          "sentence": "He is the colleague ___ I told you about.",
+          "options": ["that", "which", "whose"],
+          "answer": "that",
+          "why": "Pour une personne, on peut dire that ou who ; which est réservé aux choses."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "She is the teacher who inspired me.",
+          "translation": "C'est la professeure qui m'a inspiré."
+        },
+        {
+          "sentence": "This is the song which makes me happy.",
+          "translation": "C'est la chanson qui me rend heureux."
+        },
+        {
+          "sentence": "I met a man whose wife is shy.",
+          "translation": "J'ai rencontré un homme dont la femme est timide."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "« ch », « sh » et « j »",
+      "advice": "Le « sh » anglais est le « ch » français de « chat ». Le « ch » anglais commence par un petit « t » : « tch », comme dans « tchèque ». Le « j » anglais commence par un petit « d » : « dj », comme dans « djembé ». L'erreur typique des francophones est d'oublier ce « t » ou ce « d » : chair devient alors share, et job sonne comme le « j » français.",
+      "words": [
+        {"word": "cheap", "translation": "bon marché"},
+        {"word": "watch", "translation": "montre, regarder"},
+        {"word": "shop", "translation": "magasin"},
+        {"word": "wash", "translation": "laver"},
+        {"word": "job", "translation": "emploi"},
+        {"word": "orange", "translation": "orange"}
+      ],
+      "pairs": [
+        {"a": "chair", "b": "share"},
+        {"a": "cheap", "b": "sheep"},
+        {"a": "watch", "b": "wash"}
+      ],
+      "sentences": [
+        {
+          "sentence": "She chose a cheap orange jacket.",
+          "translation": "Elle a choisi une veste orange bon marché."
+        },
+        {
+          "sentence": "John watches the shop each July.",
+          "translation": "John surveille le magasin chaque mois de juillet."
+        }
+      ]
+    }
+  },
+  "B1-6": {
+    "vocab": {
+      "words": [
+        {
+          "word": "an exhibition",
+          "translation": "une exposition",
+          "example": "The exhibition opens on Friday evening.",
+          "example_translation": "L'exposition ouvre vendredi soir."
+        },
+        {
+          "word": "a painting",
+          "translation": "un tableau",
+          "example": "This painting is three hundred years old.",
+          "example_translation": "Ce tableau a trois cents ans."
+        },
+        {
+          "word": "a play",
+          "translation": "une pièce de théâtre",
+          "example": "We saw a wonderful play last night.",
+          "example_translation": "Nous avons vu une pièce merveilleuse hier soir."
+        },
+        {
+          "word": "a novel",
+          "translation": "un roman",
+          "example": "Her first novel was a huge success.",
+          "example_translation": "Son premier roman a été un énorme succès."
+        },
+        {
+          "word": "an audience",
+          "translation": "un public",
+          "example": "The audience clapped for ten minutes.",
+          "example_translation": "Le public a applaudi pendant dix minutes."
+        },
+        {
+          "word": "a masterpiece",
+          "translation": "un chef-d'œuvre",
+          "example": "Many people consider it a masterpiece.",
+          "example_translation": "Beaucoup de gens le considèrent comme un chef-d'œuvre."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "À la voix passive, ce qui compte est l'action ou son résultat, pas la personne qui la fait. Tu formes le passif avec be au temps voulu + participe passé : The museum was built in 1900. Si tu veux préciser qui a fait l'action, tu ajoutes by : It was painted by Monet. Seul be change selon le temps : is made, was made, has been made, will be made.",
+      "examples": [
+        {
+          "sentence": "This novel was written in 1925.",
+          "translation": "Ce roman a été écrit en 1925."
+        },
+        {
+          "sentence": "The play is performed every evening.",
+          "translation": "La pièce est jouée tous les soirs."
+        },
+        {
+          "sentence": "The painting has been sold to a museum.",
+          "translation": "Le tableau a été vendu à un musée."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "The museum ___ built in 1850.",
+          "options": ["was", "has", "did"],
+          "answer": "was",
+          "why": "Pour une action passée et datée, le passif se forme avec was + participe passé."
+        },
+        {
+          "sentence": "This song was ___ by a young artist.",
+          "options": ["written", "wrote", "writing"],
+          "answer": "written",
+          "why": "Après be au passif, il faut le participe passé : write, wrote, written."
+        },
+        {
+          "sentence": "The tickets are ___ online.",
+          "options": ["sold", "sell", "selling"],
+          "answer": "sold",
+          "why": "Les billets ne vendent pas, ils sont vendus : be + participe passé (sold)."
+        },
+        {
+          "sentence": "The film will ___ shown next week.",
+          "options": ["be", "been", "being"],
+          "answer": "be",
+          "why": "Après will, on met be à la base verbale : will be + participe passé."
+        },
+        {
+          "sentence": "The portrait was painted ___ a famous artist.",
+          "options": ["by", "from", "of"],
+          "answer": "by",
+          "why": "Au passif, la personne qui fait l'action est introduite par by."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "The novel was written in France.",
+          "translation": "Le roman a été écrit en France."
+        },
+        {
+          "sentence": "The exhibition is visited by many tourists.",
+          "translation": "L'exposition est visitée par de nombreux touristes."
+        },
+        {
+          "sentence": "The play will be performed next month.",
+          "translation": "La pièce sera jouée le mois prochain."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les consonnes finales sonores (bad / bat)",
+      "advice": "En anglais, les consonnes b, d, g, v et z restent sonores à la fin d'un mot, et la voyelle qui les précède est nettement plus longue : bad dure plus longtemps que bat. L'erreur typique des francophones est de raccourcir la voyelle et de durcir la consonne, si bien que bad sonne comme bat. Allonge la voyelle et fais vibrer la consonne finale, sans ajouter de « e » après.",
+      "words": [
+        {"word": "bad", "translation": "mauvais"},
+        {"word": "bag", "translation": "sac"},
+        {"word": "five", "translation": "cinq"},
+        {"word": "food", "translation": "nourriture"},
+        {"word": "job", "translation": "emploi"},
+        {"word": "eyes", "translation": "yeux"}
+      ],
+      "pairs": [
+        {"a": "bad", "b": "bat"},
+        {"a": "bag", "b": "back"},
+        {"a": "leave", "b": "leaf"}
+      ],
+      "sentences": [
+        {
+          "sentence": "The bad dog had five big bags.",
+          "translation": "Le méchant chien avait cinq gros sacs."
+        },
+        {
+          "sentence": "Please leave the food on the bed.",
+          "translation": "Laisse la nourriture sur le lit, s'il te plaît."
+        }
+      ]
+    }
+  }
+}

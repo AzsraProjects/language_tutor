@@ -241,3 +241,13 @@ def toggle_challenge(language: str, challenge_id: str) -> tuple[list[dict], int]
                 data["xp"] = max(0, data["xp"] + gained)
         _save(data)
         return list(data["challenges"].get(language, [])), gained
+
+
+def add_xp(amount: int) -> int:
+    """Grant XP earned outside a conversation (lessons) and mark the day active."""
+    with _lock:
+        data = load()
+        data["xp"] += int(amount)
+        _mark_today(data)
+        _save(data)
+    return int(amount)

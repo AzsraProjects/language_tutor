@@ -87,3 +87,67 @@ class Transcriber:
 
         output = result.stdout.decode("utf-8", errors="replace")
         return tutor.WhisperTranscriber._extract_transcription(output)
+
+    def transcribe_words(self, audio_path) -> list[tuple[str, float]]:
+        """Transcribe and return (word, confidence) pairs.
+
+        whisper.cpp reports a probability per token; a word's confidence is
+        the lowest probability among its tokens.
+        """
+        import json
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as folder:
+            base = Path(folder) / "out"
+            command = [
+                str(self.binary),
+                "--model",
+                str(self.model),
+                "--file",
+                str(audio_path),
+                "--language",
+                self.language,
+                "--threads",
+                str(self.threads),
+                "--no-timestamps",
+                "--output-json-full",
+                "--output-file",
+                str(base),
+            ]
+            env = dict(os.environ)
+            if not paths.IS_WINDOWS:
+                folder_path = str(self.binary.parent)
+                env["LD_LIBRARY_PATH"] = (
+                    folder_path + os.pathsep + env.get("LD_LIBRARY_PATH", "")
+                )
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                check=False,
+                env=env,
+                cwd=str(self.binary.parent),
+                creationflags=no_window_flags(),
+            )
+            if result.returncode != 0:
+                detail = result.stderr.decode("utf-8", errors="replace")[-600:]
+                raise RuntimeError("La transcription a échoué :\n" + detail)
+            data = json.loads(
+                base.with_suffix(".json").read_bytes().decode("utf-8", errors="replace")
+            )
+
+        words: list[tuple[str, float]] = []
+        for segment in data.get("transcription", []):
+            if segment.get("text", "").strip().startswith("["):
+                continue
+            for token in segment.get("tokens", []):
+                text = token.get("text", "")
+                if not text or text.startswith("[_") or text.startswith("<|"):
+                    continue
+                confidence = float(token.get("p", 1.0))
+                if text.startswith(" ") or not words:
+                    if text.strip():
+                        words.append((text.strip(), confidence))
+                elif text.strip():
+                    word, previous = words[-1]
+                    words[-1] = (word + text.strip(), min(previous, confidence))
+        return words

@@ -1,0 +1,320 @@
+{
+  "A1-1": {
+    "vocab": {
+      "words": [
+        {"word": "hello", "translation": "bonjour, salut", "example": "Hello, my name is Anna.", "example_translation": "Bonjour, je m'appelle Anna."},
+        {"word": "good morning", "translation": "bonjour (le matin)", "example": "Good morning, how are you today?", "example_translation": "Bonjour, comment vas-tu aujourd'hui ?"},
+        {"word": "goodbye", "translation": "au revoir", "example": "Goodbye, see you tomorrow at school.", "example_translation": "Au revoir, à demain à l'école."},
+        {"word": "please", "translation": "s'il te plaît, s'il vous plaît", "example": "Can you help me, please?", "example_translation": "Peux-tu m'aider, s'il te plaît ?"},
+        {"word": "thank you", "translation": "merci", "example": "Thank you for your help.", "example_translation": "Merci pour ton aide."},
+        {"word": "nice to meet you", "translation": "enchanté, ravi de te rencontrer", "example": "Hi Tom, nice to meet you.", "example_translation": "Salut Tom, ravi de te rencontrer."}
+      ]
+    },
+    "grammar": {
+      "rule": "Le verbe « to be » (être) a trois formes au présent : I am, he / she / it is, you / we / they are. En anglais, le pronom sujet est obligatoire : on ne dit jamais « is happy » tout seul. À l'oral, on contracte presque toujours : I'm, you're, he's, she's, we're, they're. Attention : « you » veut dire à la fois « tu » et « vous ».",
+      "examples": [
+        {"sentence": "I am a student.", "translation": "Je suis étudiant."},
+        {"sentence": "She is from Spain.", "translation": "Elle vient d'Espagne."},
+        {"sentence": "We are friends.", "translation": "Nous sommes amis."}
+      ],
+      "questions": [
+        {"sentence": "I ___ from France.", "options": ["am", "is", "are"], "answer": "am", "why": "Avec « I », le verbe « to be » se conjugue toujours « am »."},
+        {"sentence": "She ___ my teacher.", "options": ["am", "is", "are"], "answer": "is", "why": "Avec he, she et it, on utilise « is »."},
+        {"sentence": "They ___ very nice.", "options": ["am", "is", "are"], "answer": "are", "why": "Avec you, we et they, on utilise « are »."},
+        {"sentence": "___ is my brother.", "options": ["He", "They", "I"], "answer": "He", "why": "« is » ne va qu'avec he, she ou it ; pour un frère, on dit « he »."},
+        {"sentence": "You ___ late today.", "options": ["am", "is", "are"], "answer": "are", "why": "Avec « you », au singulier comme au pluriel, on dit toujours « are »."}
+      ],
+      "sentences": [
+        {"sentence": "I am happy to meet you.", "translation": "Je suis content de te rencontrer."},
+        {"sentence": "He is my new neighbour.", "translation": "C'est mon nouveau voisin."},
+        {"sentence": "We are from the same city.", "translation": "Nous venons de la même ville."}
+      ]
+    },
+    "pron": {
+      "focus": "le son « th » sourd (think)",
+      "advice": "Place le bout de ta langue entre tes dents, ou juste contre les dents du haut, et souffle doucement : l'air passe entre la langue et les dents, sans faire vibrer la gorge. L'erreur typique des francophones est de dire « s », « f » ou « t » à la place : « sink » au lieu de « think ».",
+      "words": [
+        {"word": "think", "translation": "penser"},
+        {"word": "three", "translation": "trois"},
+        {"word": "thanks", "translation": "merci"},
+        {"word": "thing", "translation": "chose"},
+        {"word": "mouth", "translation": "bouche"},
+        {"word": "bath", "translation": "bain"}
+      ],
+      "pairs": [
+        {"a": "think", "b": "sink"},
+        {"a": "three", "b": "tree"},
+        {"a": "mouth", "b": "mouse"}
+      ],
+      "sentences": [
+        {"sentence": "I think it is Thursday.", "translation": "Je crois qu'on est jeudi."},
+        {"sentence": "Thanks for the three things.", "translation": "Merci pour les trois choses."}
+      ]
+    }
+  },
+  "A1-2": {
+    "vocab": {
+      "words": [
+        {"word": "mother", "translation": "la mère", "example": "My mother works in a hospital.", "example_translation": "Ma mère travaille dans un hôpital."},
+        {"word": "father", "translation": "le père", "example": "His father is a good cook.", "example_translation": "Son père est un bon cuisinier."},
+        {"word": "brother", "translation": "le frère", "example": "I have one brother in London.", "example_translation": "J'ai un frère à Londres."},
+        {"word": "sister", "translation": "la sœur", "example": "My sister is ten years old.", "example_translation": "Ma sœur a dix ans."},
+        {"word": "children", "translation": "les enfants", "example": "They have three young children.", "example_translation": "Ils ont trois jeunes enfants."},
+        {"word": "friend", "translation": "un ami, une amie", "example": "Lisa is my best friend.", "example_translation": "Lisa est ma meilleure amie."}
+      ]
+    },
+    "grammar": {
+      "rule": "Pour dire à qui est quelque chose, on place un possessif devant le nom : my, your, his, her, our, their. Attention : on choisit « his » ou « her » selon la personne qui possède, pas selon le nom qui suit : « his sister » est la sœur d'un homme, « her brother » le frère d'une femme. Le verbe « to have » (avoir) fait « have » avec I, you, we, they et « has » avec he, she, it.",
+      "examples": [
+        {"sentence": "I have two brothers.", "translation": "J'ai deux frères."},
+        {"sentence": "She has a little dog.", "translation": "Elle a un petit chien."},
+        {"sentence": "This is my mother.", "translation": "Voici ma mère."}
+      ],
+      "questions": [
+        {"sentence": "I ___ a big family.", "options": ["have", "has", "having"], "answer": "have", "why": "Avec « I », le verbe « to have » se conjugue « have »."},
+        {"sentence": "My sister ___ three children.", "options": ["have", "has", "having"], "answer": "has", "why": "« My sister » correspond à « she » : on utilise « has »."},
+        {"sentence": "Emma is my aunt. ___ husband is Tom.", "options": ["Her", "She", "Hers"], "answer": "Her", "why": "Devant un nom, le possessif pour une femme est « her »."},
+        {"sentence": "We love ___ grandparents.", "options": ["our", "we", "us"], "answer": "our", "why": "Le possessif qui correspond à « we » est « our »."},
+        {"sentence": "They ___ a house near the sea.", "options": ["have", "has", "is"], "answer": "have", "why": "Avec « they », on utilise « have »."}
+      ],
+      "sentences": [
+        {"sentence": "My brother has a new car.", "translation": "Mon frère a une nouvelle voiture."},
+        {"sentence": "Her parents live in London.", "translation": "Ses parents habitent à Londres."},
+        {"sentence": "We have a very big family.", "translation": "Nous avons une très grande famille."}
+      ]
+    },
+    "pron": {
+      "focus": "le son « th » sonore (this)",
+      "advice": "La position est la même que pour « think » : le bout de la langue entre les dents ou contre les dents du haut. Cette fois, fais vibrer tes cordes vocales : tu dois sentir un bourdonnement sur la langue. Les francophones disent souvent « z » ou « d » à la place : « zis » ou « dis » au lieu de « this ».",
+      "words": [
+        {"word": "this", "translation": "ce, ceci"},
+        {"word": "that", "translation": "ce…-là, cela"},
+        {"word": "the", "translation": "le, la, les"},
+        {"word": "mother", "translation": "mère"},
+        {"word": "brother", "translation": "frère"},
+        {"word": "they", "translation": "ils, elles"}
+      ],
+      "pairs": [
+        {"a": "then", "b": "den"},
+        {"a": "they", "b": "day"},
+        {"a": "breathe", "b": "breeze"}
+      ],
+      "sentences": [
+        {"sentence": "This is my mother and father.", "translation": "Voici ma mère et mon père."},
+        {"sentence": "They are with their brother.", "translation": "Ils sont avec leur frère."}
+      ]
+    }
+  },
+  "A1-3": {
+    "vocab": {
+      "words": [
+        {"word": "get up", "translation": "se lever", "example": "I get up early every day.", "example_translation": "Je me lève tôt tous les jours."},
+        {"word": "breakfast", "translation": "le petit-déjeuner", "example": "We have breakfast at eight o'clock.", "example_translation": "Nous prenons le petit-déjeuner à huit heures."},
+        {"word": "go to work", "translation": "aller au travail", "example": "I go to work by train.", "example_translation": "Je vais au travail en train."},
+        {"word": "o'clock", "translation": "heure(s) pile", "example": "The film starts at nine o'clock.", "example_translation": "Le film commence à neuf heures."},
+        {"word": "half past", "translation": "et demie", "example": "It is half past six now.", "example_translation": "Il est six heures et demie maintenant."},
+        {"word": "go to bed", "translation": "aller se coucher", "example": "The children go to bed at nine.", "example_translation": "Les enfants vont se coucher à neuf heures."}
+      ]
+    },
+    "grammar": {
+      "rule": "Le présent simple sert à parler des habitudes et de ce qui est toujours vrai. Avec I, you, we et they, on utilise le verbe tel quel : I work, we work. Avec he, she et it, on ajoute un « s » : he works, she gets up. Quelques verbes changent un peu : go → goes, watch → watches, have → has.",
+      "examples": [
+        {"sentence": "I get up at seven o'clock.", "translation": "Je me lève à sept heures."},
+        {"sentence": "She works in an office.", "translation": "Elle travaille dans un bureau."},
+        {"sentence": "We have dinner at eight.", "translation": "Nous dînons à huit heures."}
+      ],
+      "questions": [
+        {"sentence": "He ___ to work by bus.", "options": ["go", "goes", "going"], "answer": "goes", "why": "Avec « he », le verbe prend un « s » : go devient « goes »."},
+        {"sentence": "I ___ breakfast at home.", "options": ["have", "has", "having"], "answer": "have", "why": "Avec « I », le verbe reste à sa forme de base : « have »."},
+        {"sentence": "My mother ___ up at six.", "options": ["get", "gets", "getting"], "answer": "gets", "why": "« My mother » correspond à « she » : le verbe prend un « s »."},
+        {"sentence": "They ___ TV in the evening.", "options": ["watch", "watches", "watching"], "answer": "watch", "why": "Avec « they », le verbe ne prend pas de « s »."},
+        {"sentence": "She ___ her teeth every morning.", "options": ["brush", "brushes", "brushing"], "answer": "brushes", "why": "Avec « she », un verbe en -sh prend « es » : brushes."}
+      ],
+      "sentences": [
+        {"sentence": "I go to bed at eleven.", "translation": "Je vais me coucher à onze heures."},
+        {"sentence": "He starts work at nine o'clock.", "translation": "Il commence le travail à neuf heures."},
+        {"sentence": "We eat lunch at school.", "translation": "Nous déjeunons à l'école."}
+      ]
+    },
+    "pron": {
+      "focus": "le « h » aspiré",
+      "advice": "Le « h » anglais se prononce : souffle de l'air depuis la gorge, comme pour faire de la buée sur une vitre, juste avant la voyelle. La langue et les lèvres ne font rien de particulier. Les francophones l'oublient souvent (« ello ») ou, à l'inverse, en ajoutent un devant une voyelle où il n'y en a pas.",
+      "words": [
+        {"word": "hello", "translation": "bonjour"},
+        {"word": "house", "translation": "maison"},
+        {"word": "happy", "translation": "heureux"},
+        {"word": "have", "translation": "avoir"},
+        {"word": "help", "translation": "aider"},
+        {"word": "home", "translation": "chez soi, maison"}
+      ],
+      "pairs": [
+        {"a": "hair", "b": "air"},
+        {"a": "hat", "b": "at"},
+        {"a": "hold", "b": "old"}
+      ],
+      "sentences": [
+        {"sentence": "Harry has a big house.", "translation": "Harry a une grande maison."},
+        {"sentence": "Hello, how can I help?", "translation": "Bonjour, comment puis-je aider ?"}
+      ]
+    }
+  },
+  "A1-4": {
+    "vocab": {
+      "words": [
+        {"word": "bread", "translation": "le pain", "example": "I eat bread with butter.", "example_translation": "Je mange du pain avec du beurre."},
+        {"word": "water", "translation": "l'eau", "example": "Can I have some water, please?", "example_translation": "Je peux avoir de l'eau, s'il te plaît ?"},
+        {"word": "an apple", "translation": "une pomme", "example": "She eats an apple every day.", "example_translation": "Elle mange une pomme tous les jours."},
+        {"word": "cheese", "translation": "le fromage", "example": "I like cheese on my pizza.", "example_translation": "J'aime le fromage sur ma pizza."},
+        {"word": "a cup of tea", "translation": "une tasse de thé", "example": "I drink a cup of tea.", "example_translation": "Je bois une tasse de thé."},
+        {"word": "vegetables", "translation": "les légumes", "example": "We eat vegetables every day.", "example_translation": "Nous mangeons des légumes tous les jours."}
+      ]
+    },
+    "grammar": {
+      "rule": "On utilise « a » devant un son de consonne (a banana) et « an » devant un son de voyelle (an apple). Au pluriel, on ajoute « s » au nom et on ne met jamais « a » ou « an » : two apples. Pour dire ce que tu aimes en général, il n'y a pas d'article : « I like apples », « I like cheese ». « The » désigne une chose précise : « the apple on the table ».",
+      "examples": [
+        {"sentence": "I eat an apple every day.", "translation": "Je mange une pomme tous les jours."},
+        {"sentence": "She likes tea with milk.", "translation": "Elle aime le thé avec du lait."},
+        {"sentence": "We like tomatoes.", "translation": "Nous aimons les tomates."}
+      ],
+      "questions": [
+        {"sentence": "I want ___ orange, please.", "options": ["a", "an", "two"], "answer": "an", "why": "« orange » commence par un son de voyelle : on utilise « an »."},
+        {"sentence": "He has two ___ for lunch.", "options": ["sandwich", "sandwiches", "a sandwich"], "answer": "sandwiches", "why": "Après « two », le nom est au pluriel : sandwiches."},
+        {"sentence": "She eats ___ banana every morning.", "options": ["a", "an", "two"], "answer": "a", "why": "« banana » commence par un son de consonne et il est au singulier : on utilise « a »."},
+        {"sentence": "My brother ___ pizza.", "options": ["like", "likes", "liking"], "answer": "likes", "why": "« My brother » correspond à « he » : le verbe prend un « s »."},
+        {"sentence": "I buy six ___ every week.", "options": ["egg", "eggs", "an egg"], "answer": "eggs", "why": "Après un nombre supérieur à un, le nom prend un « s »."}
+      ],
+      "sentences": [
+        {"sentence": "I like fish and vegetables.", "translation": "J'aime le poisson et les légumes."},
+        {"sentence": "She drinks a glass of water.", "translation": "Elle boit un verre d'eau."},
+        {"sentence": "We eat an egg for breakfast.", "translation": "Nous mangeons un œuf au petit-déjeuner."}
+      ]
+    },
+    "pron": {
+      "focus": "le « i » court et le « i » long (ship / sheep)",
+      "advice": "L'anglais a deux « i ». Le « i » long de « sheep » ressemble au « i » français, en plus long, avec les lèvres étirées. Le « i » court de « ship » est bref et relâché, entre le « i » et le « é » français, la bouche détendue. Les francophones prononcent souvent les deux comme un « i » français, et « ship » devient « sheep ».",
+      "words": [
+        {"word": "ship", "translation": "bateau"},
+        {"word": "sheep", "translation": "mouton"},
+        {"word": "fish", "translation": "poisson"},
+        {"word": "eat", "translation": "manger"},
+        {"word": "milk", "translation": "lait"},
+        {"word": "tea", "translation": "thé"}
+      ],
+      "pairs": [
+        {"a": "ship", "b": "sheep"},
+        {"a": "sit", "b": "seat"},
+        {"a": "live", "b": "leave"}
+      ],
+      "sentences": [
+        {"sentence": "I eat fish and chips.", "translation": "Je mange du poisson avec des frites."},
+        {"sentence": "Please drink this green tea.", "translation": "Bois ce thé vert, s'il te plaît."}
+      ]
+    }
+  },
+  "A1-5": {
+    "vocab": {
+      "words": [
+        {"word": "the station", "translation": "la gare", "example": "The station is near my house.", "example_translation": "La gare est près de chez moi."},
+        {"word": "the bank", "translation": "la banque", "example": "The bank opens at nine o'clock.", "example_translation": "La banque ouvre à neuf heures."},
+        {"word": "the supermarket", "translation": "le supermarché", "example": "I go to the supermarket on Saturdays.", "example_translation": "Je vais au supermarché le samedi."},
+        {"word": "the hospital", "translation": "l'hôpital", "example": "My mother works at the hospital.", "example_translation": "Ma mère travaille à l'hôpital."},
+        {"word": "the street", "translation": "la rue", "example": "The shop is at the end of the street.", "example_translation": "Le magasin est au bout de la rue."},
+        {"word": "the park", "translation": "le parc", "example": "The children play in the park.", "example_translation": "Les enfants jouent dans le parc."}
+      ]
+    },
+    "grammar": {
+      "rule": "Avec la plupart des verbes, on forme la question en plaçant « do » ou « does » devant le sujet : « Do you live here? », « Does she work here? ». Pour la négation, on met « don't » (do not) ou « doesn't » (does not) devant le verbe : « I don't know ». Après does et doesn't, le verbe ne prend pas de « s ». Avec le verbe « to be », pas de « do » : on inverse (« Are you ready? ») et on ajoute « not » (« I'm not ready »).",
+      "examples": [
+        {"sentence": "Do you live near the station?", "translation": "Est-ce que tu habites près de la gare ?"},
+        {"sentence": "She doesn't work on Sundays.", "translation": "Elle ne travaille pas le dimanche."},
+        {"sentence": "Is the bank open today?", "translation": "La banque est-elle ouverte aujourd'hui ?"}
+      ],
+      "questions": [
+        {"sentence": "___ you like this town?", "options": ["Do", "Does", "Is"], "answer": "Do", "why": "Avec « you » et un verbe comme « like », la question commence par « Do »."},
+        {"sentence": "___ he work at the hospital?", "options": ["Do", "Does", "Is"], "answer": "Does", "why": "Avec he, she et it, la question se forme avec « Does »."},
+        {"sentence": "I ___ know the way.", "options": ["don't", "doesn't", "not"], "answer": "don't", "why": "Avec « I », la négation se forme avec « don't »."},
+        {"sentence": "She doesn't ___ in the city centre.", "options": ["live", "lives", "living"], "answer": "live", "why": "Après « doesn't », le verbe reste à sa forme de base, sans « s »."},
+        {"sentence": "___ the supermarket open now?", "options": ["Is", "Do", "Does"], "answer": "Is", "why": "« open » est ici un adjectif : on utilise le verbe « to be », donc « Is »."}
+      ],
+      "sentences": [
+        {"sentence": "Where do you live?", "translation": "Où est-ce que tu habites ?"},
+        {"sentence": "I don't like big cities.", "translation": "Je n'aime pas les grandes villes."},
+        {"sentence": "Does the bus stop here?", "translation": "Est-ce que le bus s'arrête ici ?"}
+      ]
+    },
+    "pron": {
+      "focus": "le « r » anglais",
+      "advice": "Le « r » anglais ne vient pas du fond de la gorge. Recule légèrement la langue et relève sa pointe vers le palais, sans rien toucher, en arrondissant un peu les lèvres. Les francophones gardent souvent leur « r » français, qui gratte dans la gorge.",
+      "words": [
+        {"word": "red", "translation": "rouge"},
+        {"word": "right", "translation": "à droite, correct"},
+        {"word": "road", "translation": "route"},
+        {"word": "street", "translation": "rue"},
+        {"word": "restaurant", "translation": "restaurant"},
+        {"word": "very", "translation": "très"}
+      ],
+      "pairs": [
+        {"a": "right", "b": "light"},
+        {"a": "read", "b": "lead"},
+        {"a": "rock", "b": "lock"}
+      ],
+      "sentences": [
+        {"sentence": "Turn right at the restaurant.", "translation": "Tourne à droite au restaurant."},
+        {"sentence": "Robert reads in his room.", "translation": "Robert lit dans sa chambre."}
+      ]
+    }
+  },
+  "A1-6": {
+    "vocab": {
+      "words": [
+        {"word": "the kitchen", "translation": "la cuisine", "example": "We eat in the kitchen.", "example_translation": "Nous mangeons dans la cuisine."},
+        {"word": "the bedroom", "translation": "la chambre", "example": "The bedroom is very small.", "example_translation": "La chambre est très petite."},
+        {"word": "the bathroom", "translation": "la salle de bain", "example": "The bathroom is next to my room.", "example_translation": "La salle de bain est à côté de ma chambre."},
+        {"word": "a table", "translation": "une table", "example": "There is a table in the garden.", "example_translation": "Il y a une table dans le jardin."},
+        {"word": "a chair", "translation": "une chaise", "example": "I need a chair for my desk.", "example_translation": "J'ai besoin d'une chaise pour mon bureau."},
+        {"word": "a window", "translation": "une fenêtre", "example": "My room has a window.", "example_translation": "Ma chambre a une fenêtre."}
+      ]
+    },
+    "grammar": {
+      "rule": "Pour dire « il y a », l'anglais utilise « there is » devant un nom singulier et « there are » devant un nom pluriel. À l'oral, « there is » devient souvent « there's ». Pour situer les choses, on utilise des prépositions : in (dans), on (sur), under (sous), next to (à côté de), between (entre).",
+      "examples": [
+        {"sentence": "There is a sofa in the living room.", "translation": "Il y a un canapé dans le salon."},
+        {"sentence": "There are two lamps on the table.", "translation": "Il y a deux lampes sur la table."},
+        {"sentence": "The cat is under the bed.", "translation": "Le chat est sous le lit."}
+      ],
+      "questions": [
+        {"sentence": "There ___ a table in the kitchen.", "options": ["is", "are", "am"], "answer": "is", "why": "« a table » est au singulier : on dit « there is »."},
+        {"sentence": "There ___ four chairs in the room.", "options": ["is", "are", "has"], "answer": "are", "why": "« four chairs » est au pluriel : on dit « there are »."},
+        {"sentence": "The shoes are ___ the bed, on the floor.", "options": ["under", "on", "in"], "answer": "under", "why": "Les chaussures sont par terre : elles sont donc sous le lit, « under »."},
+        {"sentence": "The lamp is ___ the sofa and the chair.", "options": ["between", "next", "there"], "answer": "between", "why": "Pour dire « entre » deux choses, on utilise « between … and … »."},
+        {"sentence": "___ are two windows in my bedroom.", "options": ["There", "They", "It"], "answer": "There", "why": "Pour dire « il y a » devant un pluriel, on utilise « There are »."}
+      ],
+      "sentences": [
+        {"sentence": "There is a big bed in my room.", "translation": "Il y a un grand lit dans ma chambre."},
+        {"sentence": "There are three chairs in the kitchen.", "translation": "Il y a trois chaises dans la cuisine."},
+        {"sentence": "The keys are on the table.", "translation": "Les clés sont sur la table."}
+      ]
+    },
+    "pron": {
+      "focus": "le « s » final (pluriels, 3e personne)",
+      "advice": "En anglais, le « s » final se prononce toujours, contrairement au français. Il se dit « s » après un son sourd (cats, books), « z » après un son sonore (dogs, plays) et « iz » après les sons s, z, ch et sh (houses, watches). Les francophones l'oublient souvent : « two cat », « she work ».",
+      "words": [
+        {"word": "cats", "translation": "chats"},
+        {"word": "books", "translation": "livres"},
+        {"word": "chairs", "translation": "chaises"},
+        {"word": "houses", "translation": "maisons"},
+        {"word": "works", "translation": "travaille"},
+        {"word": "watches", "translation": "regarde"}
+      ],
+      "pairs": [
+        {"a": "cats", "b": "cat"},
+        {"a": "plays", "b": "play"},
+        {"a": "books", "b": "book"}
+      ],
+      "sentences": [
+        {"sentence": "She likes cats and dogs.", "translation": "Elle aime les chats et les chiens."},
+        {"sentence": "My sister works in two shops.", "translation": "Ma sœur travaille dans deux magasins."}
+      ]
+    }
+  }
+}

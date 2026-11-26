@@ -1,0 +1,320 @@
+{
+  "A2-1": {
+    "vocab": {
+      "words": [
+        {"word": "go for a walk", "translation": "faire une promenade", "example": "I often go for a walk on Sundays.", "example_translation": "Je fais souvent une promenade le dimanche."},
+        {"word": "watch a film", "translation": "regarder un film", "example": "We can watch a film tonight.", "example_translation": "On peut regarder un film ce soir."},
+        {"word": "play football", "translation": "jouer au football", "example": "They play football every Saturday.", "example_translation": "Ils jouent au football tous les samedis."},
+        {"word": "go shopping", "translation": "faire les magasins", "example": "I go shopping with my sister.", "example_translation": "Je fais les magasins avec ma sœur."},
+        {"word": "a concert", "translation": "un concert", "example": "We went to a concert last night.", "example_translation": "Nous sommes allés à un concert hier soir."},
+        {"word": "relax", "translation": "se détendre", "example": "I relax at home on Sundays.", "example_translation": "Je me détends à la maison le dimanche."}
+      ]
+    },
+    "grammar": {
+      "rule": "Le prétérit (past simple) sert à raconter une action terminée dans le passé, souvent avec yesterday, last week ou ago. Les verbes réguliers prennent « -ed » : play → played, watch → watched. Les verbes irréguliers ont une forme à apprendre : go → went, see → saw, have → had. Dans les négations et les questions, on utilise « did » et le verbe revient à sa forme de base : « I didn't go », « Did you go? ».",
+      "examples": [
+        {"sentence": "I watched a film last night.", "translation": "J'ai regardé un film hier soir."},
+        {"sentence": "We went to the beach on Sunday.", "translation": "Nous sommes allés à la plage dimanche."},
+        {"sentence": "She didn't play tennis yesterday.", "translation": "Elle n'a pas joué au tennis hier."}
+      ],
+      "questions": [
+        {"sentence": "Yesterday I ___ to the cinema.", "options": ["go", "went", "gone"], "answer": "went", "why": "« Yesterday » situe l'action dans le passé : le prétérit de « go » est « went »."},
+        {"sentence": "We ___ football last Saturday.", "options": ["play", "played", "playing"], "answer": "played", "why": "« last Saturday » demande le prétérit : play devient « played »."},
+        {"sentence": "She didn't ___ the match.", "options": ["watch", "watched", "watches"], "answer": "watch", "why": "Après « didn't », le verbe reste à sa forme de base."},
+        {"sentence": "___ you see Tom last night?", "options": ["Did", "Do", "Were"], "answer": "Did", "why": "Au prétérit, la question se forme avec « Did » suivi du verbe à la forme de base."},
+        {"sentence": "They ___ a pizza two days ago.", "options": ["eat", "ate", "eaten"], "answer": "ate", "why": "« two days ago » demande le prétérit : le verbe irrégulier « eat » devient « ate »."}
+      ],
+      "sentences": [
+        {"sentence": "I visited my grandparents last weekend.", "translation": "J'ai rendu visite à mes grands-parents le week-end dernier."},
+        {"sentence": "We went for a long walk.", "translation": "Nous avons fait une longue promenade."},
+        {"sentence": "Did you watch the match yesterday?", "translation": "Est-ce que tu as regardé le match hier ?"}
+      ]
+    },
+    "pron": {
+      "focus": "la terminaison « -ed »",
+      "advice": "La terminaison « -ed » a trois prononciations. Elle se dit « t » après un son sourd (walked, watched), « d » après un son sonore (played, lived), et « id » seulement après t ou d (wanted, needed). Les francophones ajoutent souvent une syllabe en trop : « wal-ked » en deux syllabes au lieu d'une seule.",
+      "words": [
+        {"word": "walked", "translation": "a marché"},
+        {"word": "played", "translation": "a joué"},
+        {"word": "wanted", "translation": "a voulu"},
+        {"word": "watched", "translation": "a regardé"},
+        {"word": "lived", "translation": "a vécu"},
+        {"word": "visited", "translation": "a visité"}
+      ],
+      "pairs": [
+        {"a": "walked", "b": "walk"},
+        {"a": "played", "b": "play"},
+        {"a": "wanted", "b": "want"}
+      ],
+      "sentences": [
+        {"sentence": "We walked and talked all day.", "translation": "Nous avons marché et discuté toute la journée."},
+        {"sentence": "She visited us and stayed late.", "translation": "Elle nous a rendu visite et elle est restée tard."}
+      ]
+    }
+  },
+  "A2-2": {
+    "vocab": {
+      "words": [
+        {"word": "a ticket", "translation": "un billet", "example": "I need a ticket to London.", "example_translation": "J'ai besoin d'un billet pour Londres."},
+        {"word": "the airport", "translation": "l'aéroport", "example": "The airport is far from here.", "example_translation": "L'aéroport est loin d'ici."},
+        {"word": "a flight", "translation": "un vol", "example": "We have a flight at ten.", "example_translation": "Nous avons un vol à dix heures."},
+        {"word": "luggage", "translation": "les bagages", "example": "My luggage is very heavy.", "example_translation": "Mes bagages sont très lourds."},
+        {"word": "book", "translation": "réserver", "example": "I want to book a hotel room.", "example_translation": "Je veux réserver une chambre d'hôtel."},
+        {"word": "the platform", "translation": "le quai", "example": "The train is at the platform.", "example_translation": "Le train est à quai."}
+      ]
+    },
+    "grammar": {
+      "rule": "Pour parler d'un projet déjà décidé, on utilise « be going to » + verbe : « I'm going to visit Rome ». Pour un rendez-vous ou un voyage déjà organisé, on emploie souvent le présent continu : « I'm flying to Madrid on Friday ». « Will » sert plutôt pour une décision prise à l'instant ou pour une prédiction : « I'll help you », « It will rain ».",
+      "examples": [
+        {"sentence": "I'm going to travel by train.", "translation": "Je vais voyager en train."},
+        {"sentence": "We are leaving tomorrow morning.", "translation": "Nous partons demain matin."},
+        {"sentence": "I'll carry your bag.", "translation": "Je vais porter ton sac."}
+      ],
+      "questions": [
+        {"sentence": "She is going ___ a car.", "options": ["to rent", "rent", "renting"], "answer": "to rent", "why": "Après « be going », on met « to » puis le verbe à la forme de base."},
+        {"sentence": "We ___ going to visit Berlin next month.", "options": ["is", "are", "will"], "answer": "are", "why": "Avec « we », le verbe « to be » se conjugue « are »."},
+        {"sentence": "I ___ taking the train to Paris tomorrow.", "options": ["am", "will", "going"], "answer": "am", "why": "Le présent continu se forme avec « to be » + verbe en -ing : I am taking."},
+        {"sentence": "Don't worry, I ___ call a taxi.", "options": ["will", "am", "going"], "answer": "will", "why": "Pour une décision prise à l'instant, on utilise « will » + verbe."},
+        {"sentence": "They are ___ to fly to Spain in July.", "options": ["going", "will", "go"], "answer": "going", "why": "Le projet se construit avec « be going to » : they are going to fly."}
+      ],
+      "sentences": [
+        {"sentence": "I'm going to buy a ticket.", "translation": "Je vais acheter un billet."},
+        {"sentence": "We are flying to Rome tomorrow.", "translation": "Nous prenons l'avion pour Rome demain."},
+        {"sentence": "She will meet us at the airport.", "translation": "Elle nous retrouvera à l'aéroport."}
+      ]
+    },
+    "pron": {
+      "focus": "le son « ng » (-ing)",
+      "advice": "Le son « ng » se fait avec l'arrière de la langue collé au fond du palais, l'air passant par le nez, comme à la fin de « camping ». On ne prononce pas de « g » ensuite : dans « singing », on n'entend aucun « g » dur. Les francophones disent souvent « n » (« goin ») ou ajoutent un « g » (« going-gue »).",
+      "words": [
+        {"word": "sing", "translation": "chanter"},
+        {"word": "long", "translation": "long"},
+        {"word": "thing", "translation": "chose"},
+        {"word": "morning", "translation": "matin"},
+        {"word": "going", "translation": "en train d'aller"},
+        {"word": "travelling", "translation": "en train de voyager"}
+      ],
+      "pairs": [
+        {"a": "thing", "b": "thin"},
+        {"a": "sing", "b": "sin"},
+        {"a": "wing", "b": "win"}
+      ],
+      "sentences": [
+        {"sentence": "I'm going swimming this morning.", "translation": "Je vais nager ce matin."},
+        {"sentence": "We are singing a long song.", "translation": "Nous chantons une longue chanson."}
+      ]
+    }
+  },
+  "A2-3": {
+    "vocab": {
+      "words": [
+        {"word": "tall", "translation": "grand (de taille)", "example": "My father is very tall.", "example_translation": "Mon père est très grand."},
+        {"word": "friendly", "translation": "sympathique", "example": "Our new neighbours are very friendly.", "example_translation": "Nos nouveaux voisins sont très sympathiques."},
+        {"word": "expensive", "translation": "cher", "example": "This watch is too expensive for me.", "example_translation": "Cette montre est trop chère pour moi."},
+        {"word": "heavy", "translation": "lourd", "example": "This bag is really heavy.", "example_translation": "Ce sac est vraiment lourd."},
+        {"word": "comfortable", "translation": "confortable", "example": "This sofa is very comfortable.", "example_translation": "Ce canapé est très confortable."},
+        {"word": "quiet", "translation": "calme, silencieux", "example": "She is a quiet person.", "example_translation": "C'est une personne calme."}
+      ]
+    },
+    "grammar": {
+      "rule": "Pour comparer, les adjectifs courts prennent « -er » suivi de than : « taller than ». Les adjectifs longs utilisent « more » + adjectif + than : « more expensive than ». Pour le superlatif, on dit « the -est » ou « the most » : « the tallest », « the most beautiful ». Attention aux irréguliers : good → better → the best, bad → worse → the worst.",
+      "examples": [
+        {"sentence": "My brother is taller than me.", "translation": "Mon frère est plus grand que moi."},
+        {"sentence": "This phone is more expensive than mine.", "translation": "Ce téléphone est plus cher que le mien."},
+        {"sentence": "She is the best student in the class.", "translation": "C'est la meilleure élève de la classe."}
+      ],
+      "questions": [
+        {"sentence": "My car is ___ than yours.", "options": ["faster", "more fast", "fastest"], "answer": "faster", "why": "« fast » est un adjectif court : son comparatif est « faster »."},
+        {"sentence": "This book is ___ interesting than the film.", "options": ["more", "most", "much"], "answer": "more", "why": "Avec un adjectif long, le comparatif se forme avec « more … than »."},
+        {"sentence": "He is the ___ person in my family.", "options": ["tallest", "taller", "more tall"], "answer": "tallest", "why": "Après « the », pour dire « le plus », un adjectif court prend « -est »."},
+        {"sentence": "Today the weather is ___ than yesterday.", "options": ["better", "gooder", "best"], "answer": "better", "why": "Le comparatif de « good » est irrégulier : « better »."},
+        {"sentence": "It is the ___ beautiful city in the country.", "options": ["most", "more", "much"], "answer": "most", "why": "Le superlatif d'un adjectif long se forme avec « the most »."}
+      ],
+      "sentences": [
+        {"sentence": "My sister is younger than me.", "translation": "Ma sœur est plus jeune que moi."},
+        {"sentence": "This is the best restaurant in town.", "translation": "C'est le meilleur restaurant de la ville."},
+        {"sentence": "The red dress is more expensive.", "translation": "La robe rouge est plus chère."}
+      ]
+    },
+    "pron": {
+      "focus": "les voyelles de cat et cut",
+      "advice": "Pour la voyelle de « cat », ouvre grand la bouche et étire les lèvres : le son se situe entre le « a » et le « è » français. Pour la voyelle de « cut », la bouche est à peine ouverte et détendue : c'est un son bref, proche d'un « a » très court, jamais un « eu » ni un « u ». Les francophones confondent souvent les deux, et « cup » ressemble à « cap ».",
+      "words": [
+        {"word": "cat", "translation": "chat"},
+        {"word": "bag", "translation": "sac"},
+        {"word": "happy", "translation": "heureux"},
+        {"word": "cup", "translation": "tasse"},
+        {"word": "bus", "translation": "bus"},
+        {"word": "much", "translation": "beaucoup"}
+      ],
+      "pairs": [
+        {"a": "cat", "b": "cut"},
+        {"a": "hat", "b": "hut"},
+        {"a": "cap", "b": "cup"}
+      ],
+      "sentences": [
+        {"sentence": "My mum has a black cat.", "translation": "Ma mère a un chat noir."},
+        {"sentence": "I had lunch on the bus.", "translation": "J'ai déjeuné dans le bus."}
+      ]
+    }
+  },
+  "A2-4": {
+    "vocab": {
+      "words": [
+        {"word": "the bill", "translation": "l'addition", "example": "Can we have the bill, please?", "example_translation": "Est-ce qu'on peut avoir l'addition, s'il vous plaît ?"},
+        {"word": "the menu", "translation": "la carte, le menu", "example": "Could I see the menu, please?", "example_translation": "Pourrais-je voir la carte, s'il vous plaît ?"},
+        {"word": "a table for two", "translation": "une table pour deux", "example": "I'd like a table for two.", "example_translation": "Je voudrais une table pour deux."},
+        {"word": "cheap", "translation": "bon marché, pas cher", "example": "These shoes are very cheap.", "example_translation": "Ces chaussures ne sont vraiment pas chères."},
+        {"word": "pay", "translation": "payer", "example": "Can I pay by card?", "example_translation": "Est-ce que je peux payer par carte ?"},
+        {"word": "a receipt", "translation": "un ticket de caisse", "example": "Do you need a receipt?", "example_translation": "Avez-vous besoin d'un ticket de caisse ?"}
+      ]
+    },
+    "grammar": {
+      "rule": "Pour demander poliment, on utilise « Can I have… ? », « Could I have… ? » ou « I would like… » (I'd like), plus poli que « I want ». Pour les quantités, « some » s'emploie dans les phrases affirmatives et « any » dans les négations et la plupart des questions. « How much » va avec ce qu'on ne peut pas compter (water, money) et « how many » avec ce qu'on peut compter (apples, bottles).",
+      "examples": [
+        {"sentence": "Could I have the menu, please?", "translation": "Pourrais-je avoir la carte, s'il vous plaît ?"},
+        {"sentence": "I'd like some water.", "translation": "Je voudrais de l'eau."},
+        {"sentence": "How many tickets do you need?", "translation": "De combien de billets as-tu besoin ?"}
+      ],
+      "questions": [
+        {"sentence": "I ___ like a coffee, please.", "options": ["would", "am", "have"], "answer": "would", "why": "Pour demander poliment, on dit « I would like »."},
+        {"sentence": "How ___ apples do you want?", "options": ["many", "much", "any"], "answer": "many", "why": "« apples » se compte : on utilise « how many »."},
+        {"sentence": "How ___ is this jacket?", "options": ["much", "many", "some"], "answer": "much", "why": "Pour demander un prix, on dit toujours « How much »."},
+        {"sentence": "We don't have ___ bread.", "options": ["any", "some", "many"], "answer": "any", "why": "Dans une phrase négative, on utilise « any »."},
+        {"sentence": "___ I have the bill, please?", "options": ["Could", "Would", "Do"], "answer": "Could", "why": "Pour demander quelque chose poliment, on dit « Could I have… ? »."}
+      ],
+      "sentences": [
+        {"sentence": "Could I have a glass of water?", "translation": "Pourrais-je avoir un verre d'eau ?"},
+        {"sentence": "I would like some chicken, please.", "translation": "Je voudrais du poulet, s'il vous plaît."},
+        {"sentence": "How much is this bag?", "translation": "Combien coûte ce sac ?"}
+      ]
+    },
+    "pron": {
+      "focus": "le « l » clair et le « l » sombre",
+      "advice": "Le « l » clair, devant une voyelle (light, love), se prononce comme en français : la pointe de la langue touche juste derrière les dents du haut. Le « l » sombre, en fin de mot ou devant une consonne (full, milk), garde la pointe au même endroit, mais l'arrière de la langue se relève vers le fond du palais, ce qui donne un son plus grave. Les francophones prononcent souvent tous les « l » clairs, ou remplacent le « l » final par un « o ».",
+      "words": [
+        {"word": "light", "translation": "lumière"},
+        {"word": "love", "translation": "aimer"},
+        {"word": "table", "translation": "table"},
+        {"word": "milk", "translation": "lait"},
+        {"word": "people", "translation": "gens"},
+        {"word": "bottle", "translation": "bouteille"}
+      ],
+      "pairs": [
+        {"a": "feel", "b": "fee"},
+        {"a": "tool", "b": "two"},
+        {"a": "goal", "b": "go"}
+      ],
+      "sentences": [
+        {"sentence": "I'd like a little bottle of milk.", "translation": "Je voudrais une petite bouteille de lait."},
+        {"sentence": "The small table is full.", "translation": "La petite table est pleine."}
+      ]
+    }
+  },
+  "A2-5": {
+    "vocab": {
+      "words": [
+        {"word": "a headache", "translation": "un mal de tête", "example": "I have a headache today.", "example_translation": "J'ai mal à la tête aujourd'hui."},
+        {"word": "a cold", "translation": "un rhume", "example": "She has a cold this week.", "example_translation": "Elle a un rhume cette semaine."},
+        {"word": "stomach", "translation": "l'estomac, le ventre", "example": "My stomach hurts after lunch.", "example_translation": "J'ai mal au ventre après le déjeuner."},
+        {"word": "hurt", "translation": "faire mal", "example": "Does your arm hurt?", "example_translation": "Est-ce que ton bras te fait mal ?"},
+        {"word": "medicine", "translation": "un médicament", "example": "Take this medicine after meals.", "example_translation": "Prends ce médicament après les repas."},
+        {"word": "rest", "translation": "se reposer", "example": "You need to rest for two days.", "example_translation": "Tu dois te reposer pendant deux jours."}
+      ]
+    },
+    "grammar": {
+      "rule": "« Should » sert à donner un conseil : « You should rest ». « Must » exprime une obligation forte, et « have to » une obligation qui vient de l'extérieur (une règle, le médecin) : « I have to take this medicine ». Après should et must, le verbe est à la forme de base, sans « to ». Attention : « mustn't » veut dire « il est interdit de », alors que « don't have to » veut dire « ce n'est pas nécessaire ».",
+      "examples": [
+        {"sentence": "You should drink more water.", "translation": "Tu devrais boire plus d'eau."},
+        {"sentence": "I have to see the doctor today.", "translation": "Je dois voir le médecin aujourd'hui."},
+        {"sentence": "You mustn't smoke here.", "translation": "Il est interdit de fumer ici."}
+      ],
+      "questions": [
+        {"sentence": "You should ___ a doctor.", "options": ["see", "to see", "seeing"], "answer": "see", "why": "Après « should », le verbe est à la forme de base, sans « to »."},
+        {"sentence": "She ___ to stay in bed today.", "options": ["has", "must", "should"], "answer": "has", "why": "Seul « have to » est suivi de « to » ; avec « she », il devient « has to »."},
+        {"sentence": "You ___ eat so much sugar.", "options": ["shouldn't", "don't should", "not should"], "answer": "shouldn't", "why": "La négation de « should » est « shouldn't », sans « do »."},
+        {"sentence": "I have ___ take this medicine twice a day.", "options": ["to", "for", "at"], "answer": "to", "why": "L'obligation se construit avec « have to » + verbe."},
+        {"sentence": "It's Sunday, so I ___ have to get up early.", "options": ["don't", "mustn't", "am not"], "answer": "don't", "why": "« don't have to » veut dire que ce n'est pas nécessaire."}
+      ],
+      "sentences": [
+        {"sentence": "You should go to bed early.", "translation": "Tu devrais te coucher tôt."},
+        {"sentence": "I have to take my medicine.", "translation": "Je dois prendre mon médicament."},
+        {"sentence": "You must wash your hands.", "translation": "Tu dois te laver les mains."}
+      ]
+    },
+    "pron": {
+      "focus": "« w » et « v »",
+      "advice": "Pour « w », arrondis les lèvres vers l'avant comme pour dire « ou », puis ouvre-les rapidement vers la voyelle : les dents ne touchent pas les lèvres. Pour « v », les dents du haut touchent la lèvre du bas, comme en français. Les francophones prononcent souvent « w » comme « v » : « vater » au lieu de « water ».",
+      "words": [
+        {"word": "water", "translation": "eau"},
+        {"word": "week", "translation": "semaine"},
+        {"word": "well", "translation": "bien"},
+        {"word": "very", "translation": "très"},
+        {"word": "visit", "translation": "rendre visite, visiter"},
+        {"word": "voice", "translation": "voix"}
+      ],
+      "pairs": [
+        {"a": "wine", "b": "vine"},
+        {"a": "west", "b": "vest"},
+        {"a": "wet", "b": "vet"}
+      ],
+      "sentences": [
+        {"sentence": "We visit the vet every week.", "translation": "Nous allons chez le vétérinaire toutes les semaines."},
+        {"sentence": "Wendy drinks very warm water.", "translation": "Wendy boit de l'eau très chaude."}
+      ]
+    }
+  },
+  "A2-6": {
+    "vocab": {
+      "words": [
+        {"word": "a toy", "translation": "un jouet", "example": "I had a toy like this.", "example_translation": "J'avais un jouet comme celui-ci."},
+        {"word": "grow up", "translation": "grandir", "example": "Children grow up very fast.", "example_translation": "Les enfants grandissent très vite."},
+        {"word": "a memory", "translation": "un souvenir", "example": "I have a memory of that day.", "example_translation": "J'ai un souvenir de ce jour-là."},
+        {"word": "primary school", "translation": "l'école primaire", "example": "We met at primary school.", "example_translation": "Nous nous sommes rencontrés à l'école primaire."},
+        {"word": "remember", "translation": "se souvenir de", "example": "I remember my first teacher.", "example_translation": "Je me souviens de ma première maîtresse."},
+        {"word": "a game", "translation": "un jeu", "example": "We invented a game every summer.", "example_translation": "Nous inventions un jeu chaque été."}
+      ]
+    },
+    "grammar": {
+      "rule": "« Used to » + verbe décrit une habitude ou une situation du passé qui n'existe plus : « I used to play outside ». Il correspond souvent à l'imparfait français. Dans les questions et les négations, on écrit « use to » : « Did you use to… ? », « I didn't use to… ». Pour décrire une action en cours à un moment du passé, on emploie was / were + verbe en -ing : « It was raining ».",
+      "examples": [
+        {"sentence": "I used to live in a small village.", "translation": "J'habitais dans un petit village."},
+        {"sentence": "We used to walk to school together.", "translation": "Nous allions à l'école à pied ensemble."},
+        {"sentence": "It was snowing when I woke up.", "translation": "Il neigeait quand je me suis réveillé."}
+      ],
+      "questions": [
+        {"sentence": "When I was a child, I ___ to play outside every day.", "options": ["used", "use", "using"], "answer": "used", "why": "Pour une habitude passée, on dit « used to » + verbe."},
+        {"sentence": "Did you ___ to have a pet?", "options": ["use", "used", "using"], "answer": "use", "why": "Après « did », on écrit « use to », sans « d »."},
+        {"sentence": "We ___ living in Lyon at that time.", "options": ["were", "was", "used"], "answer": "were", "why": "Avec « we », l'action en cours dans le passé se forme avec « were » + -ing."},
+        {"sentence": "My grandmother used to ___ cakes every Sunday.", "options": ["make", "made", "making"], "answer": "make", "why": "Après « used to », le verbe est à la forme de base."},
+        {"sentence": "I ___ use to like vegetables.", "options": ["didn't", "wasn't", "don't"], "answer": "didn't", "why": "La négation de « used to » se forme avec « didn't use to »."}
+      ],
+      "sentences": [
+        {"sentence": "I used to ride my bike everywhere.", "translation": "J'allais partout à vélo."},
+        {"sentence": "We used to spend summers by the sea.", "translation": "Nous passions nos étés au bord de la mer."},
+        {"sentence": "My brother was sleeping in the car.", "translation": "Mon frère dormait dans la voiture."}
+      ]
+    },
+    "pron": {
+      "focus": "les voyelles de full et fool",
+      "advice": "L'anglais a deux « ou ». Celui de « fool » est long : les lèvres sont bien arrondies et tendues, comme pour le « ou » français, en plus long. Celui de « full » est court et relâché, les lèvres à peine arrondies, entre « ou » et « eu ». Les francophones prononcent souvent les deux comme un « ou » français, et « full » devient « fool ».",
+      "words": [
+        {"word": "full", "translation": "plein"},
+        {"word": "good", "translation": "bon"},
+        {"word": "book", "translation": "livre"},
+        {"word": "food", "translation": "nourriture"},
+        {"word": "school", "translation": "école"},
+        {"word": "blue", "translation": "bleu"}
+      ],
+      "pairs": [
+        {"a": "full", "b": "fool"},
+        {"a": "pull", "b": "pool"},
+        {"a": "look", "b": "Luke"}
+      ],
+      "sentences": [
+        {"sentence": "I took a good book to school.", "translation": "J'ai emporté un bon livre à l'école."},
+        {"sentence": "The pool is full of blue water.", "translation": "La piscine est pleine d'eau bleue."}
+      ]
+    }
+  }
+}

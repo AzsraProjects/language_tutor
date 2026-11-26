@@ -1,0 +1,774 @@
+{
+  "B2-1": {
+    "vocab": {
+      "words": [
+        {
+          "word": "an assumption",
+          "translation": "une supposition",
+          "example": "That is a dangerous assumption to make.",
+          "example_translation": "C'est une supposition dangereuse à faire."
+        },
+        {
+          "word": "evidence",
+          "translation": "des preuves",
+          "example": "There is no evidence for this claim.",
+          "example_translation": "Il n'y a aucune preuve de cette affirmation."
+        },
+        {
+          "word": "a point of view",
+          "translation": "un point de vue",
+          "example": "I understand your point of view.",
+          "example_translation": "Je comprends ton point de vue."
+        },
+        {
+          "word": "controversial",
+          "translation": "controversé",
+          "example": "It remains a highly controversial issue.",
+          "example_translation": "Cela reste une question très controversée."
+        },
+        {
+          "word": "to argue",
+          "translation": "soutenir, affirmer",
+          "example": "Some experts argue that prices will fall.",
+          "example_translation": "Certains experts soutiennent que les prix vont baisser."
+        },
+        {
+          "word": "a trade-off",
+          "translation": "un compromis",
+          "example": "There is always a trade-off between speed and quality.",
+          "example_translation": "Il y a toujours un compromis entre rapidité et qualité."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour dire à quel point tu es sûr de quelque chose, l'anglais utilise les modaux. Must exprime une quasi-certitude (ça doit être vrai), might, may et could une possibilité, et can't une impossibilité logique. Pour parler du passé, tu ajoutes have + participe passé : She must have forgotten. Tu peux aussi utiliser be likely to, be bound to (c'est inévitable) ou l'adverbe probably, qui se place après will mais avant won't.",
+      "examples": [
+        {
+          "sentence": "He must be at work by now.",
+          "translation": "Il doit être au travail à l'heure qu'il est."
+        },
+        {
+          "sentence": "She might have missed the train.",
+          "translation": "Elle a peut-être raté le train."
+        },
+        {
+          "sentence": "That can't be the right answer.",
+          "translation": "Ça ne peut pas être la bonne réponse."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "The lights are off, so they ___ be asleep.",
+          "options": ["must", "ought", "has to"],
+          "answer": "must",
+          "why": "Must exprime une déduction presque certaine ; ought demande to, et has to ne s'accorde pas avec they."
+        },
+        {
+          "sentence": "She ___ have forgotten; she never forgets anything.",
+          "options": ["can't", "must", "should"],
+          "answer": "can't",
+          "why": "La suite de la phrase montre que c'est impossible : on utilise can't have + participe passé."
+        },
+        {
+          "sentence": "Prices are ___ to rise again next year.",
+          "options": ["likely", "probably", "maybe"],
+          "answer": "likely",
+          "why": "La structure est be likely to + verbe ; probably et maybe ne se construisent pas avec to."
+        },
+        {
+          "sentence": "He might ___ left his keys at the office.",
+          "options": ["have", "has", "had"],
+          "answer": "have",
+          "why": "Après un modal, on met toujours have à la base verbale, puis le participe passé."
+        },
+        {
+          "sentence": "It will ___ rain this afternoon.",
+          "options": ["probably", "likely to", "be probable"],
+          "answer": "probably",
+          "why": "L'adverbe probably se place entre will et le verbe."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "He must have forgotten our meeting.",
+          "translation": "Il a dû oublier notre réunion."
+        },
+        {
+          "sentence": "She might be right about this issue.",
+          "translation": "Elle a peut-être raison sur cette question."
+        },
+        {
+          "sentence": "That can't be the only explanation.",
+          "translation": "Ça ne peut pas être la seule explication."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les formes faibles (to, of, and, can)",
+      "advice": "Les petits mots grammaticaux comme to, of, and, can, for ou at ne sont presque jamais accentués : leur voyelle se réduit à un schwa très court. To se dit « teu », of « euv », and « eun », can « keun ». L'erreur typique des francophones est de prononcer chaque mot pleinement, ce qui donne un rythme haché ; garde la forme pleine pour insister ou en fin de phrase (Yes, I can).",
+      "words": [
+        {"word": "a cup of tea", "translation": "une tasse de thé"},
+        {"word": "fish and chips", "translation": "poisson-frites"},
+        {"word": "I can swim", "translation": "je sais nager"},
+        {"word": "go to bed", "translation": "aller au lit"},
+        {"word": "wait for me", "translation": "attends-moi"},
+        {"word": "look at this", "translation": "regarde ça"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "I can go to the shop for you.",
+          "translation": "Je peux aller au magasin pour toi."
+        },
+        {
+          "sentence": "We had a cup of tea and cake.",
+          "translation": "Nous avons pris une tasse de thé et du gâteau."
+        }
+      ]
+    }
+  },
+  "B2-2": {
+    "vocab": {
+      "words": [
+        {
+          "word": "a turning point",
+          "translation": "un tournant",
+          "example": "Moving abroad was a turning point for me.",
+          "example_translation": "Partir à l'étranger a été un tournant pour moi."
+        },
+        {
+          "word": "to settle down",
+          "translation": "se poser, s'installer",
+          "example": "They finally decided to settle down in Leeds.",
+          "example_translation": "Ils ont finalement décidé de s'installer à Leeds."
+        },
+        {
+          "word": "to take a risk",
+          "translation": "prendre un risque",
+          "example": "Sometimes you have to take a risk.",
+          "example_translation": "Parfois, il faut prendre un risque."
+        },
+        {
+          "word": "a missed opportunity",
+          "translation": "une occasion manquée",
+          "example": "Not applying was a missed opportunity.",
+          "example_translation": "Ne pas postuler a été une occasion manquée."
+        },
+        {
+          "word": "to give up",
+          "translation": "abandonner, renoncer à",
+          "example": "She refused to give up her dream.",
+          "example_translation": "Elle a refusé de renoncer à son rêve."
+        },
+        {
+          "word": "in hindsight",
+          "translation": "avec le recul",
+          "example": "In hindsight, it was the right choice.",
+          "example_translation": "Avec le recul, c'était le bon choix."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour imaginer un passé différent, tu utilises if + past perfect, puis would have + participe passé : If I had studied, I would have passed. Pour exprimer un regret, tu dis I wish ou If only + past perfect : I wish I had listened. Should have + participe passé exprime un reproche ou un regret sur ce qui n'a pas été fait. Ne mets jamais would have juste après if.",
+      "examples": [
+        {
+          "sentence": "If I had left earlier, I would have caught the train.",
+          "translation": "Si j'étais parti plus tôt, j'aurais eu le train."
+        },
+        {
+          "sentence": "I wish I had learned to play the piano.",
+          "translation": "Je regrette de ne pas avoir appris à jouer du piano."
+        },
+        {
+          "sentence": "You should have told me the truth.",
+          "translation": "Tu aurais dû me dire la vérité."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "If I ___ harder, I would have passed the exam.",
+          "options": ["had studied", "would have studied", "have studied"],
+          "answer": "had studied",
+          "why": "Dans une hypothèse sur le passé, if est suivi du past perfect, jamais de would have."
+        },
+        {
+          "sentence": "I wish I ___ that job in Canada.",
+          "options": ["had taken", "have taken", "would take"],
+          "answer": "had taken",
+          "why": "Pour un regret sur le passé, wish est suivi du past perfect."
+        },
+        {
+          "sentence": "If she had called, I ___ helped her.",
+          "options": ["would have", "would", "will have"],
+          "answer": "would have",
+          "why": "La conséquence imaginaire dans le passé se forme avec would have + participe passé."
+        },
+        {
+          "sentence": "You ___ have told me; now it's too late.",
+          "options": ["should", "must", "will"],
+          "answer": "should",
+          "why": "Should have + participe passé exprime un reproche : ce qu'il aurait fallu faire."
+        },
+        {
+          "sentence": "If only we ___ bought that house!",
+          "options": ["had", "have", "would"],
+          "answer": "had",
+          "why": "If only, comme wish, est suivi du past perfect pour un regret sur le passé."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "I wish I had travelled more.",
+          "translation": "Je regrette de ne pas avoir voyagé davantage."
+        },
+        {
+          "sentence": "You should have taken that risk.",
+          "translation": "Tu aurais dû prendre ce risque."
+        },
+        {
+          "sentence": "If I had known, I would have stayed.",
+          "translation": "Si j'avais su, je serais resté."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les liaisons entre les mots",
+      "advice": "À l'oral, l'anglais enchaîne les mots : une consonne finale s'accroche à la voyelle du mot suivant. Turn off se dit « teur-nof » et an apple « eu-napeul ». L'erreur typique des francophones est de marquer une petite pause entre chaque mot : fais glisser la consonne sur la voyelle suivante, sans couper le souffle.",
+      "words": [
+        {"word": "turn off", "translation": "éteindre"},
+        {"word": "pick it up", "translation": "ramasse-le"},
+        {"word": "an apple", "translation": "une pomme"},
+        {"word": "not at all", "translation": "pas du tout"},
+        {"word": "first of all", "translation": "tout d'abord"},
+        {"word": "check in", "translation": "s'enregistrer"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "Turn it off and pick it up.",
+          "translation": "Éteins-le et ramasse-le."
+        },
+        {
+          "sentence": "First of all, I ate an apple.",
+          "translation": "Tout d'abord, j'ai mangé une pomme."
+        }
+      ]
+    }
+  },
+  "B2-3": {
+    "vocab": {
+      "words": [
+        {
+          "word": "a deal",
+          "translation": "un accord",
+          "example": "We closed the deal after two meetings.",
+          "example_translation": "Nous avons conclu l'accord après deux réunions."
+        },
+        {
+          "word": "to negotiate",
+          "translation": "négocier",
+          "example": "They want to negotiate a lower price.",
+          "example_translation": "Ils veulent négocier un prix plus bas."
+        },
+        {
+          "word": "a stakeholder",
+          "translation": "une partie prenante",
+          "example": "Every stakeholder was invited to the meeting.",
+          "example_translation": "Chaque partie prenante a été invitée à la réunion."
+        },
+        {
+          "word": "to compromise",
+          "translation": "faire un compromis",
+          "example": "Both sides had to compromise in the end.",
+          "example_translation": "Les deux parties ont dû faire un compromis au final."
+        },
+        {
+          "word": "a quote",
+          "translation": "un devis",
+          "example": "Could you send us a quote by Friday?",
+          "example_translation": "Pourriez-vous nous envoyer un devis d'ici vendredi ?"
+        },
+        {
+          "word": "to outsource",
+          "translation": "externaliser",
+          "example": "The company decided to outsource its support.",
+          "example_translation": "L'entreprise a décidé d'externaliser son assistance."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour convaincre, tu structures ton discours avec des connecteurs. Moreover et furthermore ajoutent un argument ; nevertheless et however marquent une opposition ; therefore et as a result introduisent une conséquence. Fais attention à la construction : despite et in spite of sont suivis d'un nom ou d'un verbe en -ing, alors que although est suivi d'un sujet et d'un verbe. Provided that signifie « à condition que », et unless « sauf si ».",
+      "examples": [
+        {
+          "sentence": "The offer is fair; moreover, it is flexible.",
+          "translation": "L'offre est juste ; de plus, elle est flexible."
+        },
+        {
+          "sentence": "Despite the delay, we met the deadline.",
+          "translation": "Malgré le retard, nous avons respecté le délai."
+        },
+        {
+          "sentence": "We will sign, provided that the price drops.",
+          "translation": "Nous signerons, à condition que le prix baisse."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "___ the high cost, the project was approved.",
+          "options": ["Despite", "Although", "However"],
+          "answer": "Despite",
+          "why": "Despite est suivi d'un nom (the high cost) ; although demanderait un sujet et un verbe."
+        },
+        {
+          "sentence": "Sales fell sharply; ___, we had to cut costs.",
+          "options": ["therefore", "although", "despite"],
+          "answer": "therefore",
+          "why": "Réduire les coûts est la conséquence de la baisse des ventes : on utilise therefore, suivi d'une virgule ; although et despite ne s'emploient pas ainsi."
+        },
+        {
+          "sentence": "We won't sign ___ they lower the price.",
+          "options": ["unless", "despite", "moreover"],
+          "answer": "unless",
+          "why": "Unless signifie « sauf si » et introduit la seule condition qui changerait la décision."
+        },
+        {
+          "sentence": "The product is cheap. ___, it is very reliable.",
+          "options": ["Moreover", "Although", "Despite"],
+          "answer": "Moreover",
+          "why": "Moreover ajoute un second argument ; although et despite ne peuvent pas commencer une phrase indépendante suivie d'une virgule."
+        },
+        {
+          "sentence": "___ it was risky, the board accepted the plan.",
+          "options": ["Although", "Despite", "Nevertheless"],
+          "answer": "Although",
+          "why": "Although est suivi d'un sujet et d'un verbe (it was risky), contrairement à despite."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "Despite the risks, we accepted the deal.",
+          "translation": "Malgré les risques, nous avons accepté l'accord."
+        },
+        {
+          "sentence": "We will sign unless the price rises.",
+          "translation": "Nous signerons, sauf si le prix augmente."
+        },
+        {
+          "sentence": "The offer is fair; therefore, we agree.",
+          "translation": "L'offre est juste ; par conséquent, nous sommes d'accord."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "l'accent de phrase et le rythme",
+      "advice": "En anglais, tu accentues les mots qui portent le sens (noms, verbes, adjectifs, adverbes) et tu passes vite sur les petits mots grammaticaux. Le rythme repose sur ces temps forts, à peu près réguliers, et non sur chaque syllabe comme en français. L'erreur typique des francophones est de donner la même durée à toutes les syllabes : allonge les mots importants et écrase le reste.",
+      "words": [
+        {"word": "I'd like a coffee", "translation": "je voudrais un café (temps forts : like, coffee)"},
+        {"word": "What do you want?", "translation": "qu'est-ce que tu veux ? (temps forts : what, want)"},
+        {"word": "It's time to go", "translation": "il est temps de partir (temps forts : time, go)"},
+        {"word": "She works in a bank", "translation": "elle travaille dans une banque (temps forts : works, bank)"},
+        {"word": "Call me tomorrow", "translation": "appelle-moi demain (temps forts : call, tomorrow)"},
+        {"word": "a glass of water", "translation": "un verre d'eau (temps forts : glass, water)"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "I want to go to the bank.",
+          "translation": "Je veux aller à la banque."
+        },
+        {
+          "sentence": "She bought a glass of water.",
+          "translation": "Elle a acheté un verre d'eau."
+        }
+      ]
+    }
+  },
+  "B2-4": {
+    "vocab": {
+      "words": [
+        {
+          "word": "to run out of",
+          "translation": "ne plus avoir de, être à court de",
+          "example": "We have run out of coffee again.",
+          "example_translation": "Nous sommes encore à court de café."
+        },
+        {
+          "word": "to put up with",
+          "translation": "supporter, tolérer",
+          "example": "I can't put up with this noise.",
+          "example_translation": "Je ne supporte pas ce bruit."
+        },
+        {
+          "word": "a piece of cake",
+          "translation": "un jeu d'enfant",
+          "example": "The exam was a piece of cake.",
+          "example_translation": "L'examen était un jeu d'enfant."
+        },
+        {
+          "word": "to come up with",
+          "translation": "trouver, proposer (une idée)",
+          "example": "She always comes up with great ideas.",
+          "example_translation": "Elle trouve toujours d'excellentes idées."
+        },
+        {
+          "word": "under the weather",
+          "translation": "pas dans son assiette",
+          "example": "I feel a bit under the weather today.",
+          "example_translation": "Je ne me sens pas trop dans mon assiette aujourd'hui."
+        },
+        {
+          "word": "to call it a day",
+          "translation": "s'arrêter là pour aujourd'hui",
+          "example": "It's late, so let's call it a day.",
+          "example_translation": "Il est tard, alors arrêtons-nous là pour aujourd'hui."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Un verbe à particule associe un verbe et une ou deux particules (up, off, out, with…), et son sens est souvent imprévisible : give up veut dire « abandonner ». Certains sont séparables : tu peux dire turn off the light ou turn the light off, mais avec un pronom, il se place obligatoirement au milieu : turn it off. D'autres sont inséparables, comme look after ou run into. Les verbes à trois éléments (look forward to, put up with) ne se séparent jamais ; après look forward to, le verbe est en -ing.",
+      "examples": [
+        {
+          "sentence": "Please turn it off before you leave.",
+          "translation": "Éteins-le avant de partir, s'il te plaît."
+        },
+        {
+          "sentence": "I ran into an old friend yesterday.",
+          "translation": "Je suis tombé sur un vieil ami hier."
+        },
+        {
+          "sentence": "We are looking forward to meeting you.",
+          "translation": "Nous avons hâte de te rencontrer."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "The music is too loud. Could you turn ___?",
+          "options": ["it down", "down it", "it under"],
+          "answer": "it down",
+          "why": "Avec un verbe séparable, le pronom se place entre le verbe et la particule : turn it down."
+        },
+        {
+          "sentence": "I'm looking forward to ___ you next week.",
+          "options": ["seeing", "see", "have seen"],
+          "answer": "seeing",
+          "why": "Dans look forward to, to est une préposition : le verbe qui suit est en -ing."
+        },
+        {
+          "sentence": "She gave ___ smoking two years ago.",
+          "options": ["up", "off", "away"],
+          "answer": "up",
+          "why": "Give up signifie « arrêter, abandonner » ; give away veut dire « donner », et give off « dégager »."
+        },
+        {
+          "sentence": "Who will look ___ the children tonight?",
+          "options": ["after", "for", "into"],
+          "answer": "after",
+          "why": "Look after signifie « s'occuper de » ; look for veut dire « chercher » et look into « examiner »."
+        },
+        {
+          "sentence": "We've run ___ of milk; can you buy some?",
+          "options": ["out", "off", "away"],
+          "answer": "out",
+          "why": "L'expression est run out of : « ne plus avoir de »."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "She came up with a brilliant idea.",
+          "translation": "Elle a trouvé une idée brillante."
+        },
+        {
+          "sentence": "I can't put up with his excuses.",
+          "translation": "Je ne supporte pas ses excuses."
+        },
+        {
+          "sentence": "We ran out of time yesterday.",
+          "translation": "Nous avons manqué de temps hier."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "l'intonation des questions",
+      "advice": "Dans une question fermée (réponse oui ou non), la voix monte à la fin : Are you ready? Dans une question ouverte, qui commence par what, where, why ou how, la voix descend à la fin : Where do you live? L'erreur typique des francophones est de faire monter la voix à la fin de toutes les questions, ce qui peut donner l'impression d'être surpris ou de ne pas avoir compris.",
+      "words": [
+        {"word": "Are you ready?", "translation": "Tu es prêt ?"},
+        {"word": "Do you like it?", "translation": "Est-ce que ça te plaît ?"},
+        {"word": "Is it far?", "translation": "C'est loin ?"},
+        {"word": "Where do you live?", "translation": "Où habites-tu ?"},
+        {"word": "What time is it?", "translation": "Quelle heure est-il ?"},
+        {"word": "Why are you late?", "translation": "Pourquoi es-tu en retard ?"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "Did you come up with a plan?",
+          "translation": "As-tu trouvé un plan ?"
+        },
+        {
+          "sentence": "How did you find the answer?",
+          "translation": "Comment as-tu trouvé la réponse ?"
+        }
+      ]
+    }
+  },
+  "B2-5": {
+    "vocab": {
+      "words": [
+        {
+          "word": "to enquire",
+          "translation": "se renseigner",
+          "example": "I am writing to enquire about your services.",
+          "example_translation": "Je vous écris pour me renseigner sur vos services."
+        },
+        {
+          "word": "an agenda",
+          "translation": "un ordre du jour",
+          "example": "The first item on the agenda is the budget.",
+          "example_translation": "Le premier point à l'ordre du jour est le budget."
+        },
+        {
+          "word": "the minutes",
+          "translation": "le compte rendu",
+          "example": "Who is taking the minutes today?",
+          "example_translation": "Qui rédige le compte rendu aujourd'hui ?"
+        },
+        {
+          "word": "to postpone",
+          "translation": "reporter",
+          "example": "We need to postpone the meeting until Monday.",
+          "example_translation": "Nous devons reporter la réunion à lundi."
+        },
+        {
+          "word": "an attachment",
+          "translation": "une pièce jointe",
+          "example": "Please find the contract in the attachment.",
+          "example_translation": "Veuillez trouver le contrat en pièce jointe."
+        },
+        {
+          "word": "to follow up",
+          "translation": "relancer, donner suite",
+          "example": "I will follow up with the client tomorrow.",
+          "example_translation": "Je relancerai le client demain."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "L'anglais formel évite les contractions et préfère les tournures indirectes. Pour demander quelque chose poliment, tu dis I would be grateful if you could… ou Would you mind + verbe en -ing. Would like remplace want, et could remplace can. À l'écrit, on préfère les verbes d'origine latine aux verbes à particule : postpone plutôt que put off, request plutôt que ask for. Dans une question indirecte, l'ordre des mots est celui d'une phrase affirmative : Could you tell me where the office is?",
+      "examples": [
+        {
+          "sentence": "I would be grateful if you could reply soon.",
+          "translation": "Je vous serais reconnaissant de bien vouloir répondre rapidement."
+        },
+        {
+          "sentence": "Would you mind sending me the report?",
+          "translation": "Cela vous dérangerait-il de m'envoyer le rapport ?"
+        },
+        {
+          "sentence": "Could you tell me when the meeting starts?",
+          "translation": "Pourriez-vous me dire quand commence la réunion ?"
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "Would you mind ___ the door, please?",
+          "options": ["closing", "to close", "close"],
+          "answer": "closing",
+          "why": "Would you mind est toujours suivi d'un verbe en -ing."
+        },
+        {
+          "sentence": "I would be grateful if you ___ send me the details.",
+          "options": ["could", "are", "did"],
+          "answer": "could",
+          "why": "Après I would be grateful if you, la formule polie utilise could (ou would) + verbe."
+        },
+        {
+          "sentence": "Could you tell me where the meeting room ___?",
+          "options": ["is", "is it", "does"],
+          "answer": "is",
+          "why": "Dans une question indirecte, on garde l'ordre sujet + verbe, sans inversion."
+        },
+        {
+          "sentence": "I am writing to ___ about the vacancy.",
+          "options": ["enquire", "request", "demand"],
+          "answer": "enquire",
+          "why": "Enquire about signifie « se renseigner sur » ; request et demand ne se construisent pas avec about."
+        },
+        {
+          "sentence": "We ___ like to invite you to our annual conference.",
+          "options": ["would", "want", "wish"],
+          "answer": "would",
+          "why": "Would like to est la forme polie de want ; want et wish ne peuvent pas être suivis de like."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "Would you mind sending me the agenda?",
+          "translation": "Cela vous dérangerait-il de m'envoyer l'ordre du jour ?"
+        },
+        {
+          "sentence": "We regret to inform you of the delay.",
+          "translation": "Nous avons le regret de vous informer du retard."
+        },
+        {
+          "sentence": "Could you tell me where the office is?",
+          "translation": "Pourriez-vous me dire où se trouve le bureau ?"
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les groupes de consonnes (strengths, texts)",
+      "advice": "L'anglais enchaîne souvent plusieurs consonnes sans voyelle entre elles, au début comme à la fin des mots : street, asked, texts. Prononce chaque consonne rapidement, l'une après l'autre. L'erreur typique des francophones est d'ajouter une petite voyelle (« seu-treet », « ask-eud ») ou d'avaler une consonne finale, ce qui fait disparaître le pluriel ou le passé.",
+      "words": [
+        {"word": "street", "translation": "rue"},
+        {"word": "asked", "translation": "a demandé"},
+        {"word": "texts", "translation": "textes, SMS"},
+        {"word": "months", "translation": "mois (pluriel)"},
+        {"word": "strengths", "translation": "points forts"},
+        {"word": "sixth", "translation": "sixième"}
+      ],
+      "pairs": [],
+      "sentences": [
+        {
+          "sentence": "She asked for the texts last month.",
+          "translation": "Elle a demandé les textes le mois dernier."
+        },
+        {
+          "sentence": "The sixth street has three shops.",
+          "translation": "La sixième rue a trois magasins."
+        }
+      ]
+    }
+  },
+  "B2-6": {
+    "vocab": {
+      "words": [
+        {
+          "word": "a plot twist",
+          "translation": "un rebondissement",
+          "example": "Nobody expected that plot twist.",
+          "example_translation": "Personne ne s'attendait à ce rebondissement."
+        },
+        {
+          "word": "a narrator",
+          "translation": "un narrateur",
+          "example": "The narrator is a ten-year-old girl.",
+          "example_translation": "La narratrice est une fillette de dix ans."
+        },
+        {
+          "word": "suspense",
+          "translation": "le suspense",
+          "example": "The author builds suspense very slowly.",
+          "example_translation": "L'auteur fait monter le suspense très lentement."
+        },
+        {
+          "word": "a setting",
+          "translation": "un cadre, un décor",
+          "example": "The setting is a small fishing village.",
+          "example_translation": "Le cadre est un petit village de pêcheurs."
+        },
+        {
+          "word": "all of a sudden",
+          "translation": "tout à coup",
+          "example": "All of a sudden, the lights went out.",
+          "example_translation": "Tout à coup, les lumières se sont éteintes."
+        },
+        {
+          "word": "to unfold",
+          "translation": "se dérouler",
+          "example": "The story unfolds over a single night.",
+          "example_translation": "L'histoire se déroule sur une seule nuit."
+        }
+      ]
+    },
+    "grammar": {
+      "rule": "Pour bien raconter, tu combines plusieurs temps du passé. Le prétérit simple donne les actions principales, dans l'ordre. Le prétérit continu (was + -ing) plante le décor ou décrit une action en cours, interrompue par une autre. Le past perfect (had + participe passé) remonte à ce qui s'était passé avant, et le past perfect continu (had been + -ing) insiste sur la durée de ce qui précédait.",
+      "examples": [
+        {
+          "sentence": "I was walking home when it started to rain.",
+          "translation": "Je rentrais à pied quand il s'est mis à pleuvoir."
+        },
+        {
+          "sentence": "When we arrived, the film had already started.",
+          "translation": "Quand nous sommes arrivés, le film avait déjà commencé."
+        },
+        {
+          "sentence": "She had been waiting for an hour.",
+          "translation": "Elle attendait depuis une heure."
+        }
+      ],
+      "questions": [
+        {
+          "sentence": "I ___ dinner when the phone rang.",
+          "options": ["was cooking", "have cooked", "cook"],
+          "answer": "was cooking",
+          "why": "L'action en cours, interrompue par une autre, se met au prétérit continu."
+        },
+        {
+          "sentence": "When I got to the station, the train ___ already left.",
+          "options": ["had", "has", "was"],
+          "answer": "had",
+          "why": "Le train est parti avant mon arrivée : on utilise le past perfect (had left)."
+        },
+        {
+          "sentence": "He opened the door, ___ inside and sat down.",
+          "options": ["walked", "was walking", "had walked"],
+          "answer": "walked",
+          "why": "Des actions qui se suivent dans l'ordre se mettent toutes au prétérit simple."
+        },
+        {
+          "sentence": "She was tired because she had ___ working all night.",
+          "options": ["been", "be", "being"],
+          "answer": "been",
+          "why": "Le past perfect continu se forme avec had been + verbe en -ing."
+        },
+        {
+          "sentence": "While they ___, someone stole their car.",
+          "options": ["were sleeping", "have slept", "sleep"],
+          "answer": "were sleeping",
+          "why": "Après while, l'action longue en arrière-plan se met au prétérit continu."
+        }
+      ],
+      "sentences": [
+        {
+          "sentence": "I was reading when the lights went out.",
+          "translation": "Je lisais quand les lumières se sont éteintes."
+        },
+        {
+          "sentence": "She had never seen such a strange place.",
+          "translation": "Elle n'avait jamais vu un endroit aussi étrange."
+        },
+        {
+          "sentence": "He had been waiting there for hours.",
+          "translation": "Il attendait là depuis des heures."
+        }
+      ]
+    },
+    "pron": {
+      "focus": "les contractions à l'oral",
+      "advice": "À l'oral, les anglophones contractent presque toujours les auxiliaires : I am devient I'm, I will devient I'll, I would devient I'd, did not devient didn't. Une contraction se prononce en une seule syllabe, sans voyelle ajoutée : I'll rime presque avec « aïl », et didn't se termine par un « d-nt » très bref. L'erreur typique des francophones est de tout prononcer en forme pleine, ce qui paraît raide, ou de ne pas entendre le petit 'll ou 'd qui change le temps du verbe.",
+      "words": [
+        {"word": "I'm", "translation": "je suis"},
+        {"word": "I'll", "translation": "je vais (futur)"},
+        {"word": "I'd", "translation": "je voudrais, j'avais"},
+        {"word": "we've", "translation": "nous avons"},
+        {"word": "didn't", "translation": "n'a pas (passé)"},
+        {"word": "wouldn't", "translation": "ne voudrait pas"}
+      ],
+      "pairs": [
+        {"a": "I'll", "b": "I"},
+        {"a": "we'd", "b": "we"},
+        {"a": "can't", "b": "can"}
+      ],
+      "sentences": [
+        {
+          "sentence": "I'd love to, but I can't.",
+          "translation": "J'adorerais, mais je ne peux pas."
+        },
+        {
+          "sentence": "We've decided we'll leave tomorrow.",
+          "translation": "Nous avons décidé que nous partirons demain."
+        }
+      ]
+    }
+  }
+}

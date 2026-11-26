@@ -14,8 +14,18 @@ if str(_ROOT) not in sys.path:
 
 import webview  # noqa: E402
 
-from gui import audio, config, ollama_mgr, paths, progress, stt, updater  # noqa: E402
-from gui.engine import Engine  # noqa: E402
+from gui import (  # noqa: E402
+    audio,
+    config,
+    lessons,
+    ollama_mgr,
+    paths,
+    progress,
+    stt,
+    tts,
+    updater,
+)
+from gui.engine import Engine, _mic_id  # noqa: E402
 from gui.version import APP_NAME  # noqa: E402
 
 
@@ -40,6 +50,7 @@ class Api:
         self._window = None
         self._engine = Engine(self._emit)
         self._pending_update = None
+        self._practice = None
 
     def _attach(self, window) -> None:
         self._window = window
@@ -118,6 +129,13 @@ class Api:
                             "Téléchargement du modèle de transcription…",
                         ),
                     )
+                elif step == "download_voice":
+                    tts.install(
+                        settings["language"],
+                        lambda pct: progress_cb(
+                            pct, "Téléchargement de la voix du tuteur…"
+                        ),
+                    )
                 elif step == "download_whisper_bin":
                     raise RuntimeError(
                         "Le moteur de transcription est fourni avec l'appli : réinstalle-la."
@@ -175,6 +193,100 @@ class Api:
     def end_session(self):
         self._engine.end_session()
         return self._engine.state()
+
+    # --- Level and lessons ------------------------------------------------------------
+
+    @_safe
+    def starter_questions(self):
+        language = config.load()["language"]
+        return {"ok": True, "questions": lessons.starter_questions(language)}
+
+    @_safe
+    def assess_level(self, answers):
+        language = config.load()["language"]
+        return {"ok": True, **lessons.assess_level(language, list(answers or []))}
+
+    @_safe
+    def set_level(self, code):
+        lessons.set_level(config.load()["language"], code)
+        return self._engine.state()
+
+    @_safe
+    def get_lesson(self, kind, unit_id=None, regenerate=False):
+        language = config.load()["language"]
+        if kind == "review":
+            lesson = lessons.review_lesson(language)
+        else:
+            lesson = lessons.get_lesson(language, kind, unit_id, bool(regenerate))
+        return {"ok": True, "lesson": lesson}
+
+    @_safe
+    def finish_lesson(self, lesson_id, results):
+        return {"ok": True, **lessons.finish(lesson_id, list(results or []))}
+
+    @_safe
+    def speak(self, text):
+        import base64
+
+        language = config.load()["language"]
+        audio_bytes = tts.synthesize(str(text)[:400], language)
+        encoded = base64.b64encode(audio_bytes).decode("ascii")
+        return {"ok": True, "audio": "data:audio/wav;base64," + encoded}
+
+    @_safe
+    def practice_record_start(self):
+        """Start recording one spoken answer outside a conversation."""
+        if self._practice is not None:
+            self._practice.cancel()
+        recorder = audio.Recorder(
+            device=_mic_id(config.load()["mic"]),
+            on_level=lambda value: self._emit(
+                {"type": "level", "value": round(value, 3)}
+            ),
+        )
+        recorder.start()
+        self._practice = recorder
+
+    @_safe
+    def practice_record_cancel(self):
+        recorder, self._practice = self._practice, None
+        if recorder is not None:
+            recorder.cancel()
+
+    @_safe
+    def practice_record_stop(self, target=None):
+        """Stop and transcribe. With `target`, compare word by word with it."""
+        import tempfile
+
+        recorder, self._practice = self._practice, None
+        if recorder is None:
+            raise RuntimeError("Aucun enregistrement en cours.")
+        settings = config.load()
+        handle, name = tempfile.mkstemp(suffix=".wav")
+        os.close(handle)
+        wav = Path(name)
+        try:
+            duration = recorder.stop(wav)
+            if duration < 0.3:
+                return {
+                    "ok": True,
+                    "heard": "",
+                    "words": [],
+                    "score": 0,
+                    "passed": False,
+                }
+            transcriber = stt.Transcriber(
+                model=settings["whisper_model"],
+                language=settings["language"],
+                threads=int(settings["threads"]),
+                high_quality=bool(settings["high_quality"]),
+            )
+            words = transcriber.transcribe_words(wav)
+        finally:
+            wav.unlink(missing_ok=True)
+        if target:
+            return {"ok": True, **lessons.compare_speech(str(target), words)}
+        return {"ok": True, "heard": " ".join(word for word, _ in words)}
 
     # --- Files ----------------------------------------------------------------------
 

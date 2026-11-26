@@ -9,6 +9,7 @@ IS_WINDOWS = sys.platform == "win32"
 
 datas = [
     (str(ROOT / "gui" / "web"), "gui/web"),
+    (str(ROOT / "gui" / "content"), "gui/content"),
     (str(ROOT / "tutor_system_prompt.txt"), "."),
     (str(ROOT / "feedback_system_prompt.txt"), "."),
     (str(ROOT / "build" / "whisper"), "whisper"),

@@ -28,7 +28,11 @@
     modal: null, // {kind, ...}
     draft: null, // settings draft
     lastFocus: null,
-    demo: false
+    demo: false,
+    meet: null, // first-use flow: {step, questions, idx, answers, heard, showTr, result}
+    lesson: null, // running lesson: {data, pos, results, x}
+    lessonLoading: null, // {kind}
+    lessonEnd: null // result of finish_lesson
   };
 
   var XP_PER_CHALLENGE = 50;
@@ -93,6 +97,18 @@
     warn: function () { return svg(22, 22, '0 0 24 24', '<path d="M12 3.5l9.5 16.5h-19z" fill="#FFC93C" stroke="#4D3A00" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5" stroke="#4D3A00" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.3" fill="#4D3A00"/>'); },
     refresh: function () { return svg(18, 18, '0 0 20 20', '<path d="M3.5 10a6.5 6.5 0 1011.6-4M15.5 2.5V6H12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'); },
     folder: function () { return svg(18, 18, '0 0 20 20', '<path d="M2.5 5.5a1.5 1.5 0 011.5-1.5h3.5l2 2H16a1.5 1.5 0 011.5 1.5v7A1.5 1.5 0 0116 16H4a1.5 1.5 0 01-1.5-1.5z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>'); },
+    star: function (s, on) {
+      return svg(s, s, '0 0 24 24', '<path d="M12 2.6l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.5l-5.9 3.1 1.2-6.5L2.5 9.5l6.6-.9z" fill="' + (on ? '#FFC93C' : '#E2ECF3') + '" stroke="' + (on ? '#DB8A0B' : '#B4C6D6') + '" stroke-width="1.8" stroke-linejoin="round"/>');
+    },
+    lock: function (s) { return svg(s, s, '0 0 14 14', '<rect x="2.5" y="6" width="9" height="6.5" rx="1.5" fill="#46607A"/><path d="M4.5 6V4.5a2.5 2.5 0 015 0V6" stroke="#46607A" stroke-width="1.6"/>'); },
+    speaker: function (s, color) {
+      var c = color || 'currentColor';
+      return svg(s, s, '0 0 24 24', '<path d="M4 9.5h3.500L12 5.500v13L7.500 14.500H4z" fill="' + c + '" stroke="' + c + '" stroke-width="1.6" stroke-linejoin="round"/><path d="M15.500 9a4.200 4.200 0 010 6M18 6.500a7.800 7.800 0 010 11" stroke="' + c + '" stroke-width="2.200" stroke-linecap="round"/>');
+    },
+    cards: function (s) { return svg(s, s, '0 0 28 28', '<rect x="8" y="4" width="15" height="18" rx="3.500" fill="#BFE0FA" stroke="#062A45" stroke-width="2.200"/><rect x="4.500" y="7" width="15" height="18" rx="3.500" fill="#fff" stroke="#062A45" stroke-width="2.200"/><path d="M8.500 13h7M8.500 17.500h4.500" stroke="#062A45" stroke-width="2.200" stroke-linecap="round"/>'); },
+    puzzle: function (s) { return svg(s, s, '0 0 28 28', '<path d="M5 9.500h5.200a2.800 2.800 0 115.600 0H21a2 2 0 012 2v3.700a2.800 2.800 0 100 5.600V22a2 2 0 01-2 2H5a2 2 0 01-2-2v-4.200a2.800 2.800 0 100-5.600V11.500a2 2 0 012-2z" fill="#fff" stroke="#062A45" stroke-width="2.200" stroke-linejoin="round"/>'); },
+    wave: function (s) { return svg(s, s, '0 0 28 28', '<path d="M5 12v4M9.500 8.500v11M14 5v18M18.500 9.500v9M23 12.500v3" stroke="#062A45" stroke-width="2.600" stroke-linecap="round"/>'); },
+    loop: function (s) { return svg(s, s, '0 0 28 28', '<path d="M5.500 14a8.500 8.500 0 0114.800-5.700M22.500 14a8.500 8.500 0 01-14.800 5.700" stroke="#23330A" stroke-width="2.600" stroke-linecap="round"/><path d="M21 3.500V9h-5.500M7 24.500V19h5.500" stroke="#23330A" stroke-width="2.600" stroke-linecap="round" stroke-linejoin="round"/>'); },
     back: function () { return svg(16, 16, '0 0 14 14', '<path d="M8.5 3L4.5 7l4 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>'); },
     avatar: function (s) {
       return svg(s, s, '0 0 48 48', '<circle cx="24" cy="24" r="22" fill="#2EA8FF" stroke="#1B7FCC" stroke-width="3"/><ellipse cx="17.5" cy="21" rx="4" ry="5" fill="#fff"/><ellipse cx="30.5" cy="21" rx="4" ry="5" fill="#fff"/><circle cx="18.5" cy="22" r="2.2" fill="#14263A"/><circle cx="31.5" cy="22" r="2.2" fill="#14263A"/><path d="M18 31c3 3.5 9 3.5 12 0" stroke="#062A45" stroke-width="3" stroke-linecap="round"/>', ' class="avatar"');
@@ -367,16 +383,26 @@
     el.style.display = html ? '' : 'none';
   }
 
-  function viewHome() {
-    var p = S.progress;
-    var n = S.next_session_number;
-    var pending = (S.challenges || []).filter(function (c) { return !c.done; });
-    var first = n <= 1;
+  function langsHtml() {
     var langs = '';
     for (var i = 0; i < S.languages.length; i++) {
       var l = S.languages[i];
       langs += '<button type="button" class="btn lang-btn" data-act="lang" data-code="' + esc(l.code) + '" aria-pressed="' + (l.code === S.language ? 'true' : 'false') + '">' + esc(l.name) + '</button>';
     }
+    return langs;
+  }
+
+  function viewHome() {
+    return S.path ? viewHub() : viewHomeLegacy();
+  }
+
+  // Home without a learning path (backend without lessons).
+  function viewHomeLegacy() {
+    var p = S.progress;
+    var n = S.next_session_number;
+    var pending = (S.challenges || []).filter(function (c) { return !c.done; });
+    var first = n <= 1;
+    var langs = langsHtml();
     var banner = updateBannerHtml();
 
     var html = '<div class="view">' + topbar({ lang: false }) +
@@ -578,6 +604,8 @@
       }, 500);
     }
     refreshDock();
+    if (UI.view === 'lesson') { refreshLessonFoot(); }
+    else if (UI.view === 'meet') { refreshMeetFoot(); }
   }
 
   function toggleTalk() {
@@ -879,6 +907,808 @@
   }
 
   // ------------------------------------------------------------------
+  // View: home hub (learning path)
+  // ------------------------------------------------------------------
+
+  var KIND_LABEL = { vocab: 'Vocabulaire', grammar: 'Grammaire', pron: 'Prononciation', review: 'Révision', conversation: 'Conversation' };
+
+  function kindIcon(kind, size) {
+    if (kind === 'vocab') { return ICON.cards(size); }
+    if (kind === 'grammar') { return ICON.puzzle(size); }
+    if (kind === 'pron') { return ICON.wave(size); }
+    if (kind === 'review') { return ICON.loop(size); }
+    return ICON.mic(size);
+  }
+
+  function kindPitch(kind) {
+    if (kind === 'vocab') { return 'De nouveaux mots à découvrir, puis des exercices pour les retenir.'; }
+    if (kind === 'grammar') { return 'Une règle expliquée simplement, puis de la pratique.'; }
+    if (kind === 'pron') {
+      return S.voice ? 'Un son à travailler : tu écoutes, tu répètes, et ton tuteur te dit ce qu\'il a compris.'
+        : 'Un son à travailler : tu lis à voix haute, et ton tuteur te dit ce qu\'il a compris.';
+    }
+    if (kind === 'review') { return 'Tes points à consolider, pour qu\'ils restent pour de bon.'; }
+    return 'Tu parles, ton tuteur te répond, et tu repars avec un bilan et des défis.';
+  }
+
+  function starsHtml(n, size) {
+    n = clamp(n | 0, 0, 3);
+    var h = '<span class="stars" role="img" aria-label="' + n + (n > 1 ? ' étoiles' : ' étoile') + ' sur 3">';
+    for (var i = 1; i <= 3; i++) { h += ICON.star(size || 18, i <= n); }
+    return h + '</span>';
+  }
+
+  function actTile(kind, unit, isNext) {
+    var stars = unit.lessons[kind] | 0;
+    return '<button type="button" class="act-tile' + (stars ? ' is-done' : '') + (isNext ? ' is-next' : '') + '" data-act="lesson" data-kind="' + kind + '" data-unit="' + esc(unit.id) + '">' +
+      '<span class="act-ico">' + kindIcon(kind, 28) + '</span><span class="act-name">' + KIND_LABEL[kind] + '</span>' + starsHtml(stars, 18) +
+      '<span class="act-state">' + (stars ? 'Rejouer' : (isNext ? 'À faire maintenant' : 'À faire')) + '</span></button>';
+  }
+
+  function viewHub() {
+    var p = S.progress;
+    var path = S.path;
+    var n = S.next_session_number;
+    var rec = path.recommended || { kind: 'conversation', unit_id: null, label: 'Conversation libre' };
+    var pending = (S.challenges || []).filter(function (c) { return !c.done; });
+    var cur = null;
+    var i;
+    for (i = 0; i < path.units.length; i++) { if (path.units[i].current) { cur = path.units[i]; } }
+    var banner = updateBannerHtml();
+
+    var html = '<div class="view">' + topbar({ lang: false }) +
+      '<div class="update-banner" id="update-banner"' + (banner ? '' : ' style="display:none"') + '>' + banner + '</div>' +
+      '<div class="scroll"><div class="home"><div class="wrap home-grid"><div class="home-main">';
+
+    // What to do next.
+    html += '<section class="hero hub-next"><div class="hero-top">' + ICON.avatar(84) + '<div class="hub-next-head">' +
+      '<span class="hero-kicker">Parcours : ' + esc(path.level_name) + ' · ' + esc(langName(S.language)) + '</span>' +
+      '<h1>' + esc(rec.label) + '</h1></div></div>' +
+      '<p>' + kindPitch(rec.kind) + '</p>' +
+      '<div class="start-row"><button type="button" class="btn btn-primary btn-lg" data-act="continue" id="start-btn">' + kindIcon(rec.kind, 26) + 'Continuer</button>' +
+      '<span class="dock-hint"><kbd>Entrée</kbd></span></div></section>';
+
+    html += '<div id="voice-card">' + voiceCardHtml() + '</div>';
+
+    if (path.level_complete) {
+      html += '<section class="card level-done"><div class="level-done-row"><span class="done-mark done-mark-sm">' + ICON.check(30) + '</span><div><h2>Parcours ' + esc(path.level_name) + ' terminé !</h2>' +
+        '<p>' + (path.next_level ? 'Tu as fini toutes les unités. Prêt pour la suite ?' : 'Tu as fini toutes les unités : continue à pratiquer en conversation.') + '</p></div></div>';
+      if (path.next_level) {
+        html += '<button type="button" class="btn btn-green" data-act="pick-level" data-code="' + esc(path.next_level) + '">Passer au parcours ' + esc(levelName(path.next_level)) + '</button>';
+      }
+      html += '</section>';
+    }
+
+    // Unit in progress: its three lessons + the conversation.
+    if (cur) {
+      var nextKind = rec.unit_id === cur.id ? rec.kind : null;
+      html += '<section class="card unit-card"><span class="card-kicker">Unité ' + cur.number + ' · en cours</span><h2>' + esc(cur.title) + '</h2><div class="acts">' +
+        actTile('vocab', cur, nextKind === 'vocab') + actTile('grammar', cur, nextKind === 'grammar') + actTile('pron', cur, nextKind === 'pron') +
+        '<button type="button" class="act-tile act-talk" data-act="start"><span class="act-ico">' + ICON.mic(28) + '</span><span class="act-name">Conversation</span>' +
+        '<span class="act-sub">Séance ' + n + '</span><span class="act-state">Parler librement</span></button></div>';
+      if (S.has_briefing) {
+        html += '<label class="check"><input type="checkbox" id="followup"' + (UI.followup ? ' checked' : '') + '><span class="box">' + ICON.check(18, '#23330A', 4) + '</span>Conversation : reprendre à partir du dernier bilan</label>';
+      }
+      html += '</section>';
+    } else {
+      html += '<section class="card unit-card"><span class="card-kicker">Conversation</span><h2>Parler librement</h2><div class="start-row" style="margin-top:12px">' +
+        '<button type="button" class="btn" data-act="start">' + ICON.mic(22) + 'Commencer la séance ' + n + '</button>';
+      if (S.has_briefing) {
+        html += '<label class="check"><input type="checkbox" id="followup"' + (UI.followup ? ' checked' : '') + '><span class="box">' + ICON.check(18, '#23330A', 4) + '</span>Reprendre à partir du dernier bilan</label>';
+      }
+      html += '</div></section>';
+    }
+
+    if (path.review_due > 0) {
+      html += '<section class="card review-card"><span class="review-ico">' + ICON.loop(28) + '</span><div class="review-body"><h2>' + path.review_due + (path.review_due > 1 ? ' points à revoir' : ' point à revoir') + '</h2>' +
+        '<p>Les exercices qui t\'ont résisté reviennent ici, jusqu\'à ce qu\'ils soient acquis.</p></div>' +
+        '<button type="button" class="btn btn-green btn-sm" data-act="lesson" data-kind="review">Réviser</button></section>';
+    }
+
+    // The whole level, as plain cards.
+    html += '<section class="card"><span class="card-kicker">Parcours : ' + esc(path.level_name) + '</span><h2>Toutes les unités</h2><ul class="units">';
+    for (i = 0; i < path.units.length; i++) {
+      var u = path.units[i];
+      var open = u.done || u.current || !u.locked;
+      var cls = 'unit-row' + (u.done ? ' is-done' : (u.current ? ' is-current' : (open ? '' : ' is-locked')));
+      var mark = u.done ? ICON.check(20, '#23330A', 4) : (open ? String(u.number) : ICON.lock(18));
+      var sub = u.done ? 'Terminée' : (u.current ? 'En cours' : (open ? 'Disponible' : 'Se débloque après l\'unité ' + (u.number - 1)));
+      html += '<li class="' + cls + '"><span class="unit-num">' + mark + '</span><div class="unit-body"><span class="unit-title">' + esc(u.title) + '</span><span class="unit-sub">' + sub + '</span></div>';
+      if (open) {
+        html += '<div class="unit-acts">';
+        var kinds = ['vocab', 'grammar', 'pron'];
+        for (var k = 0; k < kinds.length; k++) {
+          var st = u.lessons[kinds[k]] | 0;
+          html += '<button type="button" class="mini" data-act="lesson" data-kind="' + kinds[k] + '" data-unit="' + esc(u.id) + '" title="' + KIND_LABEL[kinds[k]] + ' — ' + (st ? 'rejouer' : 'commencer') + '">' +
+            '<span>' + KIND_LABEL[kinds[k]] + '</span>' + starsHtml(st, 14) + '</button>';
+        }
+        html += '</div>';
+      }
+      html += '</li>';
+    }
+    html += '</ul></section></div>';
+
+    // Side column: game progress, language, pending challenges.
+    var into = Math.max(0, p.xp - p.level_floor_xp);
+    var span = Math.max(1, p.level_next_xp - p.level_floor_xp);
+    var chestLeft = Math.max(0, p.chest_every - p.chest_count);
+    html += '<aside class="home-side"><div class="tiles">' +
+      '<div class="tile tile-wide">' + levelBadge(p.level, 76) + '<div class="tile-col"><span class="tile-num">Niveau ' + p.level + '</span>' +
+      '<span class="bar bar-lg" role="img" aria-label="' + into + ' XP sur ' + span + ' avant le niveau suivant"><span style="width:' + pct(into, span) + '%"></span></span>' +
+      '<span class="tile-line"><span>' + fmt(p.xp) + ' XP</span><span>Niveau ' + (p.level + 1) + ' à ' + fmt(p.level_next_xp) + ' XP</span></span></div></div>' +
+      '<div class="tile tile-streak"><span class="tile-top">' + ICON.flame(26) + '<span class="tile-num">' + streakText(p.streak) + '</span></span><span class="tile-label">' + (p.streak > 0 ? 'd\'affilée' : 'Lance ta série aujourd\'hui') + '</span></div>' +
+      '<div class="tile"><span class="tile-top">' + ICON.check(26, '#8DB81F', 4) + '<span class="tile-num">' + p.sessions_done + '</span></span><span class="tile-label">' + (p.sessions_done > 1 ? 'conversations terminées' : 'conversation terminée') + '</span></div>' +
+      '<div class="tile tile-chest tile-wide"><span class="chest-ico">' + ICON.chest(26, true) + '</span><div class="tile-col"><span class="tile-num" style="font-size:18px;white-space:normal">' + (chestLeft <= 1 ? 'Plus qu\'une conversation' : 'Encore ' + chestLeft + ' conversations') + '</span>' +
+      '<span class="bar bar-lg bar-pink" role="img" aria-label="Coffre : ' + p.chest_count + ' sur ' + p.chest_every + '"><span style="width:' + pct(p.chest_count, p.chest_every) + '%"></span></span>' +
+      '<span class="tile-line"><span>avant d\'ouvrir le coffre</span><span>' + p.chest_count + ' / ' + p.chest_every + '</span></span></div></div></div>';
+
+    html += '<section class="card"><span class="card-kicker" id="lang-label">Je veux parler</span><div class="langs" role="group" aria-labelledby="lang-label" style="margin-top:10px">' + langsHtml() + '</div></section>';
+
+    html += '<section class="card"><span class="card-kicker">' + esc(langName(S.language)) + '</span><h2>Tes défis en attente</h2>';
+    if (pending.length) {
+      html += '<ul class="quests">';
+      for (i = 0; i < pending.length; i++) { html += '<li>' + questHtml(pending[i], false) + '</li>'; }
+      html += '</ul>';
+    } else {
+      html += '<p class="empty-note">' + (S.has_briefing ? 'Tous tes défis sont réussis. Le prochain bilan t\'en donnera de nouveaux.' : 'Pas encore de défi : ils arrivent avec ton premier bilan, à la fin d\'une conversation.') + '</p>';
+    }
+    html += '</section></aside></div></div></div></div>';
+    return html;
+  }
+
+  function levelName(code) {
+    var list = (S && S.levels) || [];
+    for (var i = 0; i < list.length; i++) { if (list[i].code === code) { return list[i].name; } }
+    return code || '';
+  }
+
+  // ------------------------------------------------------------------
+  // Tutor voice + practice recording (shared by lessons and first use)
+  // ------------------------------------------------------------------
+
+  var AUDIO = { cache: {}, el: null };
+
+  function say(text) {
+    if (!S || !S.voice || !text) { return Promise.resolve(false); }
+    var key = S.language + '|' + text;
+    function play(url) {
+      try {
+        if (AUDIO.el) { AUDIO.el.pause(); }
+        AUDIO.el = new Audio(url);
+        var pr = AUDIO.el.play();
+        if (pr && pr['catch']) { pr['catch'](function () {}); }
+      } catch (e) { return false; }
+      return true;
+    }
+    if (AUDIO.cache[key]) { return Promise.resolve(play(AUDIO.cache[key])); }
+    return call('speak', text).then(function (res) {
+      if (res.ok === false || !res.audio) { return false; }
+      AUDIO.cache[key] = res.audio;
+      return play(res.audio);
+    });
+  }
+
+  // Offer to download the tutor's voice while it is missing for this language.
+  function voiceCardHtml() {
+    var offer = S.voice_offer;
+    if (S.voice || !offer || !offer.supported) { return ''; }
+    var busy = UI.setupBusy.download_voice;
+    var html = '<section class="card review-card voice-card"><span class="review-ico">' + ICON.speaker(28) + '</span><div class="review-body"><h2>Donne une voix à ton tuteur</h2>' +
+      '<p>Il prononce les mots, te fait écouter la bonne version quand c\'est presque ça, et débloque les exercices d\'écoute. ' + offer.megabytes + ' Mo à télécharger une seule fois, puis tout fonctionne hors ligne.</p>';
+    if (busy) {
+      var known = typeof busy.pct === 'number';
+      html += '<div class="step-progress"><span class="bar' + (known ? '' : ' indet') + '"><span style="width:' + (known ? clamp(busy.pct, 0, 100) : 35) + '%"></span></span><small>' + busyLabel(busy) + '</small></div>';
+    }
+    html += '</div>';
+    if (!busy) { html += '<button type="button" class="btn btn-green btn-sm" data-act="voice">Activer la voix</button>'; }
+    return html + '</section>';
+  }
+
+  function refreshVoiceCard() {
+    var el = $('#voice-card');
+    if (el) { el.innerHTML = voiceCardHtml(); }
+  }
+
+  function stopAudio() {
+    try { if (AUDIO.el) { AUDIO.el.pause(); } } catch (e) { /* nothing playing */ }
+  }
+
+  function sayBtn(text, label) {
+    if (!S.voice) { return ''; }
+    return '<button type="button" class="say' + (label ? ' say-wide' : '') + '" data-act="say" data-text="' + esc(text) + '" aria-label="Écouter : ' + esc(text) + '" title="Écouter">' + ICON.speaker(20) + (label ? '<span>' + label + '</span>' : '') + '</button>';
+  }
+
+  // Same button and states as the conversation's « Parler », for one answer.
+  function practiceTalkHtml(label) {
+    if (UI.rec === 'rec') {
+      return '<span class="dock-hint"><kbd>Échap</kbd> annuler</span><button type="button" class="btn btn-lg btn-talk is-rec" id="talk" data-act="ptalk">' + ICON.stop(24) + 'J\'ai fini' +
+        '<span class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="chrono" id="chrono">' + chrono() + '</span></button>';
+    }
+    if (UI.rec === 'starting') {
+      return '<button type="button" class="btn btn-primary btn-lg btn-talk" id="talk" disabled><span class="spinner"></span>Micro…</button>';
+    }
+    if (UI.rec === 'transcribing') {
+      return '<button type="button" class="btn btn-primary btn-lg btn-talk" id="talk" disabled><span class="spinner"></span>Je t\'écoute…</button>';
+    }
+    return '<span class="dock-hint"><kbd>Entrée</kbd></span><button type="button" class="btn btn-primary btn-lg btn-talk" id="talk" data-act="ptalk">' + ICON.mic(26) + (label || 'Parler') + '</button>';
+  }
+
+  function practiceToggle(target, onResult) {
+    if (UI.rec === 'ready') {
+      stopAudio();
+      setRec('starting');
+      call('practice_record_start').then(function (res) {
+        if (UI.rec !== 'starting') { return; }
+        setRec(res.ok === false ? 'ready' : 'rec');
+      });
+    } else if (UI.rec === 'rec') {
+      var view = UI.view;
+      setRec('transcribing');
+      var done = function (res) {
+        if (UI.view !== view || UI.rec !== 'transcribing') { return; }
+        UI.rec = 'ready';
+        if (UI.recTimer) { clearInterval(UI.recTimer); UI.recTimer = null; }
+        onResult(res);
+      };
+      if (target) { call('practice_record_stop', target).then(done); }
+      else { call('practice_record_stop').then(done); }
+    }
+  }
+
+  function practiceCancel(quiet) {
+    if (UI.rec !== 'rec' && UI.rec !== 'starting') { return; }
+    setRec('ready');
+    call('practice_record_cancel').then(function () { if (!quiet) { toast('Enregistrement annulé.', 'soft'); } });
+  }
+
+  // ------------------------------------------------------------------
+  // View: first use — « Faisons connaissance »
+  // ------------------------------------------------------------------
+
+  function meetBody() {
+    var m = UI.meet;
+    var lang = esc(langName(S.language));
+    var html = '';
+    var i;
+    if (m.step === 'intro') {
+      html += '<div class="meet-card"><div class="setup-head">' + ICON.avatar(72) + '<div><span class="hero-kicker">' + lang + '</span><h1>Faisons connaissance</h1></div></div>' +
+        '<p class="setup-sub">Pour te proposer des leçons à ta mesure, trouvons ensemble ton point de départ. Ça prend deux minutes, et tu pourras le changer quand tu veux.</p>' +
+        '<div class="meet-choices">' +
+        '<button type="button" class="choice-card is-main" data-act="meet-chat" data-autofocus><span class="choice-ico">' + ICON.mic(30) + '</span><span class="choice-body"><strong>On discute deux minutes</strong>' +
+        '<span>Trois petites questions, tu réponds à voix haute, et ton tuteur trouve ton point de départ.</span></span></button>' +
+        '<button type="button" class="choice-card" data-act="meet-pick"><span class="choice-ico choice-ico-plain">' + ICON.gear() + '</span><span class="choice-body"><strong>Je choisis moi-même</strong>' +
+        '<span>Tu sais déjà où tu en es : choisis ton parcours directement.</span></span></button></div>' +
+        '<div class="meet-lang"><span class="card-kicker" id="lang-label">Je veux parler</span><div class="langs" role="group" aria-labelledby="lang-label">' + langsHtml() + '</div></div></div>';
+    } else if (m.step === 'loading') {
+      html += '<div class="meet-card meet-center" role="status"><span class="spinner"></span><p class="setup-sub">Ton tuteur prépare ses questions…</p></div>';
+    } else if (m.step === 'questions') {
+      var q = m.questions[m.idx];
+      html += '<div class="meet-card"><div class="meet-progress"><span class="card-kicker">Question ' + (m.idx + 1) + ' / ' + m.questions.length + '</span>' +
+        '<span class="bar bar-lg" role="img" aria-label="Question ' + (m.idx + 1) + ' sur ' + m.questions.length + '"><span style="width:' + pct(m.idx, m.questions.length) + '%"></span></span></div>' +
+        '<div class="row row-tutor is-last meet-q">' + ICON.avatar(52) + '<div class="bubble">' + esc(q.text) + sayBtnInline(q.text) + '</div></div>';
+      if (m.showTr) {
+        html += '<p class="meet-tr selectable">' + esc(q.translation) + '</p>';
+      } else if (q.translation && q.translation !== q.text) {
+        html += '<button type="button" class="link" data-act="meet-tr">Voir la traduction</button>';
+      }
+      if (m.heard) {
+        html += '<div class="row row-user meet-a"><div class="bubble">' + esc(m.heard) + '</div></div>' +
+          '<p class="meet-note">C\'est bien ce que tu as dit ? Sinon, tu peux recommencer.</p>';
+      } else {
+        html += '<p class="meet-note">Réponds à voix haute, comme tu peux. Il n\'y a pas de mauvaise réponse.</p>';
+      }
+      html += '</div>';
+    } else if (m.step === 'assessing') {
+      html += '<div class="meet-card meet-center" role="status"><span class="avatar-big">' + ICON.avatar(96) + '</span><h1>Ton tuteur t\'a écouté…</h1>' +
+        '<p class="setup-sub">Il cherche le meilleur point de départ pour toi. Quelques secondes.</p><span class="bar bar-lg indet-bar"><span></span></span></div>';
+    } else if (m.step === 'result') {
+      var hint = '';
+      for (i = 0; i < S.levels.length; i++) { if (S.levels[i].code === m.result.level) { hint = S.levels[i].hint; } }
+      html += '<div class="meet-card meet-center"><span class="done-mark">' + ICON.check(46) + '</span><span class="hero-kicker">Ton point de départ en ' + lang + '</span>' +
+        '<h1 class="meet-level">' + esc(levelName(m.result.level)) + '</h1>' +
+        '<p class="meet-reason selectable">' + esc(m.result.reason || hint) + '</p>' +
+        '<div class="meet-actions"><button type="button" class="btn btn-primary btn-lg" data-act="pick-level" data-code="' + esc(m.result.level) + '" id="meet-main" data-autofocus>C\'est parti</button>' +
+        '<button type="button" class="btn btn-ghost" data-act="meet-pick">Choisir un autre point de départ</button></div></div>';
+    } else {
+      html += '<div class="meet-card"><div class="setup-head">' + ICON.avatar(64) + '<div><span class="hero-kicker">' + lang + '</span><h1>Où en es-tu ?</h1></div></div>' +
+        '<p class="setup-sub">Choisis ce qui te ressemble le plus. Tu pourras changer de parcours dans les réglages.</p><div class="level-cards">';
+      for (i = 0; i < S.levels.length; i++) {
+        var lv = S.levels[i];
+        html += '<button type="button" class="choice-card' + (m.result && m.result.level === lv.code ? ' is-main' : '') + '" data-act="pick-level" data-code="' + esc(lv.code) + '">' +
+          '<span class="choice-ico choice-num">' + (i + 1) + '</span><span class="choice-body"><strong>' + esc(lv.name) + '</strong><span>' + esc(lv.hint) + '</span></span></button>';
+      }
+      html += '</div><div class="meet-actions"><button type="button" class="btn btn-ghost" data-act="meet-intro">' + ICON.back() + 'Retour</button></div></div>';
+    }
+    return html;
+  }
+
+  function sayBtnInline(text) { return S.voice ? ' ' + sayBtn(text) : ''; }
+
+  function meetFootHtml() {
+    var m = UI.meet;
+    if (!m || m.step !== 'questions') { return ''; }
+    if (m.heard) {
+      return '<div class="dock-left"><button type="button" class="btn btn-ghost" data-act="meet-redo">' + ICON.refresh() + 'Recommencer</button></div>' +
+        '<div class="dock-right"><span class="dock-hint"><kbd>Entrée</kbd></span><button type="button" class="btn btn-primary btn-lg" data-act="meet-next" id="meet-main">' +
+        (m.idx + 1 >= m.questions.length ? 'Terminer' : 'Question suivante') + '</button></div>';
+    }
+    var busy = UI.rec !== 'ready';
+    return '<div class="dock-left"><button type="button" class="btn btn-ghost" data-act="meet-skip"' + (busy ? ' disabled' : '') + '>Je ne comprends pas encore</button></div>' +
+      '<div class="dock-right">' + practiceTalkHtml('Répondre') + '</div>';
+  }
+
+  function refreshMeetFoot() {
+    var el = $('#meet-foot');
+    if (!el) { return; }
+    var html = meetFootHtml();
+    el.innerHTML = html;
+    el.style.display = html ? '' : 'none';
+    var b = $('#meet-main') || $('#talk');
+    if (b && !b.disabled && !UI.modal) { b.focus(); }
+  }
+
+  function viewMeet() {
+    if (!UI.meet) { UI.meet = { step: 'intro', questions: [], idx: 0, answers: [], heard: null, showTr: false, result: null }; }
+    var foot = meetFootHtml();
+    return '<div class="view">' + topbar({ lang: true }) + '<div class="scroll"><div class="meet">' + meetBody() + '</div></div>' +
+      '<footer class="dock" id="meet-foot"' + (foot ? '' : ' style="display:none"') + '>' + foot + '</footer></div>';
+  }
+
+  function refreshMeet() {
+    if (UI.view !== 'meet') { return; }
+    show('meet', true);
+    var b = $('#meet-main') || $('#talk') || $('#app [data-autofocus]');
+    if (b && !b.disabled && !UI.modal) { b.focus(); }
+    if (UI.meet && UI.meet.step === 'questions' && !UI.meet.heard && !UI.meet.played) {
+      UI.meet.played = true;
+      say(UI.meet.questions[UI.meet.idx].text);
+    }
+  }
+
+  function meetAssess() {
+    var m = UI.meet;
+    m.step = 'assessing';
+    refreshMeet();
+    call('assess_level', m.answers).then(function (res) {
+      if (UI.view !== 'meet' || UI.meet !== m) { return; }
+      if (res.ok === false || !res.level) { m.step = 'pick'; refreshMeet(); return; }
+      m.result = { level: res.level, reason: res.reason };
+      m.step = 'result';
+      refreshMeet();
+      confetti(30);
+    });
+  }
+
+  function meetAnswer(transcript) {
+    var m = UI.meet;
+    m.answers.push({ id: m.questions[m.idx].id, transcript: transcript || '' });
+    // A question the learner cannot understand ends the chat: harder ones would not help.
+    if (!transcript) {
+      for (var i = m.idx + 1; i < m.questions.length; i++) { m.answers.push({ id: m.questions[i].id, transcript: '' }); }
+      meetAssess();
+      return;
+    }
+    m.idx++;
+    m.heard = null;
+    m.showTr = false;
+    m.played = false;
+    if (m.idx >= m.questions.length) { meetAssess(); } else { refreshMeet(); }
+  }
+
+  function meetTalk() {
+    var m = UI.meet;
+    if (!m || m.step !== 'questions' || m.heard) { return; }
+    practiceToggle(null, function (res) {
+      if (res.ok !== false && res.heard) { m.heard = res.heard; }
+      else if (res.ok !== false) { toast('Je n\'ai rien entendu. Réessaie en parlant un peu plus près du micro.', 'soft', 4200); }
+      refreshMeet();
+    });
+  }
+
+  function chooseLevel(code, el) {
+    if (el) { el.disabled = true; }
+    call('set_level', code).then(function (res) {
+      if (!applyState(res)) { if (el) { el.disabled = false; } return; }
+      var first = !!UI.meet;
+      UI.meet = null;
+      route();
+      toast(first ? 'Ton parcours est prêt. C\'est parti !' : 'Parcours changé : ' + levelName(S.level) + '.', 'ok');
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // View: lesson player
+  // ------------------------------------------------------------------
+
+  function lessonItem() { return UI.lesson.data.items[UI.lesson.pos]; }
+
+  function enterItem() {
+    UI.lesson.x = { phase: 'answer', sel: -1, built: [], tries: 0, res: null, correct: null, skipped: false };
+    UI.rec = 'ready';
+    if (UI.recTimer) { clearInterval(UI.recTimer); UI.recTimer = null; }
+  }
+
+  function startLesson(kind, unitId) {
+    UI.lesson = null;
+    UI.lessonEnd = null;
+    UI.lessonLoading = { kind: kind };
+    show('lesson');
+    return call('get_lesson', kind, unitId || null, false).then(function (res) {
+      if (UI.view !== 'lesson' || !UI.lessonLoading) { return; }
+      UI.lessonLoading = null;
+      if (res.ok === false || !res.lesson || !res.lesson.items || !res.lesson.items.length) {
+        if (res.ok !== false) { toast('Cette leçon est vide. Réessaie dans un instant.', 'error'); }
+        show('home');
+        return;
+      }
+      UI.lesson = { data: res.lesson, pos: 0, results: {}, x: null };
+      enterItem();
+      show('lesson');
+      afterItemShown();
+    });
+  }
+
+  function blankHtml(sentence, fill, state) {
+    var parts = String(sentence).split('___');
+    if (parts.length < 2) { return esc(sentence); }
+    var gap = fill ? '<span class="blank is-filled' + (state ? ' is-' + state : '') + '">' + esc(fill) + '</span>' : '<span class="blank" aria-label="mot manquant"></span>';
+    return esc(parts[0]) + gap + esc(parts.slice(1).join('___'));
+  }
+
+  function optionsHtml(item, x) {
+    var done = x.phase === 'done';
+    var html = '<div class="options" role="radiogroup" aria-label="Réponses possibles">';
+    for (var i = 0; i < item.options.length; i++) {
+      var cls = 'opt';
+      if (done && i === item.answer) { cls += ' is-right'; }
+      else if (done && i === x.sel) { cls += ' is-wrong'; }
+      else if (!done && i === x.sel) { cls += ' is-sel'; }
+      html += '<button type="button" class="' + cls + '" data-act="opt" data-i="' + i + '" role="radio" aria-checked="' + (i === x.sel ? 'true' : 'false') + '"' + (done ? ' disabled' : '') + '>' +
+        '<span class="opt-key">' + (i + 1) + '</span><span class="opt-text">' + esc(item.options[i]) + '</span></button>';
+    }
+    return html + '</div>';
+  }
+
+  function speakWordsHtml(item, x) {
+    var res = x.res;
+    if (!res || !res.words || !res.words.length) { return '<span class="speak-text selectable">' + esc(item.text) + '</span>'; }
+    var html = '<span class="speak-text selectable">';
+    for (var i = 0; i < res.words.length; i++) {
+      var w = res.words[i];
+      html += '<span class="w w-' + esc(w.status) + '">' + esc(w.word) + '</span> ';
+    }
+    return html + '</span>';
+  }
+
+  function itemHtml() {
+    var L = UI.lesson;
+    var item = lessonItem();
+    var x = L.x;
+    var i;
+    var html = '<span class="card-kicker lesson-kicker">' + esc(L.data.title) + '</span>';
+    if (L.data.source === 'generated' && L.pos === 0) {
+      html += '<p class="gen-note">' + ICON.warn() + '<span>Leçon préparée par l\'IA de ton PC : elle peut contenir des erreurs.</span></p>';
+    }
+    if (item.kind === 'info') {
+      html += '<h1 class="ex-title">' + esc(item.title) + '</h1><p class="ex-text selectable">' + esc(item.text).replace(/\n/g, '<br>') + '</p>';
+      if (item.examples && item.examples.length) {
+        html += '<ul class="examples">';
+        for (i = 0; i < item.examples.length; i++) {
+          var e = item.examples[i];
+          html += '<li>' + sayBtn(e.text) + '<span class="ex-pair"><span class="ex-target selectable">' + esc(e.text) + '</span><span class="ex-tr selectable">' + esc(e.translation) + '</span></span></li>';
+        }
+        html += '</ul>';
+      }
+    } else if (item.kind === 'choice') {
+      html += '<h1 class="ex-prompt">' + esc(item.prompt) + '</h1>';
+      if (item.sentence) {
+        var fill = x.phase === 'done' ? item.options[item.answer] : (x.sel >= 0 ? item.options[x.sel] : '');
+        var state = x.phase === 'done' ? 'right' : '';
+        html += '<p class="ex-sentence selectable">' + (item.sentence.indexOf('___') >= 0 ? blankHtml(item.sentence, fill, state) : esc(item.sentence)) + '</p>';
+      }
+      html += optionsHtml(item, x);
+    } else if (item.kind === 'listen') {
+      html += '<h1 class="ex-prompt">' + esc(item.prompt) + '</h1>' +
+        '<div class="listen-box"><button type="button" class="btn btn-primary listen-btn" data-act="say" data-text="' + esc(item.audio_text) + '">' + ICON.speaker(26, '#062A45') + 'Écouter</button></div>' +
+        optionsHtml(item, x);
+    } else if (item.kind === 'order') {
+      var done = x.phase === 'done';
+      html += '<h1 class="ex-prompt">' + esc(item.prompt) + '</h1><p class="ex-tr-line selectable">' + esc(item.translation) + '</p>' +
+        '<div class="order-line' + (done ? (x.correct ? ' is-right' : ' is-wrong') : '') + '" aria-label="Ta phrase">';
+      for (i = 0; i < x.built.length; i++) {
+        html += '<button type="button" class="tok" data-act="tok-rm" data-i="' + i + '"' + (done ? ' disabled' : '') + '>' + esc(item.tokens[x.built[i]]) + '</button>';
+      }
+      if (!x.built.length) { html += '<span class="order-hint">Clique sur les mots ci-dessous</span>'; }
+      html += '</div><div class="order-bank" aria-label="Mots disponibles">';
+      for (i = 0; i < item.tokens.length; i++) {
+        var used = x.built.indexOf(i) >= 0;
+        html += '<button type="button" class="tok' + (used ? ' is-used' : '') + '" data-act="tok-add" data-i="' + i + '"' + (used || done ? ' disabled' : '') + (used ? ' aria-hidden="true" tabindex="-1"' : '') + '>' + esc(item.tokens[i]) + '</button>';
+      }
+      html += '</div>';
+    } else if (item.kind === 'speak') {
+      html += '<h1 class="ex-prompt">' + esc(item.prompt) + '</h1><div class="speak-card">' +
+        '<div class="speak-row">' + sayBtn(item.text) + speakWordsHtml(item, x) + '</div>' +
+        '<span class="ex-tr selectable">' + esc(item.translation) + '</span></div>';
+      if (x.res) {
+        var res = x.res;
+        var weak = false;
+        var miss = false;
+        for (i = 0; i < (res.words || []).length; i++) {
+          if (res.words[i].status === 'weak') { weak = true; }
+          if (res.words[i].status === 'miss') { miss = true; }
+        }
+        html += '<p class="heard selectable">' + (res.heard ? 'Tu as dit : « ' + esc(res.heard) + ' »' : 'Je n\'ai rien entendu.') + '</p>';
+        if (weak || miss) {
+          html += '<p class="legend">' + (weak ? '<span><i class="dot dot-weak"></i>à préciser</span>' : '') + (miss ? '<span><i class="dot dot-miss"></i>pas reconnu</span>' : '') + '</p>';
+        }
+      }
+    } else {
+      html += '<h1 class="ex-prompt">Exercice non pris en charge</h1>';
+    }
+    return html;
+  }
+
+  function fbHtml(ok, title, detail) {
+    return '<div class="fb ' + (ok ? 'fb-ok' : 'fb-ko') + '" role="status"><span class="fb-mark">' + (ok ? ICON.check(22, '#23330A', 4) : ICON.close()) + '</span>' +
+      '<div class="fb-body"><strong>' + title + '</strong>' + (detail ? '<span class="selectable">' + detail + '</span>' : '') + '</div></div>';
+  }
+
+  function nextBtn(ok) {
+    var last = UI.lesson.pos + 1 >= UI.lesson.data.items.length;
+    return '<span class="dock-hint"><kbd>Entrée</kbd></span><button type="button" class="btn btn-lg ' + (ok === false ? 'btn-pink' : (ok ? 'btn-green' : 'btn-primary')) + '" data-act="lesson-next" id="lesson-main">' + (last ? 'Terminer' : 'Continuer') + '</button>';
+  }
+
+  var PRAISE = ['Bien joué !', 'Exact !', 'Parfait !', 'Bravo !'];
+
+  function lessonFootHtml() {
+    var L = UI.lesson;
+    if (!L || UI.lessonEnd) { return ''; }
+    var item = lessonItem();
+    var x = L.x;
+    var praise = PRAISE[L.pos % PRAISE.length];
+    if (item.kind === 'info') {
+      return '<div class="dock-left"></div><div class="dock-right">' + nextBtn(null) + '</div>';
+    }
+    if (item.kind === 'speak') {
+      if (x.phase === 'done') {
+        if (x.correct) { return fbHtml(true, x.tries > 1 ? 'Tu l\'as !' : praise, 'Ton tuteur t\'a bien compris.') + '<div class="dock-right">' + nextBtn(true) + '</div>'; }
+        return fbHtml(false, x.skipped ? 'Pas de souci' : 'On y reviendra', x.skipped ? 'Cet exercice reviendra en révision.' : 'Tu le retravailleras en révision : ça finit toujours par venir.') + '<div class="dock-right">' + nextBtn(false) + '</div>';
+      }
+      var busy = UI.rec !== 'ready';
+      if (x.res && UI.rec === 'ready') {
+        var near = x.res.score >= 0.5;
+        var detail = S.voice ? 'Écoute : voilà comment le dire. Puis réessaie.' : (near ? 'Regarde les mots en couleur, puis réessaie.' : 'Prends ton temps, articule bien, et réessaie.');
+        return fbHtml(false, near ? 'C\'est presque ça' : 'On réessaie', detail) + '<div class="dock-right">' + practiceTalkHtml('Réessayer') + '</div>';
+      }
+      return '<div class="dock-left"><button type="button" class="btn btn-ghost btn-sm" data-act="speak-skip"' + (busy ? ' disabled' : '') + '>Je ne peux pas parler maintenant</button></div>' +
+        '<div class="dock-right">' + practiceTalkHtml('Parler') + '</div>';
+    }
+    if (x.phase === 'done') {
+      if (x.correct) { return fbHtml(true, praise, item.explanation ? esc(item.explanation) : '') + '<div class="dock-right">' + nextBtn(true) + '</div>'; }
+      var right = item.kind === 'order' ? item.sentence : item.options[item.answer];
+      var more = 'Bonne réponse : <b>' + esc(right) + '</b>' + (item.explanation ? '<br>' + esc(item.explanation) : '');
+      return fbHtml(false, 'Pas tout à fait', more) + '<div class="dock-right">' + nextBtn(false) + '</div>';
+    }
+    var ready = item.kind === 'order' ? x.built.length === item.tokens.length : x.sel >= 0;
+    return '<div class="dock-left"></div><div class="dock-right"><span class="dock-hint"><kbd>Entrée</kbd></span>' +
+      '<button type="button" class="btn btn-primary btn-lg" data-act="lesson-check" id="lesson-main"' + (ready ? '' : ' disabled') + '>Vérifier</button></div>';
+  }
+
+  function refreshLessonFoot() {
+    var el = $('#lesson-foot');
+    if (!el) { return; }
+    el.innerHTML = lessonFootHtml();
+    var x = UI.lesson && UI.lesson.x;
+    el.className = 'dock lesson-foot' + (x && x.phase === 'done' ? (x.correct === false ? ' is-ko' : (x.correct ? ' is-ok' : '')) : '');
+    if (UI.rec === 'rec' && !UI.modal) {
+      var talk = $('#talk');
+      if (talk) { talk.focus(); }
+    }
+  }
+
+  function focusLessonMain() {
+    if (UI.modal) { return; }
+    var b = $('#lesson-main') || $('#talk');
+    if (b && !b.disabled) { b.focus(); }
+  }
+
+  function refreshLesson(focus) {
+    var body = $('#lesson-body');
+    if (!body || !UI.lesson) { return; }
+    body.innerHTML = itemHtml();
+    refreshLessonFoot();
+    if (focus) { focusLessonMain(); }
+  }
+
+  function lessonProgress() {
+    var L = UI.lesson;
+    return pct(L.pos, L.data.items.length);
+  }
+
+  function viewLesson() {
+    if (UI.lessonLoading) {
+      var kind = UI.lessonLoading.kind;
+      return '<div class="view"><div class="waiting" role="status"><span class="avatar-big">' + ICON.avatar(110) + '</span>' +
+        '<h1>' + (kind === 'review' ? 'Ton tuteur rassemble tes révisions…' : 'Ton tuteur prépare ta leçon…') + '</h1>' +
+        '<p>C\'est presque prêt. Si la leçon est écrite à la demande, ça peut prendre jusqu\'à une minute.</p>' +
+        '<span class="bar bar-lg"><span></span></span>' +
+        '<button type="button" class="btn btn-ghost btn-sm" data-act="lesson-cancel">Annuler</button></div></div>';
+    }
+    if (UI.lessonEnd) { return viewLessonEnd(); }
+    var L = UI.lesson;
+    if (!L) { return viewHome(); }
+    var x = L.x;
+    return '<div class="view lesson"><header class="lesson-top">' +
+      '<button type="button" class="btn btn-ghost btn-icon" data-act="lesson-quit" aria-label="Quitter la leçon" title="Quitter la leçon">' + ICON.close() + '</button>' +
+      '<span class="bar bar-lg bar-green lesson-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + lessonProgress() + '" aria-label="Avancement de la leçon"><span id="lesson-fill" style="width:' + lessonProgress() + '%"></span></span>' +
+      '<span class="lesson-count" id="lesson-count">' + (L.pos + 1) + ' / ' + L.data.items.length + '</span></header>' +
+      '<div class="scroll" id="lesson-scroll"><div class="lesson-wrap"><div class="lesson-body" id="lesson-body">' + itemHtml() + '</div></div></div>' +
+      '<footer class="dock lesson-foot' + (x.phase === 'done' ? (x.correct === false ? ' is-ko' : (x.correct ? ' is-ok' : '')) : '') + '" id="lesson-foot">' + lessonFootHtml() + '</footer></div>';
+  }
+
+  function afterItemShown() {
+    if (!UI.lesson || UI.lessonEnd) { return; }
+    var item = lessonItem();
+    focusLessonMain();
+    if (item.kind === 'listen') { say(item.audio_text); }
+    else if (item.kind === 'speak') { say(item.text); }
+  }
+
+  function lessonCheck() {
+    var L = UI.lesson;
+    var item = lessonItem();
+    var x = L.x;
+    if (x.phase !== 'answer') { return; }
+    var correct;
+    if (item.kind === 'order') {
+      if (x.built.length !== item.tokens.length) { return; }
+      var built = x.built.map(function (i) { return item.tokens[i]; }).join(' ');
+      correct = built.replace(/\s+/g, ' ').trim() === String(item.sentence).replace(/\s+/g, ' ').trim();
+    } else {
+      if (x.sel < 0) { return; }
+      correct = x.sel === item.answer;
+    }
+    x.phase = 'done';
+    x.correct = correct;
+    L.results[item.index] = { index: item.index, correct: correct, tries: 1 };
+    refreshLesson(true);
+  }
+
+  function lessonSpeakResult(res) {
+    var L = UI.lesson;
+    if (!L) { return; }
+    var item = lessonItem();
+    var x = L.x;
+    if (res.ok === false) { refreshLesson(true); return; }
+    if (!res.heard && !(res.words && res.words.length)) {
+      toast('Je n\'ai rien entendu. Réessaie en parlant un peu plus près du micro.', 'soft', 4200);
+      refreshLesson(true);
+      return;
+    }
+    x.tries++;
+    x.res = res;
+    if (res.passed) {
+      x.phase = 'done';
+      x.correct = true;
+      L.results[item.index] = { index: item.index, correct: true, tries: x.tries };
+    } else if (x.tries >= 3) {
+      x.phase = 'done';
+      x.correct = false;
+      L.results[item.index] = { index: item.index, correct: false, tries: x.tries };
+    } else {
+      say(item.text);
+    }
+    refreshLesson(true);
+  }
+
+  function lessonTalk() {
+    var L = UI.lesson;
+    if (!L || UI.lessonEnd) { return; }
+    var item = lessonItem();
+    if (item.kind !== 'speak' || L.x.phase !== 'answer') { return; }
+    practiceToggle(item.text, lessonSpeakResult);
+  }
+
+  function lessonNext() {
+    var L = UI.lesson;
+    if (!L || UI.lessonEnd || UI.lessonFinishing) { return; }
+    var item = lessonItem();
+    if (item.kind !== 'info' && L.x.phase !== 'done') { return; }
+    stopAudio();
+    L.pos++;
+    if (L.pos >= L.data.items.length) { finishLesson(); return; }
+    enterItem();
+    var fill = $('#lesson-fill');
+    var count = $('#lesson-count');
+    if (fill) { fill.style.width = lessonProgress() + '%'; }
+    if (count) { count.textContent = (L.pos + 1) + ' / ' + L.data.items.length; }
+    var body = $('#lesson-body');
+    if (body) {
+      body.classList.remove('slide-in');
+      void body.offsetWidth;
+      body.classList.add('slide-in');
+    }
+    refreshLesson(false);
+    var sc = $('#lesson-scroll');
+    if (sc) { sc.scrollTop = 0; }
+    afterItemShown();
+  }
+
+  function finishLesson() {
+    var L = UI.lesson;
+    var results = [];
+    for (var i = 0; i < L.data.items.length; i++) {
+      var it = L.data.items[i];
+      if (it.kind === 'info') { continue; }
+      results.push(L.results[it.index] || { index: it.index, correct: false, tries: 1 });
+    }
+    UI.lessonFinishing = true;
+    var fill = $('#lesson-fill');
+    if (fill) { fill.style.width = '100%'; }
+    var main = $('#lesson-main');
+    if (main) { main.disabled = true; }
+    call('finish_lesson', L.data.id, results).then(function (res) {
+      UI.lessonFinishing = false;
+      if (UI.view !== 'lesson' || UI.lesson !== L) { return; }
+      if (res.ok === false) { leaveLesson(); return; }
+      if (res.progress) { S.progress = res.progress; }
+      if (res.path) { S.path = res.path; }
+      UI.lessonEnd = res;
+      show('lesson');
+      confetti(res.stars >= 3 ? 70 : (res.stars === 2 ? 40 : 20));
+      var b = $('#start-btn');
+      if (b) { b.focus(); }
+    });
+  }
+
+  function viewLessonEnd() {
+    var r = UI.lessonEnd;
+    var L = UI.lesson;
+    var stars = clamp(r.stars | 0, 1, 3);
+    var title = stars === 3 ? 'Sans faute ou presque, bravo !' : (stars === 2 ? 'Bien joué !' : 'Leçon terminée !');
+    var rec = (S.path && S.path.recommended) || null;
+    var html = '<div class="view"><div class="scroll"><div class="lesson-end"><div class="end-card">' +
+      '<div class="end-stars" role="img" aria-label="' + stars + (stars > 1 ? ' étoiles' : ' étoile') + ' sur 3">';
+    for (var i = 1; i <= 3; i++) { html += '<span class="end-star' + (i <= stars ? ' is-on' : '') + '" style="animation-delay:' + (0.15 + i * 0.18) + 's">' + ICON.star(i === 2 ? 92 : 72, i <= stars) + '</span>'; }
+    html += '</div><h1>' + title + '</h1><p class="end-sub">' + esc(L ? L.data.title : '') + '</p><div class="rewards end-rewards">' +
+      '<div class="reward">' + ICON.bolt(26) + '<span><span class="reward-num">+' + fmt(r.xp_gained || 0) + ' XP</span><span class="reward-label">gagnés</span></span></div>' +
+      '<div class="reward">' + ICON.check(28, '#8DB81F', 4) + '<span><span class="reward-num">' + (r.correct | 0) + ' / ' + (r.total | 0) + '</span><span class="reward-label">du premier coup</span></span></div>';
+    if (r.leveled_up) {
+      html += '<div class="reward reward-level">' + levelBadge(S.progress.level, 46) + '<span><span class="reward-num">Niveau ' + S.progress.level + ' !</span><span class="reward-label">Tu montes de niveau</span></span></div>';
+    }
+    html += '</div>';
+    if ((r.total | 0) > (r.correct | 0)) { html += '<p class="end-note">Ce qui t\'a résisté reviendra en révision, pour bien l\'ancrer.</p>'; }
+    html += '<div class="end-actions"><button type="button" class="btn btn-primary btn-lg" data-act="continue" id="start-btn">Continuer</button>';
+    if (rec) { html += '<span class="end-next">À suivre : <b>' + esc(rec.label) + '</b></span>'; }
+    html += '<button type="button" class="btn btn-ghost" data-act="lesson-home">Retour à l\'accueil</button></div></div></div></div></div>';
+    return html;
+  }
+
+  function leaveLesson() {
+    practiceCancel(true);
+    stopAudio();
+    UI.lesson = null;
+    UI.lessonEnd = null;
+    UI.lessonLoading = null;
+    UI.lessonFinishing = false;
+    UI.rec = 'ready';
+    return call('get_state').then(function (res) {
+      applyState(res);
+      route();
+    });
+  }
+
+  function runRecommended() {
+    var rec = (S.path && S.path.recommended) || { kind: 'conversation' };
+    practiceCancel(true);
+    UI.lesson = null;
+    UI.lessonEnd = null;
+    if (rec.kind === 'conversation') { return startSession(S.has_briefing && UI.followup); }
+    if (rec.kind === 'review') { return startLesson('review', null); }
+    return startLesson(rec.kind, rec.unit_id);
+  }
+
+  // ------------------------------------------------------------------
   // Modals
   // ------------------------------------------------------------------
 
@@ -966,7 +1796,16 @@
     }
     if (!known && d.whisper_model) { wm = '<option value="' + esc(d.whisper_model) + '" selected>' + esc(d.whisper_model) + '</option>' + wm; }
 
-    var html = '<div class="field"><label for="set-mic">Micro</label><select class="select" id="set-mic">' + mics + '</select></div>';
+    var html = '';
+    if (S.levels && S.levels.length && S.level) {
+      var lv = '';
+      for (i = 0; i < S.levels.length; i++) {
+        lv += '<button type="button" class="btn" data-act="set-level" data-code="' + esc(S.levels[i].code) + '" title="' + esc(S.levels[i].hint) + '" aria-pressed="' + (S.levels[i].code === S.level ? 'true' : 'false') + '">' + esc(S.levels[i].name) + '</button>';
+      }
+      html += '<div class="field"><span class="label" id="lvl-label">Ton parcours en ' + esc(langName(S.language)) + '</span><div class="seg" role="group" aria-labelledby="lvl-label">' + lv + '</div>' +
+        '<span class="hint">Change de parcours si les leçons te semblent trop faciles ou trop difficiles. Tes étoiles sont conservées.</span></div>';
+    }
+    html += '<div class="field"><label for="set-mic">Micro</label><select class="select" id="set-mic">' + mics + '</select></div>';
 
     html += '<div class="field"><span class="label" id="prov-label">Où tourne le tuteur</span><div class="seg" role="group" aria-labelledby="prov-label">' + provs + '</div>';
     if (external) {
@@ -1051,7 +1890,7 @@
       closeModal();
       toast('Réglages enregistrés.', 'ok');
       if (!S.session && !S.setup.ready) { show('setup'); }
-      else if (!S.session && UI.view === 'setup' && S.setup.ready) { show('home'); }
+      else if (!S.session && UI.view === 'setup' && S.setup.ready) { route(); }
       else { show(UI.view, true); }
     });
   }
@@ -1067,6 +1906,8 @@
     else if (view === 'home') { html = viewHome(); }
     else if (view === 'conversation') { html = viewConversation(); }
     else if (view === 'bilan') { html = UI.feedbackLoading || !UI.feedback ? viewBilanWaiting() : viewBilan(); }
+    else if (view === 'meet') { html = viewMeet(); }
+    else if (view === 'lesson') { html = viewLesson(); }
     else { html = '<div class="boot" role="status"><div class="boot-dot"></div><span>Chargement…</span></div>'; }
     $('#app').innerHTML = html;
     if (keep) {
@@ -1084,7 +1925,15 @@
       show(S.session.feedback_done && UI.feedback ? 'bilan' : 'conversation');
     } else if (!S.setup.ready) {
       show('setup');
+    } else if (S.levels && S.levels.length && !S.level) {
+      // No starting point yet for this language: first-use flow.
+      if (UI.view !== 'meet') { UI.meet = null; }
+      UI.rec = 'ready';
+      show('meet');
+      var first = $('#app [data-autofocus]');
+      if (first) { first.focus(); }
     } else {
+      UI.meet = null;
       show('home');
     }
   }
@@ -1144,6 +1993,13 @@
         } else { el.disabled = false; }
       });
     },
+    voice: function () {
+      UI.setupBusy.download_voice = { pct: null, label: 'Démarrage…' };
+      refreshVoiceCard();
+      call('setup_action', 'download_voice').then(function (res) {
+        if (res.ok === false) { delete UI.setupBusy.download_voice; refreshVoiceCard(); }
+      });
+    },
     setup: function (el) {
       var step = el.getAttribute('data-step');
       UI.setupBusy[step] = { pct: null, label: 'Démarrage…' };
@@ -1155,7 +2011,101 @@
     lang: function (el) {
       var code = el.getAttribute('data-code');
       if (code === S.language) { return; }
-      call('set_language', code).then(function (res) { if (applyState(res)) { show('home', true); } });
+      practiceCancel(true);
+      call('set_language', code).then(function (res) {
+        if (!applyState(res)) { return; }
+        UI.meet = null;
+        if (S.levels && S.levels.length && !S.level) { route(); } else { UI.view = 'home'; show('home', true); }
+      });
+    },
+    'continue': function (el) {
+      el.disabled = true;
+      var cb = $('#followup');
+      if (cb) { UI.followup = cb.checked; }
+      var p = runRecommended();
+      if (p && p.then) { p.then(function () { var b = $('#start-btn'); if (b) { b.disabled = false; } }); }
+    },
+    lesson: function (el) {
+      startLesson(el.getAttribute('data-kind'), el.getAttribute('data-unit'));
+    },
+    'lesson-cancel': function () { leaveLesson(); },
+    'lesson-quit': function () {
+      if (UI.rec === 'rec') { practiceCancel(true); }
+      confirmModal('Quitter la leçon ?', 'Ta progression dans cette leçon ne sera pas enregistrée.', 'Quitter', 'lesson-quit-yes');
+    },
+    'lesson-quit-yes': function () { closeModal(); leaveLesson(); },
+    'lesson-home': function () { leaveLesson(); },
+    'lesson-check': function () { lessonCheck(); },
+    'lesson-next': function () { lessonNext(); },
+    opt: function (el) {
+      var L = UI.lesson;
+      if (!L || L.x.phase !== 'answer') { return; }
+      L.x.sel = parseInt(el.getAttribute('data-i'), 10);
+      refreshLesson(true);
+    },
+    'tok-add': function (el) {
+      var L = UI.lesson;
+      if (!L || L.x.phase !== 'answer') { return; }
+      var i = parseInt(el.getAttribute('data-i'), 10);
+      if (L.x.built.indexOf(i) < 0) { L.x.built.push(i); }
+      refreshLesson(L.x.built.length === lessonItem().tokens.length);
+    },
+    'tok-rm': function (el) {
+      var L = UI.lesson;
+      if (!L || L.x.phase !== 'answer') { return; }
+      L.x.built.splice(parseInt(el.getAttribute('data-i'), 10), 1);
+      refreshLesson(false);
+    },
+    'speak-skip': function () {
+      var L = UI.lesson;
+      if (!L || UI.rec !== 'ready') { return; }
+      var item = lessonItem();
+      L.x.phase = 'done';
+      L.x.correct = false;
+      L.x.skipped = true;
+      L.results[item.index] = { index: item.index, correct: false, tries: Math.max(1, L.x.tries) };
+      refreshLesson(true);
+    },
+    say: function (el) { say(el.getAttribute('data-text')); },
+    ptalk: function () {
+      if (UI.view === 'lesson') { lessonTalk(); }
+      else if (UI.view === 'meet') { meetTalk(); }
+    },
+    'meet-chat': function (el) {
+      el.disabled = true;
+      var m = UI.meet;
+      m.step = 'loading';
+      refreshMeet();
+      call('starter_questions').then(function (res) {
+        if (UI.view !== 'meet' || UI.meet !== m) { return; }
+        if (res.ok === false || !res.questions || !res.questions.length) { m.step = 'pick'; refreshMeet(); return; }
+        m.questions = res.questions;
+        m.idx = 0;
+        m.answers = [];
+        m.heard = null;
+        m.showTr = false;
+        m.played = false;
+        m.step = 'questions';
+        refreshMeet();
+      });
+    },
+    'meet-pick': function () { practiceCancel(true); UI.meet.step = 'pick'; refreshMeet(); },
+    'meet-intro': function () { UI.meet.step = 'intro'; UI.meet.result = null; refreshMeet(); },
+    'meet-tr': function () { UI.meet.showTr = true; refreshMeet(); },
+    'meet-redo': function () { UI.meet.heard = null; refreshMeet(); },
+    'meet-next': function () { if (UI.meet.heard) { meetAnswer(UI.meet.heard); } },
+    'meet-skip': function () { if (UI.rec === 'ready') { meetAnswer(''); } },
+    'pick-level': function (el) { chooseLevel(el.getAttribute('data-code'), el); },
+    'set-level': function (el) {
+      var code = el.getAttribute('data-code');
+      if (code === S.level) { return; }
+      readDraft();
+      call('set_level', code).then(function (res) {
+        if (!applyState(res)) { return; }
+        refreshSettingsBody();
+        if (UI.view === 'home') { show('home', true); }
+        toast('Parcours changé : ' + levelName(S.level) + '.', 'ok');
+      });
     },
     start: function (el) {
       el.disabled = true;
@@ -1164,6 +2114,7 @@
       startSession(S.has_briefing && UI.followup).then(function () {
         var b = $('#start-btn');
         if (b) { b.disabled = false; }
+        el.disabled = false;
       });
     },
     talk: function () { toggleTalk(); },
@@ -1282,8 +2233,55 @@
     } else if (UI.view === 'home' && key === 'Enter' && (!tag || tag === 'BODY')) {
       var b = $('#start-btn');
       if (b && !b.disabled) { ev.preventDefault(); b.click(); }
+    } else if (UI.view === 'lesson') {
+      lessonKey(ev, key, tag);
+    } else if (UI.view === 'meet') {
+      if (key === 'Escape' && UI.rec === 'rec') { ev.preventDefault(); practiceCancel(); return; }
+      if (key === 'Enter' && UI.meet && UI.meet.step === 'questions') {
+        if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') { return; }
+        if (tag === 'BUTTON' && ev.target.id !== 'talk' && ev.target.id !== 'meet-main') { return; }
+        ev.preventDefault();
+        if (ev.repeat) { return; }
+        if (UI.meet.heard) { meetAnswer(UI.meet.heard); } else { meetTalk(); }
+      }
     }
   });
+
+  function lessonKey(ev, key, tag) {
+    if (UI.lessonLoading) { return; }
+    if (UI.lessonEnd) {
+      if (key === 'Enter' && (!tag || tag === 'BODY' || ev.target.id === 'start-btn')) {
+        var go = $('#start-btn');
+        if (go && !go.disabled && !ev.repeat) { ev.preventDefault(); go.click(); }
+      }
+      return;
+    }
+    var L = UI.lesson;
+    if (!L || UI.lessonFinishing) { return; }
+    var item = lessonItem();
+    var x = L.x;
+    if (!item || !x) { return; }
+    if (key === 'Escape' && UI.rec === 'rec') { ev.preventDefault(); practiceCancel(); return; }
+    if (tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') { return; }
+    if ((item.kind === 'choice' || item.kind === 'listen') && x.phase === 'answer' && /^[1-9]$/.test(key)) {
+      var n = parseInt(key, 10) - 1;
+      if (n < item.options.length) { ev.preventDefault(); x.sel = n; refreshLesson(true); }
+      return;
+    }
+    if (key === 'Backspace' && item.kind === 'order' && x.phase === 'answer' && x.built.length) {
+      ev.preventDefault();
+      x.built.pop();
+      refreshLesson(false);
+      return;
+    }
+    if (key !== 'Enter') { return; }
+    if (tag === 'BUTTON' && ev.target.id !== 'talk' && ev.target.id !== 'lesson-main') { return; }
+    ev.preventDefault();
+    if (ev.repeat) { return; }
+    if (item.kind === 'speak' && x.phase === 'answer') { lessonTalk(); return; }
+    var main = $('#lesson-main');
+    if (main && !main.disabled) { main.click(); }
+  }
 
   // ------------------------------------------------------------------
   // Events pushed by the backend
@@ -1359,15 +2357,24 @@
         break;
       case 'setup_progress':
         UI.setupBusy[evt.step] = { pct: typeof evt.pct === 'number' ? evt.pct : null, label: evt.label };
+        if (evt.step === 'download_voice') { refreshVoiceCard(); break; }
         updateSetupProgress(evt.step);
         break;
       case 'setup_done':
         delete UI.setupBusy[evt.step];
         if (evt.ok === false) { toast(evt.error || 'Cette étape a échoué.', 'error'); }
+        if (evt.step === 'download_voice') {
+          call('recheck_setup').then(function (res) {
+            if (!applyState(res)) { refreshVoiceCard(); return; }
+            if (S.voice) { toast('Ton tuteur a trouvé sa voix !', 'ok'); }
+            refreshVoiceCard();
+          });
+          break;
+        }
         call('recheck_setup').then(function (res) {
           if (!applyState(res)) { refreshSetup(); return; }
           if (UI.view !== 'setup') { return; }
-          if (S.setup.ready) { toast('Tout est prêt !', 'ok'); confetti(24); show('home'); }
+          if (S.setup.ready) { toast('Tout est prêt !', 'ok'); confetti(24); route(); }
           else { refreshSetup(); }
         });
         break;
@@ -1422,7 +2429,9 @@
   // ==================================================================
   // DEMO API — only used when the page is opened without the backend.
   // Same methods and events as the real one, with fake data and delays.
-  // Options: ?ready=1 (skip setup), ?level=N, ?update=1, ?chest=0..4,
+  // Options: ?ready=1 (skip setup), ?level=N (game level) or ?level=none (first-use
+  // flow), ?voice=1 (tutor voice = a beep), ?gen=1 (lesson marked as generated),
+  // ?review=N (points to review), ?done=1 (path finished), ?update=1, ?chest=0..4,
   // ?nobriefing=1 (bilan without briefing), ?nospeech=1 (first take is silent)
   // ==================================================================
 
@@ -1445,6 +2454,7 @@
 
     var db = {
       language: 'en',
+      voice: params.voice === '1',
       settings: { api: 'ollama', base_url: 'http://127.0.0.1:11434/v1', api_key_set: false, model: 'llama3.1:8b', whisper_model: 'small', high_quality: false, mic: null, goal: 5 },
       setup: { ollama_installed: ready, ollama_running: ready, model_ok: ready, whisper_bin_ok: true, whisper_model_ok: ready, mic_ok: true, platform: 'windows', needs_ollama: true },
       xp: floorXp(startLevel) + 40,
@@ -1532,9 +2542,174 @@
       return {
         ok: true, version: '1.0.0', language: db.language, languages: LANGS, settings: db.settings, setup: setup(),
         progress: progress(), next_session_number: db.sessions_done + 1, challenges: db.challenges,
-        has_briefing: db.has_briefing, session: db.session, update: db.update
+        has_briefing: db.has_briefing, session: db.session, update: db.update,
+        levels: LEVELS, level: db.levels[db.language] || null, path: pathState(), voice: db.voice, voice_offer: { supported: true, megabytes: db.voice ? 0 : 86 }
       };
     }
+
+    // --- Lessons (demo) ----------------------------------------------------
+
+    var LEVELS = [
+      { code: 'A1', name: 'Débutant', hint: 'Je connais quelques mots, ou rien du tout.' },
+      { code: 'A2', name: 'Élémentaire', hint: 'Je me débrouille avec des phrases simples.' },
+      { code: 'B1', name: 'Intermédiaire', hint: 'Je tiens une conversation, avec des erreurs.' },
+      { code: 'B2', name: 'Avancé', hint: 'Je parle avec aisance et je veux gagner en précision.' }
+    ];
+    var UNIT_TITLES = {
+      A1: ['Se présenter', 'La famille et les proches', 'Le quotidien', 'Manger et boire', 'Poser des questions', 'Chez soi'],
+      A2: ['Raconter au passé', 'Faire des projets', 'Comparer', 'Au restaurant et en courses', 'Donner des conseils', 'Habitudes passées'],
+      B1: ['Expériences de vie', 'Si… alors', 'Donner son avis', 'Rapporter des paroles', 'Décrire précisément', 'La voix passive'],
+      B2: ['Nuancer', 'Regrets et hypothèses', 'Convaincre', 'Expressions idiomatiques', 'Registres', 'Raconter avec style']
+    };
+    var KINDS = ['vocab', 'grammar', 'pron'];
+    var KIND_NAMES = { vocab: 'Vocabulaire', grammar: 'Grammaire', pron: 'Prononciation' };
+    db.levels = { en: params.level === 'none' ? null : 'A2' };
+    // stars per language, unit and kind
+    db.stars = { en: { 'A2-1': { vocab: 3, grammar: 2, pron: 0 } } };
+    if (params.done === '1') {
+      db.stars.en = {};
+      UNIT_TITLES.A2.forEach(function (t, i) { db.stars.en['A2-' + (i + 1)] = { vocab: 3, grammar: 2, pron: 3 }; });
+    }
+    db.review_due = params.review !== undefined ? (parseInt(params.review, 10) || 0) : 3;
+    var activeLesson = null;
+    var speakTries = {};
+    var practiceTimer = null;
+    var chatAnswers = 0;
+
+    function pathState() {
+      var code = db.levels[db.language];
+      if (!code) { return null; }
+      var stars = db.stars[db.language] || {};
+      var units = [];
+      var current = null;
+      UNIT_TITLES[code].forEach(function (title, i) {
+        var id = code + '-' + (i + 1);
+        var s = stars[id] || {};
+        var lessons = { vocab: s.vocab || 0, grammar: s.grammar || 0, pron: s.pron || 0 };
+        var done = !!(lessons.vocab && lessons.grammar && lessons.pron);
+        var entry = { id: id, number: i + 1, title: title, lessons: lessons, done: done, current: false, locked: current !== null };
+        if (!done && current === null) { current = entry; entry.current = true; }
+        units.push(entry);
+      });
+      var rec;
+      if (db.review_due >= 6) { rec = { kind: 'review', unit_id: null, label: 'Révision' }; }
+      else if (current) {
+        var kind = KINDS.filter(function (k) { return !current.lessons[k]; })[0];
+        rec = { kind: kind, unit_id: current.id, label: KIND_NAMES[kind] + ' · ' + current.title };
+      } else { rec = { kind: 'conversation', unit_id: null, label: 'Conversation libre' }; }
+      var pos = ['A1', 'A2', 'B1', 'B2'].indexOf(code);
+      return {
+        level: code, level_name: LEVELS[pos].name, units: units, recommended: rec, review_due: db.review_due,
+        level_complete: current === null, next_level: current === null && pos < 3 ? LEVELS[pos + 1].code : null
+      };
+    }
+
+    function shuffled(list) {
+      var a = list.slice();
+      for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function choice(prompt, sentence, options, right, explanation) {
+      var o = shuffled(options);
+      return { kind: 'choice', prompt: prompt, sentence: sentence, options: o, answer: o.indexOf(right), explanation: explanation || '' };
+    }
+    function listen(options, right) {
+      var o = shuffled(options);
+      return { kind: 'listen', prompt: 'Écoute et choisis ce que tu entends.', audio_text: right, options: o, answer: o.indexOf(right) };
+    }
+    function order(sentence, translation) {
+      var t = sentence.split(' ');
+      var m = shuffled(t);
+      if (m.join(' ') === sentence) { m = t.slice(1).concat(t.slice(0, 1)); }
+      return { kind: 'order', prompt: 'Remets les mots dans l\'ordre.', translation: translation, sentence: sentence, tokens: m };
+    }
+    function speakEx(text, translation) {
+      return { kind: 'speak', prompt: db.voice ? 'Écoute, puis répète à voix haute.' : 'Lis à voix haute.', text: text, translation: translation };
+    }
+
+    function demoLesson(kind) {
+      var voice = db.voice;
+      var items;
+      var title;
+      if (kind === 'vocab') {
+        title = 'Vocabulaire · Raconter au passé';
+        items = [
+          { kind: 'info', title: 'Les mots du jour', text: voice ? 'Écoute chaque mot, puis on s\'entraîne.' : 'Lis chaque mot, puis on s\'entraîne.', examples: [
+            { text: 'the weekend', translation: 'le week-end' }, { text: 'to relax', translation: 'se détendre' },
+            { text: 'a hike', translation: 'une randonnée' }, { text: 'a museum', translation: 'un musée' },
+            { text: 'to visit', translation: 'rendre visite, visiter' }, { text: 'a party', translation: 'une fête' }] },
+          choice('Que veut dire ce mot ?', 'a hike', ['une randonnée', 'un musée', 'une fête'], 'une randonnée'),
+          choice('Que veut dire ce mot ?', 'to relax', ['se détendre', 'rendre visite, visiter', 'le week-end'], 'se détendre'),
+          listen(['a party', 'a hike', 'a museum'], 'a party'),
+          order('We visited a museum on Saturday.', 'Nous avons visité un musée samedi.'),
+          order('I relaxed at home last weekend.', 'Je me suis détendu à la maison le week-end dernier.'),
+          speakEx('a museum', 'un musée'),
+          speakEx('We went on a hike yesterday.', 'Nous avons fait une randonnée hier.')
+        ];
+      } else if (kind === 'grammar') {
+        title = 'Grammaire · Raconter au passé';
+        items = [
+          { kind: 'info', title: 'La règle', text: 'Pour une action terminée dans le passé, l\'anglais utilise le prétérit (past simple).\nPour les verbes réguliers, on ajoute -ed : play → played.\nBeaucoup de verbes courants sont irréguliers : go → went, see → saw, eat → ate.', examples: [
+            { text: 'I watched a film last night.', translation: 'J\'ai regardé un film hier soir.' },
+            { text: 'She went to London in May.', translation: 'Elle est allée à Londres en mai.' },
+            { text: 'We ate pizza on Friday.', translation: 'Nous avons mangé une pizza vendredi.' }] },
+          choice('Complète la phrase.', 'Yesterday I ___ to the cinema with my sister.', ['go', 'went', 'gone'], 'went', '« Yesterday » situe l\'action dans le passé : go devient went.'),
+          choice('Complète la phrase.', 'We ___ a great film last weekend.', ['see', 'saw', 'seen'], 'saw', 'See est irrégulier : son prétérit est saw.'),
+          choice('Complète la phrase.', 'She ___ tennis on Saturday.', ['played', 'plays', 'playing'], 'played', 'Verbe régulier : on ajoute -ed.'),
+          order('They visited their friends last night.', 'Ils ont rendu visite à leurs amis hier soir.'),
+          speakEx('I went to the park on Sunday.', 'Je suis allé au parc dimanche.')
+        ];
+      } else if (kind === 'pron') {
+        title = 'Prononciation · la terminaison -ed';
+        items = [
+          { kind: 'info', title: 'La terminaison -ed', text: 'Le -ed du passé ne se prononce presque jamais « èd ».\nAprès un son sourd (k, p, s, ch), il se dit « t » : walked. Après un son sonore, il se dit « d » : played.\nIl ne forme une syllabe « id » qu\'après t ou d : wanted, needed.', examples: [
+            { text: 'walked', translation: 'a marché' }, { text: 'played', translation: 'a joué' }, { text: 'wanted', translation: 'a voulu' }] }
+        ];
+        if (voice) { items.push(listen(['walk', 'walked'], 'walked')); }
+        items.push(speakEx('walked', 'a marché'), speakEx('wanted', 'a voulu'), speakEx('We played and then we walked home.', 'Nous avons joué puis nous sommes rentrés à pied.'));
+      } else {
+        title = 'Révision · tes points à consolider';
+        items = [
+          choice('Complète la phrase.', 'Last summer we ___ to Spain.', ['go', 'went', 'gone'], 'went', 'Action terminée dans le passé : went.'),
+          order('I saw a good film yesterday.', 'J\'ai vu un bon film hier.'),
+          speakEx('I visited my grandparents.', 'J\'ai rendu visite à mes grands-parents.')
+        ];
+        if (voice) { items.splice(1, 0, listen(['thin', 'tin'], 'thin')); }
+      }
+      if (!voice) { items = items.filter(function (it) { return it.kind !== 'listen'; }); }
+      items.forEach(function (it, i) { it.index = i; });
+      return { id: 'demo-' + Date.now(), kind: kind, unit_id: null, title: title, source: params.gen === '1' ? 'generated' : 'bundled', items: items };
+    }
+
+    // Short beep as a WAV data URL, standing in for the tutor's voice.
+    function beep() {
+      var rate = 8000;
+      var n = Math.floor(rate * 0.28);
+      var bytes = new Uint8Array(44 + n);
+      var view = new DataView(bytes.buffer);
+      var put = function (off, s) { for (var i = 0; i < s.length; i++) { bytes[off + i] = s.charCodeAt(i); } };
+      put(0, 'RIFF'); view.setUint32(4, 36 + n, true); put(8, 'WAVEfmt ');
+      view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true);
+      view.setUint32(24, rate, true); view.setUint32(28, rate, true); view.setUint16(32, 1, true); view.setUint16(34, 8, true);
+      put(36, 'data'); view.setUint32(40, n, true);
+      for (var i = 0; i < n; i++) {
+        var fade = Math.min(1, i / 200, (n - i) / 400);
+        bytes[44 + i] = 128 + Math.round(60 * fade * Math.sin(2 * Math.PI * 520 * i / rate));
+      }
+      var bin = '';
+      for (var k = 0; k < bytes.length; k++) { bin += String.fromCharCode(bytes[k]); }
+      return 'data:audio/wav;base64,' + btoa(bin);
+    }
+
+    var CHAT_ANSWERS = [
+      'My name is Paul and I live in Lyon.',
+      'Last weekend I go to the cinema with my sister and we eat a pizza.',
+      'I think I would change the traffic because there is too much cars.'
+    ];
 
     function simulate(step, label, seconds, done) {
       var t = 0;
@@ -1585,6 +2760,7 @@
         else if (step === 'start_ollama') { simulate(step, 'Démarrage d\'Ollama…', 1.5, function () { db.setup.ollama_running = true; }); }
         else if (step === 'pull_model') { simulate(step, 'Téléchargement de ' + db.settings.model + '…', 4, function () { db.setup.model_ok = true; }); }
         else if (step === 'download_whisper_bin') { simulate(step, 'Installation de Whisper…', 2, function () { db.setup.whisper_bin_ok = true; }); }
+        else if (step === 'download_voice') { simulate(step, 'Téléchargement de la voix du tuteur…', 3, function () { db.voice = true; }); }
         else if (step === 'download_whisper_model') { simulate(step, 'Téléchargement du modèle ' + db.settings.whisper_model + '…', 3, function () { db.setup.whisper_model_ok = true; }); }
         else { return reply({ ok: false, error: 'Étape inconnue : ' + step }); }
         return reply({ ok: true });
@@ -1671,6 +2847,89 @@
         return reply({ ok: true }, 60);
       },
       end_session: function () { db.session = null; return reply(state(), 200); },
+      starter_questions: function () {
+        chatAnswers = 0;
+        return reply({ ok: true, questions: [
+          { id: 0, text: 'What is your name, and where do you live?', translation: 'Comment tu t\'appelles, et où habites-tu ?' },
+          { id: 1, text: 'What did you do last weekend?', translation: 'Qu\'est-ce que tu as fait le week-end dernier ?' },
+          { id: 2, text: 'If you could change one thing about your city, what would it be, and why?', translation: 'Si tu pouvais changer une chose dans ta ville, ce serait quoi, et pourquoi ?' }
+        ] }, 500);
+      },
+      practice_record_start: function () {
+        clearInterval(practiceTimer);
+        practiceTimer = setInterval(function () { emit({ type: 'level', value: 0.15 + Math.random() * 0.8 }); }, 70);
+        return reply({ ok: true }, 250);
+      },
+      practice_record_cancel: function () { clearInterval(practiceTimer); return reply({ ok: true }); },
+      practice_record_stop: function (target) {
+        clearInterval(practiceTimer);
+        if (!target) {
+          var heard = CHAT_ANSWERS[chatAnswers % CHAT_ANSWERS.length];
+          chatAnswers++;
+          return reply({ ok: true, heard: heard }, 1100);
+        }
+        var words = String(target).split(' ');
+        speakTries[target] = (speakTries[target] || 0) + 1;
+        // Sentences are missed once (to show the retry), single words pass.
+        var miss = words.length > 3 && speakTries[target] === 1;
+        var out = words.map(function (w, i) {
+          var status = 'ok';
+          if (miss && i === 1) { status = 'miss'; }
+          else if (miss && i === words.length - 1) { status = 'weak'; }
+          return { word: w, status: status };
+        });
+        var points = out.reduce(function (sum, w) { return sum + (w.status === 'ok' ? 1 : (w.status === 'weak' ? 0.5 : 0)); }, 0);
+        var score = Math.round((points / out.length) * 100) / 100;
+        var said = miss ? words.map(function (w, i) { return i === 1 ? 'go' : w; }).join(' ') : target;
+        return reply({ ok: true, heard: said, words: out, score: score, passed: score >= 0.8 }, 1100);
+      },
+      assess_level: function (answers) {
+        var spoken = (answers || []).filter(function (a) { return a.transcript; }).length;
+        var level = spoken >= 3 ? 'A2' : (spoken === 2 ? 'A2' : 'A1');
+        var reason = spoken >= 2 ? 'Tu te présentes facilement et tu racontes déjà ce que tu as fait : on va consolider le passé ensemble.'
+          : 'On part des bases, tranquillement : tu vas vite prendre confiance.';
+        return reply({ ok: true, level: level, reason: reason }, 2200);
+      },
+      set_level: function (code) {
+        db.levels[db.language] = code;
+        return reply(state(), 300);
+      },
+      get_lesson: function (kind) {
+        if (kind === 'review' && db.review_due <= 0) { return reply({ ok: false, error: 'Rien à réviser pour l\'instant.' }, 300); }
+        activeLesson = demoLesson(kind);
+        activeLesson.unit_id = arguments[1] || null;
+        return reply({ ok: true, lesson: activeLesson }, params.gen === '1' ? 2600 : 700);
+      },
+      speak: function () { return reply({ ok: true, audio: beep() }, 150); },
+      finish_lesson: function (lessonId, results) {
+        var lesson = activeLesson;
+        if (!lesson || lesson.id !== lessonId) { return reply({ ok: false, error: 'Cette leçon n\'est plus en cours.' }); }
+        activeLesson = null;
+        var total = results.length;
+        var first = results.filter(function (r) { return r.correct && r.tries <= 1; }).length;
+        var solved = results.filter(function (r) { return r.correct; }).length;
+        var ratio = total ? first / total : 1;
+        var stars = ratio >= 0.9 ? 3 : (ratio >= 0.7 ? 2 : 1);
+        var gained = solved * 5 + 20 + (stars === 3 ? 10 : 0);
+        var before = levelOf(db.xp);
+        db.xp += gained;
+        if (lesson.kind === 'review') { db.review_due = Math.max(0, db.review_due - total); }
+        else {
+          db.review_due += total - first;
+          var code = db.levels[db.language];
+          var path = pathState();
+          var unitId = lesson.unit_id;
+          if (!unitId && path) {
+            path.units.forEach(function (u) { if (u.current) { unitId = u.id; } });
+          }
+          if (unitId && code) {
+            db.stars[db.language] = db.stars[db.language] || {};
+            var s = db.stars[db.language][unitId] = db.stars[db.language][unitId] || {};
+            s[lesson.kind] = Math.max(s[lesson.kind] || 0, stars);
+          }
+        }
+        return reply({ ok: true, stars: stars, xp_gained: gained, correct: first, total: total, leveled_up: levelOf(db.xp) > before, progress: progress(), path: pathState() }, 500);
+      },
       open_logs_folder: function () { toast('(Démo) Le dossier des séances s\'ouvrirait ici.', 'soft'); return reply({ ok: true }); },
       open_feedback_file: function () { toast('(Démo) Le fichier du bilan s\'ouvrirait ici.', 'soft'); return reply({ ok: true }); },
       check_update: function () { return reply({ ok: true, update: db.update }, 700); },

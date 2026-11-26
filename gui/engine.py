@@ -12,7 +12,17 @@ import time
 from pathlib import Path
 
 import tutor
-from gui import audio, config, ollama_mgr, paths, progress, stt
+from gui import (
+    audio,
+    config,
+    curriculum,
+    lessons,
+    ollama_mgr,
+    paths,
+    progress,
+    stt,
+    tts,
+)
 
 
 def _mic_id(value):
@@ -102,6 +112,14 @@ class Engine:
             "next_session_number": snapshot["sessions_done"] + 1,
             "challenges": progress.challenges(language),
             "has_briefing": briefing is not None,
+            "levels": curriculum.LEVELS,
+            "level": lessons.level(language),
+            "path": lessons.path_state(language),
+            "voice": tts.available(language),
+            "voice_offer": {
+                "supported": tts.supported(language),
+                "megabytes": round(tts.download_size(language) / 1_000_000),
+            },
             "session": self._session_public(),
             "update": {"version": update["version"], "notes": update["notes"]}
             if update
@@ -145,6 +163,13 @@ class Engine:
                     final_prompt += "\n\n" + tutor.build_followup_context(
                         previous_notes
                     )
+
+            # Adapt the conversation to the level chosen in the app.
+            learner_level = lessons.level(language)
+            if learner_level:
+                final_prompt += (
+                    "\n\n[Learner level]\n" + curriculum.LEVEL_GUIDANCE[learner_level]
+                )
 
             transcriber = stt.Transcriber(
                 model=settings["whisper_model"],
