@@ -8,3 +8,8 @@ __pycache__/
 .venv/*
 TODO.txt
 models/
+# Desktop app builds
+.venv-gui/
+.build_cache/
+build/
+dist/

@@ -211,3 +211,49 @@ ruff format --check .
 ```
 
 `ruff format .` applies the formatting, and `ruff check --fix .` fixes the automatically fixable lint errors.
+
+## Desktop app (Windows and Linux)
+
+The `gui/` folder adds a graphical desktop app on top of the command-line tutor. It does not change `tutor.py`: it imports its classes and prompts and drives them exactly as `main()` does (same conversation, same feedback and briefing files, same follow-up logic). Only the terminal is replaced, plus what a desktop app needs to run on Windows:
+
+- microphone capture through PortAudio (`sounddevice`) instead of `arecord`;
+- a prebuilt `whisper.cpp` binary shipped with the app (the Whisper model is downloaded on first start);
+- a guided setup that installs/starts Ollama and downloads the language model.
+
+### Install
+
+Download the latest release from the [releases page](https://github.com/AzsraProjects/language_tutor/releases):
+
+- **Windows**: run `LanguageTutor-Setup-x.y.z.exe` (per-user install, no administrator rights).
+- **Linux**: `tar -xzf language-tutor-linux-x64-x.y.z.tar.gz && ./language-tutor/install.sh`
+
+The app checks the releases of this repository at startup and can update itself (Settings → check for updates). A download is installed only if its SHA-256 matches the release's `SHA256SUMS.txt`.
+
+### Game layer
+
+The app adds a motivation layer computed from what the learner does (stored in `progress.json`, next to the session logs in the user data folder):
+
+| Action | Reward |
+| --- | --- |
+| Each spoken reply | +10 XP |
+| Asking for the session feedback | +50 XP |
+| Checking a challenge | +50 XP |
+| Every 5th session | chest: +100 XP (content to be defined) |
+
+XP gives levels; consecutive practice days give a streak. The "priority for improvement" items of the feedback become the challenges shown during the next session.
+
+### Run from source
+
+```bash
+python -m venv .venv-gui && . .venv-gui/bin/activate   # Windows: .venv-gui\Scripts\activate
+pip install -r requirements-gui.txt
+python packaging/fetch_whisper.py
+python gui/app.py
+```
+
+### Build and release
+
+- Windows: `powershell -ExecutionPolicy Bypass -File packaging\build_windows.ps1` (needs PyInstaller and Inno Setup 6) → `dist/LanguageTutor-Setup-x.y.z.exe`
+- Linux: `sh packaging/build_linux.sh` (needs PyInstaller and `libportaudio2`) → `dist/language-tutor-linux-x64-x.y.z.tar.gz`
+
+To publish an update: bump `VERSION` in `gui/version.py`, then push a tag `vX.Y.Z`. The `Release desktop app` workflow builds both packages and publishes the release.

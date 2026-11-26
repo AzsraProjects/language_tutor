@@ -1,0 +1,13 @@
+# Desktop app (gui/). The command-line tutor keeps using requirements.txt.
+
+# Window (system WebView2 on Windows, Qt WebEngine on Linux)
+pywebview; sys_platform == "win32"
+pywebview[qt]; sys_platform != "win32"
+
+# Microphone
+sounddevice
+
+# Same LLM clients as tutor.py
+python-dotenv
+mistralai
+openai

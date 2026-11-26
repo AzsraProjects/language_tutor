@@ -1,0 +1,60 @@
+name: Release desktop app
+
+# Pushing a tag like v1.2.3 builds the Windows installer and the Linux archive
+# and publishes them as a GitHub release, which the in-app updater reads.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-gui.txt pyinstaller
+      - run: choco install innosetup --no-progress -y
+      - run: powershell -ExecutionPolicy Bypass -File packaging\build_windows.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: dist/LanguageTutor-Setup-*.exe
+
+  linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y libportaudio2 libxkbfile1 libxcb-cursor0 libnss3 libxkbcommon-x11-0 libegl1 libasound2
+      - run: pip install -r requirements-gui.txt pyinstaller
+      - run: sh packaging/build_linux.sh python
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: dist/language-tutor-linux-x64-*.tar.gz
+
+  release:
+    needs: [windows, linux]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - name: Checksums
+        run: cd out && sha256sum * > SHA256SUMS.txt && cat SHA256SUMS.txt
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >
+          gh release create "$GITHUB_REF_NAME" out/*
+          --repo "$GITHUB_REPOSITORY"
+          --title "Language Tutor $GITHUB_REF_NAME"
+          --generate-notes
